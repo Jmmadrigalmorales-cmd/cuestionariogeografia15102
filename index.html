@@ -14,6 +14,13 @@
         ::placeholder {
             color: #9ca3af;
         }
+        .theory-box {
+            background-color: #f3f4f6; /* Un gris un poco más claro */
+            border-left: 4px solid #4f46e5; /* Borde izquierdo índigo */
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.25rem;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans p-4 sm:p-6 md:p-8">
@@ -31,11 +38,32 @@
             <p>&copy; 2024 - Creado para practicar y aprender.</p>
         </footer>
     </div>
+    
+    <!-- Contador de Puntuación -->
+    <div id="scoreboard" class="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-xl border border-gray-200 w-48">
+        <h3 class="font-bold text-center mb-2 text-indigo-600">Puntuación</h3>
+        <div class="flex justify-around gap-4">
+            <div class="text-center">
+                <span class="font-bold text-2xl text-green-500" id="correct-count">0</span>
+                <p class="text-sm text-gray-500">Correctas</p>
+            </div>
+            <div class="text-center">
+                <span class="font-bold text-2xl text-red-500" id="incorrect-count">0</span>
+                <p class="text-sm text-gray-500">Incorrectas</p>
+            </div>
+        </div>
+    </div>
+
 
     <script>
+        let correctCount = 0;
+        let incorrectCount = 0;
+        const answeredQuestions = new Set(); // Almacena IDs de preguntas ya respondidas
+
         const exercises = [
             {
                 topic: 'Conversión de unidades de longitud',
+                theory: 'Imagina que quieres "traducir" una unidad a otra. Para eso, usamos los <strong>factores de conversión</strong>.<br><strong>La Regla de Oro:</strong> Multiplica tu número por una fracción. Arriba pones la unidad a la que quieres llegar, y abajo la que quieres eliminar. ¡Así se tachan y listo!<br><em>🔍 Ejemplo: Convertir 2,5 km a m.</em><br><code>2,5 km × (1000 m / 1 km) = 2500 m</code><br>Como "km" está arriba y abajo, se cancelan, dejando solo los "m".',
                 questions: [
                     { question: '1. Expresa 12,5 kilómetros (km) en metros (m).', answer: '12500', unit: 'm' },
                     { question: '2. Convierte 340 centímetros (cm) a metros (m).', answer: '3.4', unit: 'm' },
@@ -46,6 +74,7 @@
             },
             {
                 topic: 'Conversión de unidades compuestas',
+                theory: 'Aquí hay más de una unidad, ¡pero no te asustes! El truco es cambiar cada una por separado, con su propio factor de conversión.<br><em>🔍 Ejemplo: Convertir 90 km/h a m/s.</em><br>Hacemos dos conversiones a la vez:<br>1️⃣ <strong>Distancia:</strong> de kilómetros (km) a metros (m).<br>2️⃣ <strong>Tiempo:</strong> de horas (h) a segundos (s).<br><code>90 km/h × (1000 m / 1 km) × (1 h / 3600 s) = 25 m/s</code><br>¡Tachamos "km" con "km" y "h" con "h" y ya lo tenemos!',
                 questions: [
                     { question: '1. Convierte una velocidad de 72 kilómetros por hora (km/h) a metros por segundo (m/s).', answer: '20', unit: 'm/s' },
                     { question: '2. Pasa una velocidad de 15 metros por segundo (m/s) a kilómetros por hora (km/h).', answer: '54', unit: 'km/h' },
@@ -56,6 +85,7 @@
             },
             {
                 topic: 'Factores de conversión simples',
+                theory: 'Este método es una receta que siempre funciona:<br><code>Valor que tienes × (Unidad a la que vas / Unidad que tienes) = Resultado</code><br>La "unidad que tienes" se cancela y te quedas con la que querías.<br><em>🔍 Ejemplo: Convertir 180 minutos a horas (sabiendo que 1 h = 60 min).</em><br><code>180 min × (1 h / 60 min) = 3 h</code>',
                 questions: [
                     { question: '1. Sabiendo que 1 hora son 60 minutos, convierte 4,5 horas a minutos.', answer: '270', unit: 'minutos' },
                     { question: '2. Sabiendo que 1 kg son 1.000 g, convierte 0,56 kg a g.', answer: '560', unit: 'g' },
@@ -66,6 +96,7 @@
             },
             {
                 topic: 'Expresar números en notación científica y decimal',
+                theory: 'Esto sirve para escribir números gigantes o súper pequeños de forma cómoda.<br><strong>De número normal a científico:</strong><br>Mueve la coma hasta que solo quede una cifra delante (que no sea cero). Los saltos que das son el exponente.<br>➡️ Si el número era grande (>1), el exponente es positivo.<br>⬅️ Si era pequeño (<1), el exponente es negativo.<br><em>🔍 Ejemplo: 0,0045 ⟶ movemos la coma 3 sitios a la derecha ⟶ 4,5 x 10⁻³</em><br><strong>De científico a normal:</strong><br>Mueve la coma según el exponente. Positivo a la derecha, negativo a la izquierda.<br><em>🔍 Ejemplo: 2,1 x 10⁴ ⟶ movemos la coma 4 sitios a la derecha ⟶ 21000</em>',
                 questions: [
                     { question: '1. Expresa el número 345.000.000 en notación científica.', answer: ['3.45e+8', '3.45x10^8'], unit: '' },
                     { question: '2. Expresa el número 0,0000078 en notación científica.', answer: ['7.8e-6', '7.8x10^-6'], unit: '' },
@@ -76,6 +107,7 @@
             },
             {
                 topic: 'Redondeo de números decimales',
+                theory: 'Redondear es simplificar. ¡Sigue estos pasos!<br>1️⃣ Busca la cifra hasta la que quieres redondear (ej: las centésimas).<br>2️⃣ Mira a su "vecino" de la derecha.<br>📈 Si el vecino es <strong>5 o más grande</strong> (5, 6, 7, 8, 9) → Súmale 1 a tu cifra.<br>😐 Si el vecino es <strong>más pequeño que 5</strong> (0, 1, 2, 3, 4) → Tu cifra se queda igual.<br>3️⃣ ¡Borra todos los vecinos de la derecha!<br><em>🔍 Ejemplo: Redondear 7,837 a las centésimas.</em><br>Tu cifra es el <strong>3</strong>. Su vecino es el <strong>7</strong>. Como es mayor que 5, el 3 sube a 4. Resultado: <strong>7,84</strong>',
                 questions: [
                     { question: '1. Redondea 14,5678 a las centésimas (2 cifras decimales).', answer: '14.57', unit: '' },
                     { question: '2. Redondea 3,9981 a las centésimas (2 cifras decimales).', answer: '4.00', unit: '' },
@@ -87,6 +119,12 @@
         ];
 
         const container = document.getElementById('exercise-container');
+
+        // Función para actualizar el contador en la pantalla
+        function updateScoreboard() {
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+        }
 
         // Función para normalizar y comparar respuestas
         function checkAnswer(userAnswer, correctAnswer, tolerance = 0.001) {
@@ -115,7 +153,10 @@
         exercises.forEach((topic, topicIndex) => {
             const section = document.createElement('section');
             section.className = 'bg-white p-6 rounded-lg shadow-md';
-            section.innerHTML = `<h2 class="text-2xl font-semibold text-indigo-500 mb-6">${topic.topic}</h2>`;
+            section.innerHTML = `
+                <h2 class="text-2xl font-semibold text-indigo-500 mb-4">${topic.topic}</h2>
+                <div class="theory-box text-sm text-gray-700 space-y-2">${topic.theory}</div>
+            `;
             
             const questionsList = document.createElement('div');
             questionsList.className = 'space-y-6';
@@ -152,7 +193,19 @@
             }
 
             const isCorrect = checkAnswer(userInput.value, exercise.answer, exercise.tolerance);
+            
+            // Solo actualiza la puntuación si es la primera vez que se responde esta pregunta
+            if (!answeredQuestions.has(id)) {
+                if (isCorrect) {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+                answeredQuestions.add(id);
+                updateScoreboard();
+            }
 
+            // Muestra siempre el mensaje de correcto/incorrecto
             if (isCorrect) {
                 resultDiv.innerHTML = `<span class="font-semibold text-green-600">¡Correcto! ✔️</span>`;
                 userInput.classList.remove('border-red-500');
@@ -167,3 +220,4 @@
     </script>
 </body>
 </html>
+
