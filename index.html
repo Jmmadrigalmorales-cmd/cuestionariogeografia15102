@@ -2,626 +2,168 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cuestionario de Demografía</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Repaso: Física y Química</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
+        /* Estilo para un scroll suave */
+        html {
+            scroll-behavior: smooth;
         }
-        .quiz-container {
-            max-width: 600px;
-            width: 95%;
-            margin: 1rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .answer-btn {
-            display: block;
-            width: 100%;
-            padding: 0.9rem;
-            margin: 0.6rem 0;
-            font-size: 1rem;
-            text-align: left;
-            background-color: #f1f5f9;
-            border: 2px solid #e2e8f0;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            color: #1e293b;
-        }
-        .answer-btn:hover:not(:disabled) {
-            background-color: #e2e8f0;
-            border-color: #cbd5e1;
-        }
-        .answer-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.9;
-        }
-        .correct {
-            background-color: #dcfce7 !important;
-            border-color: #4ade80 !important;
-            color: #15803d !important;
-            font-weight: bold;
-        }
-        .incorrect {
-            background-color: #fee2e2 !important;
-            border-color: #f87171 !important;
-            color: #b91c1c !important;
-            font-weight: bold;
-        }
-        #next-btn, #restart-btn {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            background: linear-gradient(to right, #3b82f6, #60a5fa);
-            border: none;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            transition: all 0.2s ease;
-        }
-        #next-btn:hover, #restart-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-        }
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e2e8f0;
-            border-radius: 9999px;
-            height: 10px;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: #3b82f6;
-            border-radius: 9999px;
-            transition: width 0.3s ease-in-out;
-        }
-        .question-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 1rem;
-            margin: 1rem 0;
-            border: 2px solid #e2e8f0;
+        /* Estilo para los placeholders */
+        ::placeholder {
+            color: #9ca3af;
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 text-gray-800 font-sans p-4 sm:p-6 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-indigo-600">Ejercicios de Repaso de Física y Química</h1>
+            <p class="text-lg text-gray-600 mt-2">Introduce tus respuestas y comprueba los resultados al instante.</p>
+        </header>
 
-    <div class="quiz-container">
-        <h1 class="text-2xl md:text-3xl font-bold text-center mb-2 text-slate-800">Cuestionario: La Población Mundial</h1>
-        <p class="text-center text-slate-500 mb-6">Pon a prueba tus conocimientos</p>
+        <main id="exercise-container" class="space-y-8">
+            <!-- Los ejercicios se cargarán aquí dinámicamente -->
+        </main>
         
-        <div id="quiz-header">
-            <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-            <div class="flex justify-between text-sm text-slate-600 mb-4">
-                <span id="question-counter"></span>
-                <span>Puntuación: <span id="score-display" class="font-bold">0</span></span>
-            </div>
-        </div>
-
-        <div id="question-container">
-            <h2 id="question" class="text-lg font-semibold mb-4 text-slate-700">Cargando pregunta...</h2>
-            <div id="image-container"></div>
-            <div id="answer-buttons" class="grid grid-cols-1 gap-2">
-                <!-- Answer buttons will be generated here -->
-            </div>
-        </div>
-
-        <button id="next-btn" class="hidden mt-6">Siguiente</button>
-
-        <div id="results-container" class="hidden text-center">
-            <h2 class="text-2xl font-bold mb-4 text-slate-800">¡Cuestionario completado!</h2>
-            <p class="text-lg mb-2 text-slate-600">Tu resultado final es:</p>
-            <div class="flex justify-around mt-4 text-xl">
-                <div class="bg-green-100 text-green-800 p-4 rounded-lg">
-                    <p class="font-bold" id="correct-answers"></p>
-                    <p>Correctas</p>
-                </div>
-                <div class="bg-red-100 text-red-800 p-4 rounded-lg">
-                    <p class="font-bold" id="incorrect-answers"></p>
-                    <p>Incorrectas</p>
-                </div>
-            </div>
-            <button id="restart-btn" class="mt-8">Volver a empezar</button>
-        </div>
+        <footer class="text-center mt-12 text-gray-500">
+            <p>&copy; 2024 - Creado para practicar y aprender.</p>
+        </footer>
     </div>
 
     <script>
-        const quizData = [
+        const exercises = [
             {
-                question: "¿Qué ciencia estudia las características de la población como su dimensión, estructura y evolución?",
-                answers: [
-                    { text: "Geografía", correct: false },
-                    { text: "Demografía", correct: true },
-                    { text: "Sociología", correct: false },
-                    { text: "Estadística", correct: false }
+                topic: 'Conversión de unidades de longitud',
+                questions: [
+                    { question: '1. Expresa 12,5 kilómetros (km) en metros (m).', answer: '12500', unit: 'm' },
+                    { question: '2. Convierte 340 centímetros (cm) a metros (m).', answer: '3.4', unit: 'm' },
+                    { question: '3. Pasa 1.500 milímetros (mm) a hectómetros (Hm).', answer: '0.015', unit: 'Hm' },
+                    { question: '4. Expresa 0,04 decámetros (dam) en centímetros (cm).', answer: '40', unit: 'cm' },
+                    { question: '5. Convierte 250 metros (m) a kilómetros (km).', answer: '0.25', unit: 'km' }
                 ]
             },
             {
-                question: "Según el documento, ¿qué hito alcanzó la población mundial en noviembre de 2022?",
-                answers: [
-                    { text: "7.000 millones de personas", correct: false },
-                    { text: "10.000 millones de personas", correct: false },
-                    { text: "8.000 millones de personas", correct: true },
-                    { text: "6.500 millones de personas", correct: false }
+                topic: 'Conversión de unidades compuestas',
+                questions: [
+                    { question: '1. Convierte una velocidad de 72 kilómetros por hora (km/h) a metros por segundo (m/s).', answer: '20', unit: 'm/s' },
+                    { question: '2. Pasa una velocidad de 15 metros por segundo (m/s) a kilómetros por hora (km/h).', answer: '54', unit: 'km/h' },
+                    { question: '3. Expresa una densidad de 1.000 kg/m³ a g/cm³.', answer: '1', unit: 'g/cm³' },
+                    { question: '4. Convierte 20 centímetros por minuto (cm/min) a metros por segundo (m/s).', answer: '0.0033', unit: 'm/s (aprox.)', tolerance: 0.0001 },
+                    { question: '5. Pasa una densidad de 2,5 gramos por litro (g/L) a kilogramos por metro cúbico (kg/m³).', answer: '2.5', unit: 'kg/m³' }
                 ]
             },
             {
-                question: "¿Cómo fue el crecimiento de la población mundial hasta el siglo XIX?",
-                answers: [
-                    { text: "Acelerado", correct: false },
-                    { text: "Exponencial", correct: false },
-                    { text: "Nulo", correct: false },
-                    { text: "Lento", correct: true }
+                topic: 'Factores de conversión simples',
+                questions: [
+                    { question: '1. Sabiendo que 1 hora son 60 minutos, convierte 4,5 horas a minutos.', answer: '270', unit: 'minutos' },
+                    { question: '2. Sabiendo que 1 kg son 1.000 g, convierte 0,56 kg a g.', answer: '560', unit: 'g' },
+                    { question: '3. Sabiendo que 1 L son 1.000 mL, convierte 300 mL a L.', answer: '0.3', unit: 'L' },
+                    { question: '4. Sabiendo que 1 m son 100 cm, convierte 80 cm a m.', answer: '0.8', unit: 'm' },
+                    { question: '5. Sabiendo que 1 g son 1.000 mg, convierte 5.200 mg a g.', answer: '5.2', unit: 'g' }
                 ]
             },
             {
-                question: "¿Cuál fue la causa principal del crecimiento acelerado de la población desde el siglo XIX?",
-                answers: [
-                    { text: "Aumento de la natalidad", correct: false },
-                    { text: "Reducción de la mortalidad", correct: true },
-                    { text: "Grandes migraciones", correct: false },
-                    { text: "Fin de las guerras", correct: false }
+                topic: 'Expresar números en notación científica y decimal',
+                questions: [
+                    { question: '1. Expresa el número 345.000.000 en notación científica.', answer: ['3.45e+8', '3.45x10^8'], unit: '' },
+                    { question: '2. Expresa el número 0,0000078 en notación científica.', answer: ['7.8e-6', '7.8x10^-6'], unit: '' },
+                    { question: '3. Escribe el número 5,4 x 10⁵ en notación decimal.', answer: '540000', unit: '' },
+                    { question: '4. Escribe el número 1,22 x 10⁻⁴ en notación decimal.', answer: '0.000122', unit: '' },
+                    { question: '5. Expresa el número 0,00506 en notación científica.', answer: ['5.06e-3', '5.06x10^-3'], unit: '' }
                 ]
             },
             {
-                question: "¿Qué es la 'Transición Demográfica'?",
-                answers: [
-                    { text: "El paso de un modelo demográfico antiguo a uno moderno", correct: true },
-                    { text: "El aumento de la población en las ciudades", correct: false },
-                    { text: "La disminución de la población por emigración", correct: false },
-                    { text: "Un estudio sobre la edad de la población", correct: false }
-                ]
-            },
-            {
-                question: "Observando el mapa de 'LA TASA DE NATALIDAD EN EL MUNDO', ¿en qué continente se localizan las tasas más altas (entre 35 y 50‰)?",
-                answers: [
-                    { text: "Asia", correct: false },
-                    { text: "América del Sur", correct: false },
-                    { text: "Europa", correct: false },
-                    { text: "África", correct: true }
-                ],
-                image: "https://placehold.co/600x300/e2e8f0/334155?text=Mapa+Tasa+Natalidad"
-            },
-            {
-                question: "¿Qué indicador demográfico mide el número de nacimientos por cada mil habitantes en un año?",
-                answers: [
-                    { text: "Tasa de fecundidad", correct: false },
-                    { text: "Esperanza de vida", correct: false },
-                    { text: "Tasa de natalidad", correct: true },
-                    { text: "Crecimiento natural", correct: false }
-                ]
-            },
-            {
-                question: "La fórmula '(Nº Fallecimientos en un año x 1000) / Población total' corresponde a:",
-                answers: [
-                    { text: "La tasa de mortalidad", correct: true },
-                    { text: "La tasa de mortalidad infantil", correct: false },
-                    { text: "La tasa de natalidad", correct: false },
-                    { text: "El saldo migratorio", correct: false }
-                ]
-            },
-            {
-                question: "¿Qué mide la 'esperanza de vida'?",
-                answers: [
-                    { text: "La edad máxima que puede alcanzar una persona", correct: false },
-                    { text: "El número de años que se espera que aumente la población", correct: false },
-                    { text: "La media de años que viven las personas de una zona determinada", correct: true },
-                    { text: "El porcentaje de población mayor de 65 años", correct: false }
-                ]
-            },
-            {
-                question: "¿Cómo se calcula el 'Crecimiento Natural' o vegetativo?",
-                answers: [
-                    { text: "Inmigrantes - Emigrantes", correct: false },
-                    { text: "Nacimientos - Fallecimientos", correct: true },
-                    { text: "Población total / Superficie", correct: false },
-                    { text: "Población adulta - Población anciana", correct: false }
-                ]
-            },
-            {
-                question: "Según el documento, ¿qué factor NO condiciona la natalidad?",
-                answers: [
-                    { text: "Uso de anticonceptivos", correct: false },
-                    { text: "Incorporación de la mujer al mundo laboral", correct: false },
-                    { text: "El clima de la región", correct: true },
-                    { text: "Costumbres o hábitos culturales", correct: false }
-                ]
-            },
-            {
-                question: "La tasa de mortalidad infantil es un indicador de:",
-                answers: [
-                    { text: "El número de hospitales de un país", correct: false },
-                    { text: "Las condiciones de vida de un país", correct: true },
-                    { text: "La tasa de fecundidad", correct: false },
-                    { text: "La cantidad de población joven", correct: false }
-                ]
-            },
-            {
-                question: "En los países desarrollados, el crecimiento natural suele ser:",
-                answers: [
-                    { text: "Superior al 1,5%", correct: false },
-                    { text: "Siempre positivo y alto", correct: false },
-                    { text: "Inferior al 1%, nulo o incluso negativo", correct: true },
-                    { text: "Igual a la media mundial", correct: false }
-                ]
-            },
-            {
-                question: "¿Qué dos países superan individualmente los 1000 millones de habitantes?",
-                answers: [
-                    { text: "Estados Unidos y Brasil", correct: false },
-                    { text: "China e India", correct: true },
-                    { text: "Rusia e Indonesia", correct: false },
-                    { text: "Nigeria y Pakistán", correct: false }
-                ]
-            },
-            {
-                question: "¿Qué mide la 'Densidad de Población'?",
-                answers: [
-                    { text: "La cantidad total de habitantes", correct: false },
-                    { text: "La concentración de población en un territorio", correct: true },
-                    { text: "El número de ciudades por kilómetro cuadrado", correct: false },
-                    { text: "El crecimiento de la población en un año", correct: false }
-                ]
-            },
-            {
-                question: "Un 'desierto demográfico' es una zona con una densidad de población...",
-                answers: [
-                    { text: "Inferior a 10 hab./km²", correct: true },
-                    { text: "Superior a 200 hab./km²", correct: false },
-                    { text: "Exactamente de 0 hab./km²", correct: false },
-                    { text: "Donde solo habitan nómadas", correct: false }
-                ]
-            },
-            {
-                question: "¿Cuál de estas zonas NO es un foco de concentración demográfica?",
-                answers: [
-                    { text: "Europa Occidental", correct: false },
-                    { text: "Asia Meridional y Oriental", correct: false },
-                    { text: "La costa este de Estados Unidos", correct: false },
-                    { text: "Las selvas ecuatoriales y desiertos", correct: true }
-                ]
-            },
-            {
-                question: "La estructura biológica de la población se refiere a su composición según:",
-                answers: [
-                    { text: "La nacionalidad y la lengua", correct: false },
-                    { text: "El nivel de estudios y la profesión", correct: false },
-                    { text: "El sexo y la edad", correct: true },
-                    { text: "El hábitat rural o urbano", correct: false }
-                ]
-            },
-            {
-                question: "¿Qué grupo de edad se considera 'población anciana' en el documento?",
-                answers: [
-                    { text: "Mayores de 60 años", correct: false },
-                    { text: "Mayores de 65 años", correct: true },
-                    { text: "Mayores de 70 años", correct: false },
-                    { text: "Personas jubiladas", correct: false }
-                ]
-            },
-            {
-                question: "¿Para qué sirve una pirámide de población?",
-                answers: [
-                    { text: "Para calcular la densidad de población", correct: false },
-                    { text: "Para mostrar la distribución de la población por sexo y edad", correct: true },
-                    { text: "Para predecir catástrofes naturales", correct: false },
-                    { text: "Para medir el nivel de riqueza de un país", correct: false }
-                ]
-            },
-            {
-                question: "¿Qué forma tiene una pirámide de población 'progresiva' o 'triangular'?",
-                image: "https://placehold.co/400x300/e2e8f0/334155?text=Pirámide+Triangular",
-                answers: [
-                    { text: "Base estrecha y cumbre ancha", correct: false },
-                    { text: "Base ancha y cumbre estrecha", correct: true },
-                    { text: "Lados rectos y cumbre redondeada", correct: false },
-                    { text: "Forma de bulbo o urna", correct: false }
-                ]
-            },
-            {
-                question: "Una pirámide con forma de bulbo o 'regresiva' es típica de una población:",
-                answers: [
-                    { text: "Muy joven", correct: false },
-                    { text: "En crecimiento rápido", correct: false },
-                    { text: "Envejecida", correct: true },
-                    { text: "Estancada", correct: false }
-                ]
-            },
-            {
-                question: "Una pirámide de población progresiva (triangular) indica:",
-                answers: [
-                    { text: "Baja natalidad y baja mortalidad", correct: false },
-                    { text: "Alta natalidad y alta mortalidad", correct: true },
-                    { text: "Baja natalidad y alta mortalidad", correct: false },
-                    { text: "Alta natalidad y baja mortalidad", correct: false }
-                ]
-            },
-            {
-                question: "El modelo demográfico moderno se caracteriza por:",
-                answers: [
-                    { text: "Natalidad y mortalidad bajas, y esperanza de vida alta", correct: true },
-                    { text: "Natalidad y mortalidad altas, y esperanza de vida baja", correct: false },
-                    { text: "Natalidad alta y mortalidad baja", correct: false },
-                    { text: "Natalidad baja y mortalidad alta", correct: false }
-                ]
-            },
-            {
-                question: "El principal organismo para conocer la información demográfica de España es:",
-                answers: [
-                    { text: "El Ministerio de Sanidad", correct: false },
-                    { text: "La Seguridad Social", correct: false },
-                    { text: "El Instituto Nacional de Estadística (INE)", correct: true },
-                    { text: "El Banco de España", correct: false }
-                ]
-            },
-            {
-                question: "La 'tasa de fecundidad' se diferencia de la de natalidad porque se centra en:",
-                answers: [
-                    { text: "El número de nacimientos por cada mil mujeres en edad fértil", correct: true },
-                    { text: "El número total de mujeres en un país", correct: false },
-                    { text: "El número de hijos por hombre", correct: false },
-                    { text: "Los nacimientos de gemelos", correct: false }
-                ]
-            },
-            {
-                question: "Las zonas de escasa densidad como los polos, desiertos y altas cordilleras concentran aproximadamente el:",
-                answers: [
-                    { text: "20% de la población mundial", correct: false },
-                    { text: "10% de la población mundial", correct: false },
-                    { text: "50% de la población mundial", correct: false },
-                    { text: "2% de la población mundial", correct: true }
-                ]
-            },
-            {
-                question: "¿Cuál de estos factores es físico y condiciona la distribución de la población?",
-                answers: [
-                    { text: "Capitales de Estado", correct: false },
-                    { text: "Actividad económica", correct: false },
-                    { text: "Fertilidad del suelo y clima", correct: true },
-                    { text: "Antigüedad del poblamiento", correct: false }
-                ]
-            },
-            {
-                question: "¿Qué es el 'Círculo Yuxi'?",
-                answers: [
-                    { text: "Una zona de desierto demográfico en Asia", correct: false },
-                    { text: "La zona más densamente poblada del planeta", correct: true },
-                    { text: "Un antiguo observatorio astronómico", correct: false },
-                    { text: "El círculo polar ártico", correct: false }
-                ]
-            },
-            {
-                question: "Una pirámide de población con forma de 'campana' o 'estacionaria' corresponde a una población:",
-                answers: [
-                    { text: "Envejecida y en decrecimiento", correct: false },
-                    { text: "Joven, donde la población anciana ha aumentado", correct: true },
-                    { text: "Muy joven con alta mortalidad", correct: false },
-                    { text: "Con más hombres que mujeres", correct: false }
-                ]
-            },
-            {
-                question: "En las últimas décadas, la mortalidad en los países en vías de desarrollo:",
-                answers: [
-                    { text: "Ha aumentado drásticamente", correct: false },
-                    { text: "Se ha mantenido igual que en el siglo XIX", correct: false },
-                    { text: "Se ha reducido gracias a mejoras sanitarias", correct: true },
-                    { text: "Ha superado a la de los países ricos", correct: false }
-                ]
-            },
-            {
-                question: "El 'saldo migratorio' se calcula como:",
-                answers: [
-                    { text: "Nacimientos - Muertes", correct: false },
-                    { text: "Inmigrantes - Emigrantes", correct: true },
-                    { text: "Población que llega / Población total", correct: false },
-                    { text: "El total de personas que se mueven de país", correct: false }
-                ]
-            },
-            {
-                question: "Observando el mapa 'LA TASA DE MORTALIDAD EN EL MUNDO', ¿qué región presenta tasas de mortalidad elevadas (más del 17‰)?",
-                answers: [
-                    { text: "Norte de África", correct: false },
-                    { text: "Sudamérica", correct: false },
-                    { text: "Europa del Este y Rusia", correct: true },
-                    { text: "Australia", correct: false }
-                ],
-                image: "https://placehold.co/600x300/e2e8f0/334155?text=Mapa+Tasa+Mortalidad"
-            },
-            {
-                question: "El envejecimiento de la población en países ricos hace que sus tasas de mortalidad...",
-                answers: [
-                    { text: "Sean las más bajas del mundo sin excepción", correct: false },
-                    { text: "Tiendan a disminuir las diferencias con los países pobres", correct: true },
-                    { text: "Sean irrelevantes para los estudios demográficos", correct: false },
-                    { text: "Sean idénticas a sus tasas de natalidad", correct: false }
-                ]
-            },
-            {
-                question: "La esperanza de vida más alta (más de 80 años) se encuentra predominantemente en:",
-                answers: [
-                    { text: "África subsahariana", correct: false },
-                    { text: "Asia Central", correct: false },
-                    { text: "Europa Occidental, Canadá, Japón y Australia", correct: true },
-                    { text: "América del Sur", correct: false }
-                ]
-            },
-            {
-                question: "Según el gráfico de 'Evolución de la natalidad en España', ¿en qué período se produjo el mayor número de nacimientos?",
-                answers: [
-                    { text: "Alrededor de 1975", correct: true },
-                    { text: "Alrededor de 1995", correct: false },
-                    { text: "Alrededor de 2008", correct: false },
-                    { text: "En 2016", correct: false }
-                ],
-                image: "https://placehold.co/600x300/e2e8f0/334155?text=Gráfico+Natalidad+España"
-            },
-            {
-                question: "¿Qué grupo de edad representa la base de una pirámide de población?",
-                answers: [
-                    { text: "Población anciana", correct: false },
-                    { text: "Población adulta", correct: false },
-                    { text: "Población joven (0-15 años)", correct: true },
-                    { text: "La población total", correct: false }
-                ]
-            },
-            {
-                question: "El estudio de la demografía es útil para:",
-                answers: [
-                    { text: "Predecir el clima futuro", correct: false },
-                    { text: "Planificar el gasto público y gestionar recursos", correct: true },
-                    { text: "Ganar campeonatos deportivos", correct: false },
-                    { text: "Elegir el nombre de las ciudades", correct: false }
-                ]
-            },
-            {
-                question: "Si un país tiene una tasa de natalidad del 10‰ y una tasa de mortalidad del 12‰, su crecimiento natural es:",
-                answers: [
-                    { text: "Positivo (2‰)", correct: false },
-                    { text: "Nulo (0‰)", correct: false },
-                    { text: "Negativo (-2‰)", correct: true },
-                    { text: "No se puede calcular con esos datos", correct: false }
-                ]
-            },
-            {
-                question: "¿A qué se debe que en las cumbres de las pirámides de población la barra de las mujeres sea generalmente más ancha que la de los hombres?",
-                answers: [
-                    { text: "A que nacen más mujeres", correct: false },
-                    { text: "A que las mujeres tienen mayor esperanza de vida", correct: true },
-                    { text: "A que los hombres emigran más", correct: false },
-                    { text: "Es un error de representación gráfica", correct: false }
+                topic: 'Redondeo de números decimales',
+                questions: [
+                    { question: '1. Redondea 14,5678 a las centésimas (2 cifras decimales).', answer: '14.57', unit: '' },
+                    { question: '2. Redondea 3,9981 a las centésimas (2 cifras decimales).', answer: '4.00', unit: '' },
+                    { question: '3. Redondea 0,12345 a las milésimas (3 cifras decimales).', answer: '0.123', unit: '' },
+                    { question: '4. Redondea 8,5000 a la décima (1 cifra decimal).', answer: '8.5', unit: '' },
+                    { question: '5. Redondea 45,695 a las centésimas (2 cifras decimales).', answer: '45.70', unit: '' }
                 ]
             }
         ];
 
-        const questionContainer = document.getElementById('question-container');
-        const questionElement = document.getElementById('question');
-        const imageContainer = document.getElementById('image-container');
-        const answerButtonsElement = document.getElementById('answer-buttons');
-        const nextButton = document.getElementById('next-btn');
-        const resultsContainer = document.getElementById('results-container');
-        const questionCounterElement = document.getElementById('question-counter');
-        const progressBar = document.getElementById('progress-bar');
-        const scoreDisplay = document.getElementById('score-display');
-        const restartButton = document.getElementById('restart-btn');
+        const container = document.getElementById('exercise-container');
 
-        let shuffledQuestions, currentQuestionIndex;
-        let score = 0;
-        let correctAnswersCount = 0;
-        let incorrectAnswersCount = 0;
-        
-        function startGame() {
-            shuffledQuestions = quizData.sort(() => Math.random() - 0.5);
-            currentQuestionIndex = 0;
-            score = 0;
-            correctAnswersCount = 0;
-            incorrectAnswersCount = 0;
-            scoreDisplay.innerText = score;
-            resultsContainer.classList.add('hidden');
-            questionContainer.classList.remove('hidden');
-            document.getElementById('quiz-header').classList.remove('hidden');
-            nextButton.classList.add('hidden');
-            setNextQuestion();
-        }
+        // Función para normalizar y comparar respuestas
+        function checkAnswer(userAnswer, correctAnswer, tolerance = 0.001) {
+            const normalizedUserAnswer = userAnswer.replace(/,/g, '.').replace(/\s/g, '').toLowerCase();
 
-        function setNextQuestion() {
-            resetState();
-            if (currentQuestionIndex < quizData.length) {
-                showQuestion(shuffledQuestions[currentQuestionIndex]);
-                updateProgressBar();
+            if (Array.isArray(correctAnswer)) {
+                // Para notación científica y otras respuestas con múltiples formatos válidos
+                const normalizedCorrectAnswers = correctAnswer.map(ans => 
+                    ans.replace(/,/g, '.').replace(/\s/g, '').toLowerCase()
+                );
+                return normalizedCorrectAnswers.includes(normalizedUserAnswer);
             } else {
-                showResults();
+                // Para respuestas numéricas estándar
+                const userNum = parseFloat(normalizedUserAnswer);
+                const correctNum = parseFloat(correctAnswer);
+                if (!isNaN(userNum) && !isNaN(correctNum)) {
+                    // Compara usando una tolerancia para manejar pequeñas diferencias en decimales
+                    return Math.abs(userNum - correctNum) < tolerance;
+                }
+                return normalizedUserAnswer === correctAnswer.toLowerCase();
             }
         }
 
-        function showQuestion(question) {
-            questionElement.innerText = question.question;
-            questionCounterElement.innerText = `Pregunta ${currentQuestionIndex + 1} de ${quizData.length}`;
+
+        // Generar el HTML para cada ejercicio
+        exercises.forEach((topic, topicIndex) => {
+            const section = document.createElement('section');
+            section.className = 'bg-white p-6 rounded-lg shadow-md';
+            section.innerHTML = `<h2 class="text-2xl font-semibold text-indigo-500 mb-6">${topic.topic}</h2>`;
             
-            if (question.image) {
-                imageContainer.innerHTML = `<img src="${question.image}" alt="Imagen de la pregunta" class="question-image">`;
-            } else {
-                imageContainer.innerHTML = '';
-            }
+            const questionsList = document.createElement('div');
+            questionsList.className = 'space-y-6';
+            
+            topic.questions.forEach((q, questionIndex) => {
+                const questionDiv = document.createElement('div');
+                const uniqueId = `q-${topicIndex}-${questionIndex}`;
 
-            question.answers.forEach(answer => {
-                const button = document.createElement('button');
-                button.innerText = answer.text;
-                button.classList.add('answer-btn');
-                if (answer.correct) {
-                    button.dataset.correct = answer.correct;
-                }
-                button.addEventListener('click', selectAnswer);
-                answerButtonsElement.appendChild(button);
-            });
-        }
-        
-        function resetState() {
-            nextButton.classList.add('hidden');
-            while (answerButtonsElement.firstChild) {
-                answerButtonsElement.removeChild(answerButtonsElement.firstChild);
-            }
-        }
-
-        function selectAnswer(e) {
-            const selectedBtn = e.target;
-            const isCorrect = selectedBtn.dataset.correct === 'true';
-
-            if (isCorrect) {
-                selectedBtn.classList.add('correct');
-                score++;
-                correctAnswersCount++;
-                scoreDisplay.innerText = score;
-            } else {
-                selectedBtn.classList.add('incorrect');
-                incorrectAnswersCount++;
-            }
-
-            Array.from(answerButtonsElement.children).forEach(button => {
-                if (button.dataset.correct === 'true') {
-                    button.classList.add('correct');
-                }
-                button.disabled = true;
+                questionDiv.innerHTML = `
+                    <p class="text-gray-700 mb-2">${q.question}</p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                        <input id="input-${uniqueId}" type="text" class="flex-grow p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition" placeholder="Tu respuesta...">
+                        <button onclick="verify('${uniqueId}')" class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition-colors duration-300 font-semibold">Comprobar</button>
+                    </div>
+                    <div id="result-${uniqueId}" class="mt-2 text-sm h-6"></div> <!-- Espacio para el resultado -->
+                `;
+                questionsList.appendChild(questionDiv);
             });
 
-            nextButton.classList.remove('hidden');
-        }
-
-        function showResults() {
-            questionContainer.classList.add('hidden');
-            document.getElementById('quiz-header').classList.add('hidden');
-            imageContainer.innerHTML = '';
-            resultsContainer.classList.remove('hidden');
-            document.getElementById('correct-answers').innerText = correctAnswersCount;
-            document.getElementById('incorrect-answers').innerText = incorrectAnswersCount;
-        }
-        
-        function updateProgressBar() {
-            const progressPercentage = ((currentQuestionIndex) / quizData.length) * 100;
-            progressBar.style.width = progressPercentage + '%';
-        }
-
-        nextButton.addEventListener('click', () => {
-            currentQuestionIndex++;
-            setNextQuestion();
+            section.appendChild(questionsList);
+            container.appendChild(section);
         });
 
-        restartButton.addEventListener('click', startGame);
+        // Función global para verificar la respuesta
+        window.verify = function(id) {
+            const [_, topicIndex, questionIndex] = id.split('-');
+            const exercise = exercises[topicIndex].questions[questionIndex];
+            const userInput = document.getElementById(`input-${id}`);
+            const resultDiv = document.getElementById(`result-${id}`);
+            
+            if (userInput.value.trim() === '') {
+                resultDiv.innerHTML = `<span class="font-semibold text-yellow-600">Por favor, introduce una respuesta.</span>`;
+                return;
+            }
 
-        startGame();
+            const isCorrect = checkAnswer(userInput.value, exercise.answer, exercise.tolerance);
+
+            if (isCorrect) {
+                resultDiv.innerHTML = `<span class="font-semibold text-green-600">¡Correcto! ✔️</span>`;
+                userInput.classList.remove('border-red-500');
+                userInput.classList.add('border-green-500');
+            } else {
+                let correctAnswerText = Array.isArray(exercise.answer) ? exercise.answer[0] : exercise.answer;
+                resultDiv.innerHTML = `<span class="font-semibold text-red-600">Incorrecto. La respuesta es ${correctAnswerText} ${exercise.unit}.</span>`;
+                userInput.classList.remove('border-green-500');
+                userInput.classList.add('border-red-500');
+            }
+        }
     </script>
 </body>
 </html>
