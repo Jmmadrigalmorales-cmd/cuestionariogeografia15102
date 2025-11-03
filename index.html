@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super-Quiz de Lengua 🚀</title>
+    <title>Examen Rápido de Refuerzo de Lengua 📝</title>
     <style>
-        /* Estilos generales para un diseño limpio y responsive */
+        /* Estilos generales (mismos del examen anterior para coherencia) */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7f6;
@@ -23,16 +23,16 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #4CAF50;
+            color: #FF5722; /* Color Naranja más fuerte */
             text-align: center;
-            border-bottom: 3px solid #4CAF50;
+            border-bottom: 3px solid #FF5722;
             padding-bottom: 10px;
             margin-bottom: 25px;
         }
         h2 {
-            color: #007bff;
+            color: #3f51b5; /* Índigo */
             margin-top: 25px;
-            border-left: 5px solid #007bff;
+            border-left: 5px solid #3f51b5;
             padding-left: 10px;
         }
         .question-block {
@@ -43,8 +43,8 @@
             background-color: #f9f9f9;
         }
         .summary {
-            background-color: #e3f2fd;
-            border-left: 5px solid #2196F3;
+            background-color: #e8eaf6; /* Azul claro para el resumen */
+            border-left: 5px solid #3f51b5;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 5px;
@@ -71,19 +71,19 @@
         }
         .options input[type="radio"] {
             margin-right: 10px;
-            accent-color: #4CAF50; /* Color del radio button */
+            accent-color: #FF5722;
         }
         #result-area {
             text-align: center;
             margin-top: 40px;
             padding: 20px;
             border-radius: 10px;
-            background-color: #ffe0b2;
-            border: 2px dashed #ff9800;
+            background-color: #e0f7fa; /* Cian claro */
+            border: 2px dashed #00bcd4; /* Cian */
         }
         #score {
             font-size: 2em;
-            color: #e65100;
+            color: #00838f;
             font-weight: bold;
         }
         #feedback {
@@ -94,7 +94,7 @@
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: #4CAF50;
+            background-color: #FF5722;
             color: white;
             border: none;
             border-radius: 8px;
@@ -104,7 +104,7 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #f4511e;
         }
         .hidden {
             display: none;
@@ -114,292 +114,209 @@
 <body>
 
 <div class="container">
-    <h1>🚀 ¡Super-Quiz de Repaso para el Examen de Lengua! 🚀</h1>
-    <p>¡Hola, campeón/campeona! Soy Profe-IA y vamos a repasar el temario de tu examen. ¡Lee las pistas y a por todas!</p>
+    <h1>📝 Examen Rápido de Refuerzo Profe-IA (30 Preguntas)</h1>
+    <p>¡Este examen es más rápido y se centra en los conceptos clave que acabas de repasar! ¡Tú puedes con esto!</p>
 
     <form id="quiz-form">
 
         <div class="question-block">
-            <h2>⭐ Bloque 1: El Nombre (Sustantivo) y sus Clases (8 Preguntas)</h2>
+            <h2>🗣️ Bloque 1: Comunicación y Comprensión (6 Preguntas)</h2>
             <div class="summary">
-                **💡 Pista Profe-IA:** Los **nombres** (o sustantivos) sirven para nombrar personas, animales, cosas, lugares o ideas. Pueden ser: **Comunes** (mesa, perro) o **Propios** (Andalucía, María); **Individuales** (oveja) o **Colectivos** (rebaño); **Concretos** (se pueden tocar) o **Abstractos** (ideas o sentimientos).
+                **💡 Pista Profe-IA:** La comunicación tiene 5 elementos: **Emisor** (envía), **Receptor** (recibe), **Mensaje** (la info), **Código** (idioma) y **Canal** (medio). ¡Recuerda leer con **atención** para la comprensión!
             </div>
 
-            <div class="question">1. ¿Qué tipo de nombre es 'Andalucía'?</div>
+            <div class="question">1. ¿Cuál es el rol de la persona que recibe la información en el acto comunicativo?</div>
             <div class="options">
-                <label><input type="radio" name="q1" value="A"> Común</label>
-                <label><input type="radio" name="q1" value="B"> Propio</label>
-                <label><input type="radio" name="q1" value="C"> Abstracto</label>
+                <label><input type="radio" name="q1" value="A"> Emisor</label>
+                <label><input type="radio" name="q1" value="B"> Receptor</label>
             </div>
 
-            <div class="question">2. La palabra 'alegría' es un nombre...</div>
+            <div class="question">2. Si ves las noticias en la televisión, ¿cuál es el canal?</div>
             <div class="options">
-                <label><input type="radio" name="q2" value="A"> Concreto</label>
-                <label><input type="radio" name="q2" value="B"> Abstracto</label>
-                <label><input type="radio" name="q2" value="C"> Individual</label>
+                <label><input type="radio" name="q2" value="A"> El mensaje</label>
+                <label><input type="radio" name="q2" value="B"> El televisor/la señal</label>
             </div>
 
-            <div class="question">3. ¿Cuál de estos es un nombre individual?</div>
+            <div class="question">3. ¿Cuál es el código si dos personas hablan por señas?</div>
             <div class="options">
-                <label><input type="radio" name="q3" value="A"> Pinar (muchos pinos)</label>
-                <label><input type="radio" name="q3" value="B"> Árbol</label>
-                <label><input type="radio" name="q3" value="C"> Rebaño (muchas ovejas)</label>
+                <label><input type="radio" name="q3" value="A"> El español</label>
+                <label><input type="radio" name="q3" value="B"> El lenguaje de signos</label>
+            </div>
+            
+            <div class="question">4. El **decálogo** es un texto que contiene...</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> Diez normas o reglas</label>
+                <label><input type="radio" name="q4" value="B"> Una única historia</label>
             </div>
 
-            <div class="question">4. ¿Cuál de estos es un nombre colectivo?</div>
+            <div class="question">5. ¿Qué debemos buscar al leer un texto para tener una buena **comprensión escrita**?</div>
             <div class="options">
-                <label><input type="radio" name="q4" value="A"> Persona</label>
-                <label><input type="radio" name="q4" value="B"> Archipiélago (muchas islas)</label>
-                <label><input type="radio" name="q4" value="C"> Mesa</label>
+                <label><input type="radio" name="q5" value="A"> La idea principal y los detalles</label>
+                <label><input type="radio" name="q5" value="B"> El color del libro</label>
             </div>
 
-            <div class="question">5. ¿El nombre 'libro' es un nombre común o propio?</div>
+            <div class="question">6. Entender lo que te dicen por teléfono es un ejemplo de...</div>
             <div class="options">
-                <label><input type="radio" name="q5" value="A"> Común</label>
-                <label><input type="radio" name="q5" value="B"> Propio</label>
-            </div>
-
-            <div class="question">6. ¿Qué nombre es de género femenino?</div>
-            <div class="options">
-                <label><input type="radio" name="q6" value="A"> El sol</label>
-                <label><input type="radio" name="q6" value="B"> La casa</label>
-                <label><input type="radio" name="q6" value="C"> Un coche</label>
-            </div>
-
-            <div class="question">7. El plural de 'luz' es...</div>
-            <div class="options">
-                <label><input type="radio" name="q7" value="A"> Luzes</label>
-                <label><input type="radio" name="q7" value="B"> Luces</label>
-                <label><input type="radio" name="q7" value="C"> Lúces</label>
-            </div>
-
-            <div class="question">8. El nombre 'vaso' es...</div>
-            <div class="options">
-                <label><input type="radio" name="q8" value="A"> Común, individual, concreto</label>
-                <label><input type="radio" name="q8" value="B"> Propio, individual, abstracto</label>
+                <label><input type="radio" name="q6" value="A"> Comprensión oral</label>
+                <label><input type="radio" name="q6" value="B"> Comprensión escrita</label>
             </div>
         </div>
 
         <div class="question-block">
-            <h2>✏️ Bloque 2: Palabras Derivadas, Compuestas y Familia de Palabras (8 Preguntas)</h2>
+            <h2>⭐ Bloque 2: Sustantivos y Formación de Palabras (12 Preguntas)</h2>
             <div class="summary">
-                **💡 Pista Profe-IA:** La **familia de palabras** comparte la misma **raíz** o parte principal (ej: *pan, pan*adero, *pan*ecillo). Una palabra **derivada** nace de otra añadiéndole un prefijo (antes) o sufijo (después) (ej: *des*hacer). Una palabra **compuesta** se forma uniendo dos palabras completas (ej: *abre* + *latas* = *abrelatas*).
+                **💡 Pista Profe-IA:** Recuerda: **Propio** (con mayúscula), **Abstracto** (no se toca), **Colectivo** (conjunto), **Derivada** (prefijo/sufijo), **Compuesta** (dos palabras unidas).
             </div>
 
-            <div class="question">9. ¿Cuál de estas palabras NO pertenece a la familia de 'mar'?</div>
+            <div class="question">7. El nombre 'felicidad' es...</div>
             <div class="options">
-                <label><input type="radio" name="q9" value="A"> Marino</label>
-                <label><input type="radio" name="q9" value="B"> Barco</label>
-                <label><input type="radio" name="q9" value="C"> Marea</label>
+                <label><input type="radio" name="q7" value="A"> Concreto</label>
+                <label><input type="radio" name="q7" value="B"> Abstracto</label>
             </div>
 
-            <div class="question">10. 'Paraguas' es una palabra...</div>
+            <div class="question">8. ¿Cuál de estos es un nombre **propio**?</div>
             <div class="options">
-                <label><input type="radio" name="q10" value="A"> Derivada</label>
-                <label><input type="radio" name="q10" value="B"> Simple</label>
-                <label><input type="radio" name="q10" value="C"> Compuesta</label>
+                <label><input type="radio" name="q8" value="A"> Montaña</label>
+                <label><input type="radio" name="q8" value="B"> Giralda</label>
             </div>
 
-            <div class="question">11. 'Florero' (flor + ero) es una palabra...</div>
+            <div class="question">9. El nombre **'pinar'** (conjunto de pinos) es...</div>
             <div class="options">
-                <label><input type="radio" name="q11" value="A"> Derivada</label>
-                <label><input type="radio" name="q11" value="B"> Compuesta</label>
+                <label><input type="radio" name="q9" value="A"> Individual</label>
+                <label><input type="radio" name="q9" value="B"> Colectivo</label>
             </div>
 
-            <div class="question">12. La raíz de la familia de palabras 'casita', 'caserón', 'caseta' es...</div>
+            <div class="question">10. El plural de un nombre se usa para indicar...</div>
             <div class="options">
-                <label><input type="radio" name="q12" value="A"> Caserón</label>
-                <label><input type="radio" name="q12" value="B"> Cas</label>
-                <label><input type="radio" name="q12" value="C"> Casa</label>
+                <label><input type="radio" name="q10" value="A"> Una sola unidad</label>
+                <label><input type="radio" name="q10" value="B"> Varias unidades</label>
             </div>
 
-            <div class="question">13. 'Inmóvil' (in + móvil) es un ejemplo de palabra...</div>
+            <div class="question">11. ¿Cuál de estas palabras NO pertenece a la familia de 'sol'?</div>
             <div class="options">
-                <label><input type="radio" name="q13" value="A"> Compuesta</label>
-                <label><input type="radio" name="q13" value="B"> Derivada (con prefijo)</label>
+                <label><input type="radio" name="q11" value="A"> Solitario</label>
+                <label><input type="radio" name="q11" value="B"> Asolar</label>
             </div>
 
-            <div class="question">14. ¿Qué par de palabras está formado por la unión de dos palabras simples?</div>
+            <div class="question">12. La palabra **'limpiacristales'** es...</div>
             <div class="options">
-                <label><input type="radio" name="q14" value="A"> Panadero y deshacer</label>
-                <label><input type="radio" name="q14" value="B"> Lavacoches y medianoche</label>
+                <label><input type="radio" name="q12" value="A"> Derivada</label>
+                <label><input type="radio" name="q12" value="B"> Compuesta</label>
+            </div>
+
+            <div class="question">13. La palabra **'prehistoria'** (pre + historia) es un ejemplo de palabra...</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="A"> Derivada (con prefijo)</label>
+                <label><input type="radio" name="q13" value="B"> Compuesta</label>
+            </div>
+
+            <div class="question">14. ¿Cuál es la **raíz** de la familia de palabras *zapato, zapatería, zapatilla*?</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="A"> Zapat</label>
+                <label><input type="radio" name="q14" value="B"> Zapato</label>
             </div>
 
             <div class="question">15. Una palabra derivada se forma añadiendo a la raíz un...</div>
             <div class="options">
-                <label><input type="radio" name="q15" value="A"> Nombre común</label>
-                <label><input type="radio" name="q15" value="B"> Prefijo o sufijo</label>
+                <label><input type="radio" name="q15" value="A"> Prefijo o sufijo</label>
+                <label><input type="radio" name="q15" value="B"> Nombre propio</label>
             </div>
 
-            <div class="question">16. ¿Cuál es la palabra primitiva de la que derivan 'frutería', 'afrutado' y 'frutal'?</div>
+            <div class="question">16. ¿Qué tipo de nombre es **'bandada'** (conjunto de pájaros)?</div>
             <div class="options">
-                <label><input type="radio" name="q16" value="A"> Fruto</label>
-                <label><input type="radio" name="q16" value="B"> Fruta</label>
+                <label><input type="radio" name="q16" value="A"> Individual</label>
+                <label><input type="radio" name="q16" value="B"> Colectivo</label>
+            </div>
+
+            <div class="question">17. El nombre **'agua'** es...</div>
+            <div class="options">
+                <label><input type="radio" name="q17" value="A"> Concreto</label>
+                <label><input type="radio" name="q17" value="B"> Abstracto</label>
+            </div>
+            
+            <div class="question">18. La palabra **'saltamontes'** es un ejemplo de palabra...</div>
+            <div class="options">
+                <label><input type="radio" name="q18" value="A"> Derivada</label>
+                <label><input type="radio" name="q18" value="B"> Compuesta</label>
             </div>
         </div>
 
         <div class="question-block">
-            <h2>🛑 Bloque 3: Ortografía - Signos de Puntuación (10 Preguntas)</h2>
+            <h2>🛑 Bloque 3: Ortografía - Signos de Puntuación (12 Preguntas)</h2>
             <div class="summary">
-                **💡 Pista Profe-IA:** El **punto** (.) marca el final de una frase o párrafo. La **coma** (,) separa elementos en una lista o aclaraciones. El **punto y coma** (;) es una pausa mayor que la coma y menor que el punto. Los **dos puntos** (:) anuncian una explicación o una lista. Los **puntos suspensivos** (...) indican una interrupción o que la lista continúa. Las **comillas** ("") se usan para citar o para títulos.
+                **💡 Pista Profe-IA:** Los **dos puntos (:)** anuncian listas y las **comillas (" ")** citas. La **coma (,)** separa elementos de listas. Los **puntos suspensivos (...)** indican interrupción o que hay más.
             </div>
 
-            <div class="question">17. ¿Qué signo usamos para separar los elementos de una lista?</div>
+            <div class="question">19. ¿Qué signo se usa para separar los elementos de una enumeración (lista)?</div>
             <div class="options">
-                <label><input type="radio" name="q17" value="A"> Punto y coma</label>
-                <label><input type="radio" name="q17" value="B"> Coma</label>
-            </div>
-
-            <div class="question">18. ¿Qué signo se usa para anunciar una enumeración? Ejemplo: Llevo tres cosas: lápiz, goma y estuche.</div>
-            <div class="options">
-                <label><input type="radio" name="q18" value="A"> Dos puntos</label>
-                <label><input type="radio" name="q18" value="B"> Punto</label>
-            </div>
-
-            <div class="question">19. ¿Qué signo se coloca al final de un texto, si no es una pregunta o una exclamación?</div>
-            <div class="options">
-                <label><input type="radio" name="q19" value="A"> Punto final</label>
+                <label><input type="radio" name="q19" value="A"> Punto y coma</label>
                 <label><input type="radio" name="q19" value="B"> Coma</label>
             </div>
 
-            <div class="question">20. ¿Qué indican los puntos suspensivos (...) en una frase?</div>
+            <div class="question">20. El signo que se coloca al final de una oración es el...</div>
             <div class="options">
-                <label><input type="radio" name="q20" value="A"> Fin de la oración</label>
-                <label><input type="radio" name="q20" value="B"> Continuación o duda</label>
+                <label><input type="radio" name="q20" value="A"> Dos puntos</label>
+                <label><input type="radio" name="q20" value="B"> Punto</label>
             </div>
 
-            <div class="question">21. ¿Qué signo de puntuación usamos para escribir el título de un libro o una cita?</div>
+            <div class="question">21. ¿Qué signo debes usar para anunciar una lista? Ejemplo: Hemos comprado: queso, pan y leche.</div>
             <div class="options">
-                <label><input type="radio" name="q21" value="A"> Punto y coma</label>
-                <label><input type="radio" name="q21" value="B"> Comillas</label>
+                <label><input type="radio" name="q21" value="A"> Dos puntos</label>
+                <label><input type="radio" name="q21" value="B"> Punto y coma</label>
             </div>
 
-            <div class="question">22. En esta frase, ¿dónde va la coma? "Tengo un perro un gato y un pájaro"</div>
+            <div class="question">22. ¿Qué indican los **puntos suspensivos** en una frase?</div>
             <div class="options">
-                <label><input type="radio" name="q22" value="A"> Después de 'perro' y 'gato'</label>
-                <label><input type="radio" name="q22" value="B"> Solo después de 'perro'</label>
+                <label><input type="radio" name="q22" value="A"> Interrupción, duda o lista incompleta</label>
+                <label><input type="radio" name="q22" value="B"> El final de un texto</label>
             </div>
 
-            <div class="question">23. ¿Qué signo usarías para separar dos oraciones largas que están relacionadas?</div>
+            <div class="question">23. ¿Qué signo se usa para escribir una cita textual de otra persona?</div>
             <div class="options">
-                <label><input type="radio" name="q23" value="A"> Punto y coma</label>
-                <label><input type="radio" name="q23" value="B"> Coma</label>
+                <label><input type="radio" name="q23" value="A"> Puntos suspensivos</label>
+                <label><input type="radio" name="q23" value="B"> Comillas</label>
             </div>
 
-            <div class="question">24. ¿Es correcto escribir una lista de objetos después de dos puntos? Ejemplo: Necesito: pan, leche, huevos.</div>
+            <div class="question">24. En la frase: "Mi hermana, que es muy alta, jugaba al baloncesto." ¿Por qué se usa la coma?</div>
             <div class="options">
-                <label><input type="radio" name="q24" value="A"> Sí, es su función.</label>
-                <label><input type="radio" name="q24" value="B"> No, es incorrecto.</label>
+                <label><input type="radio" name="q24" value="A"> Para separar elementos de una lista</label>
+                <label><input type="radio" name="q24" value="B"> Para marcar una aclaración o inciso</label>
             </div>
 
-            <div class="question">25. El punto final (.), punto y aparte (.), y punto y seguido (.) son tipos de...</div>
+            <div class="question">25. El punto y coma (;) marca una pausa...</div>
             <div class="options">
-                <label><input type="radio" name="q25" value="A"> Comillas</label>
-                <label><input type="radio" name="q25" value="B"> Punto</label>
+                <label><input type="radio" name="q25" value="A"> Menor que la coma</label>
+                <label><input type="radio" name="q25" value="B"> Mayor que la coma y menor que el punto</label>
             </div>
 
-            <div class="question">26. ¿Qué signo falta? "Mi maestra dijo Cállate por favor"</div>
+            <div class="question">26. ¿Qué tipo de punto se usa para separar oraciones dentro de un mismo párrafo?</div>
             <div class="options">
-                <label><input type="radio" name="q26" value="A"> Puntos suspensivos</label>
-                <label><input type="radio" name="q26" value="B"> Comillas</label>
-            </div>
-        </div>
-
-        <div class="question-block">
-            <h2>🗣️ Bloque 4: Comunicación y Expresión Escrita (8 Preguntas)</h2>
-            <div class="summary">
-                **💡 Pista Profe-IA:** En la **comunicación**, hay un **emisor** (quien envía el mensaje), un **receptor** (quien lo recibe), un **mensaje** (lo que se dice), un **código** (el idioma o las señales) y un **canal** (por donde viaja el mensaje, ej: el aire, el teléfono). El **decálogo** es un conjunto de 10 reglas o normas para algo.
+                <label><input type="radio" name="q26" value="A"> Punto y aparte</label>
+                <label><input type="radio" name="q26" value="B"> Punto y seguido</label>
             </div>
 
-            <div class="question">27. ¿Quién es la persona que transmite la información en la comunicación?</div>
+            <div class="question">27. ¿Es correcto usar los dos puntos antes de la palabra **'por ejemplo'**?</div>
             <div class="options">
-                <label><input type="radio" name="q27" value="A"> Receptor</label>
-                <label><input type="radio" name="q27" value="B"> Emisor</label>
+                <label><input type="radio" name="q27" value="A"> Sí, es correcto.</label>
+                <label><input type="radio" name="q27" value="B"> No, es incorrecto.</label>
             </div>
 
-            <div class="question">28. ¿Qué elemento de la comunicación es el idioma que utilizamos (ej: el español)?</div>
+            <div class="question">28. ¿Qué signo de puntuación cierra una frase después de una exclamación?</div>
             <div class="options">
-                <label><input type="radio" name="q28" value="A"> Mensaje</label>
-                <label><input type="radio" name="q28" value="B"> Código</label>
+                <label><input type="radio" name="q28" value="A"> Punto final</label>
+                <label><input type="radio" name="q28" value="B"> Signo de exclamación (!)</label>
             </div>
-
-            <div class="question">29. Si lees un libro, ¿quién es el receptor?</div>
+            
+            <div class="question">29. Los dos puntos (:) se escriben siempre después de una palabra o frase y...</div>
             <div class="options">
-                <label><input type="radio" name="q29" value="A"> El escritor del libro</label>
-                <label><input type="radio" name="q29" value="B"> Tú</label>
+                <label><input type="radio" name="q29" value="A"> Antes de la palabra que anuncian</label>
+                <label><input type="radio" name="q29" value="B"> Después de la palabra que anuncian</label>
             </div>
-
-            <div class="question">30. El mensaje es...</div>
+            
+            <div class="question">30. En esta frase, ¿dónde se usarían comillas? "Mi trabajo se titula El maravilloso mundo de los nombres."</div>
             <div class="options">
-                <label><input type="radio" name="q30" value="A"> Lo que se dice o escribe</label>
-                <label><input type="radio" name="q30" value="B"> La persona que escucha</label>
-            </div>
-
-            <div class="question">31. ¿Qué es la comunicación no verbal?</div>
-            <div class="options">
-                <label><input type="radio" name="q31" value="A"> La que usa palabras</label>
-                <label><input type="radio" name="q31" value="B"> La que usa gestos, imágenes o sonidos</label>
-            </div>
-
-            <div class="question">32. ¿Cuántas reglas tiene un decálogo?</div>
-            <div class="options">
-                <label><input type="radio" name="q32" value="A"> Diez</label>
-                <label><input type="radio" name="q32" value="B"> Veinte</label>
-            </div>
-
-            <div class="question">33. Si hablas por teléfono, ¿cuál es el canal?</div>
-            <div class="options">
-                <label><input type="radio" name="q33" value="A"> El aire</label>
-                <label><input type="radio" name="q33" value="B"> El teléfono/la línea</label>
-            </div>
-
-            <div class="question">34. En la comunicación escrita, el código suele ser...</div>
-            <div class="options">
-                <label><input type="radio" name="q34" value="A"> El mismo idioma</label>
-                <label><input type="radio" name="q34" value="B"> Los gestos</label>
-            </div>
-        </div>
-
-        <div class="question-block">
-            <h2>📚 Bloque 5: Lectura y Comprensión (8 Preguntas)</h2>
-            <div class="summary">
-                **💡 Pista Profe-IA:** La **comprensión lectora** es entender lo que se lee. Hay que fijarse en la idea principal, los detalles y el orden de los sucesos. Recuerda leer siempre con atención, ¡es la clave del éxito!
-            </div>
-
-            <div class="question">35. ¿Qué significa 'Comprensión Oral'?</div>
-            <div class="options">
-                <label><input type="radio" name="q35" value="A"> Entender lo que se lee</label>
-                <label><input type="radio" name="q35" value="B"> Entender lo que se escucha</label>
-            </div>
-
-            <div class="question">36. Para entender bien un texto, ¿qué es más importante?</div>
-            <div class="options">
-                <label><input type="radio" name="q36" value="A"> La velocidad de la lectura</label>
-                <label><input type="radio" name="q36" value="B"> Entender la idea principal</label>
-            </div>
-
-            <div class="question">37. En la comprensión escrita, ¿qué debemos hacer para saber cómo se desarrollan los hechos?</div>
-            <div class="options">
-                <label><input type="radio" name="q37" value="A"> Saltarnos los párrafos</label>
-                <label><input type="radio" name="q37" value="B"> Entender la secuencia y los detalles</label>
-            </div>
-
-            <div class="question">38. ¿Cuál es el primer paso para mejorar la comprensión lectora?</div>
-            <div class="options">
-                <label><input type="radio" name="q38" value="A"> Dibujar el texto</label>
-                <label><input type="radio" name="q38" value="B"> Leer con mucha atención</label>
-            </div>
-
-            <div class="question">39. Si no entiendes una palabra mientras lees, lo mejor es...</div>
-            <div class="options">
-                <label><input type="radio" name="q39" value="A"> Dejar de leer</label>
-                <label><input type="radio" name="q39" value="B"> Buscar su significado o deducirlo del contexto</label>
-            </div>
-
-            <div class="question">40. ¿Qué debemos buscar después de leer un texto corto?</div>
-            <div class="options">
-                <label><input type="radio" name="q40" value="A"> Quién es el autor</label>
-                <label><input type="radio" name="q40" value="B"> El tema principal del que habla</label>
+                <label><input type="radio" name="q30" value="A"> Alrededor de 'Mi trabajo'</label>
+                <label><input type="radio" name="q30" value="B"> Alrededor de 'El maravilloso mundo de los nombres'</label>
             </div>
         </div>
 
@@ -407,30 +324,28 @@
     </form>
 
     <div id="result-area" class="hidden">
-        <h2>🎉 ¡RESULTADOS DEL SUPER-QUIZ! 🎉</h2>
+        <h2>🎉 ¡RESULTADOS DEL EXAMEN DE REFUERZO! 🎉</h2>
         <p>Tu puntuación ha sido:</p>
-        <div id="score">0/40</div>
+        <div id="score">0/30</div>
         <p id="feedback"></p>
-        <button onclick="location.reload()">Hacer el Repaso de Nuevo</button>
+        <button onclick="location.reload()">Hacer el Examen de Nuevo</button>
     </div>
 
 </div>
 
 <script>
-    // Respuestas correctas (A=A, B=B, C=C)
+    // Respuestas correctas (A=A, B=B)
     const correctAnswers = {
-        q1: 'B', q2: 'B', q3: 'B', q4: 'B', q5: 'A', q6: 'B', q7: 'B', q8: 'A',
-        q9: 'B', q10: 'C', q11: 'A', q12: 'B', q13: 'B', q14: 'B', q15: 'B', q16: 'B',
-        q17: 'B', q18: 'A', q19: 'A', q20: 'B', q21: 'B', q22: 'A', q23: 'A', q24: 'A', q25: 'B', q26: 'B',
-        q27: 'B', q28: 'B', q29: 'B', q30: 'A', q31: 'B', q32: 'A', q33: 'B', q34: 'A',
-        q35: 'B', q36: 'B', q37: 'B', q38: 'B', q39: 'B', q40: 'B'
+        q1: 'B', q2: 'B', q3: 'B', q4: 'A', q5: 'A', q6: 'A',
+        q7: 'B', q8: 'B', q9: 'B', q10: 'B', q11: 'A', q12: 'B', q13: 'A', q14: 'A', q15: 'A', q16: 'B', q17: 'A', q18: 'B',
+        q19: 'B', q20: 'B', q21: 'A', q22: 'A', q23: 'B', q24: 'B', q25: 'B', q26: 'B', q27: 'A', q28: 'B', q29: 'A', q30: 'B'
     };
 
     const form = document.getElementById('quiz-form');
     const resultArea = document.getElementById('result-area');
     const scoreDisplay = document.getElementById('score');
     const feedbackDisplay = document.getElementById('feedback');
-    const totalQuestions = 40;
+    const totalQuestions = 30;
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -448,13 +363,13 @@
         scoreDisplay.textContent = `${score}/${totalQuestions}`;
         
         if (score === totalQuestions) {
-            feedbackDisplay.textContent = '¡Impresionante! ¡Dominas la Lengua! ¡A por el 10 en el examen!';
-        } else if (score >= 32) {
-            feedbackDisplay.textContent = '¡Genial! Tienes el temario muy controlado. ¡Un último repaso y listo!';
-        } else if (score >= 20) {
-            feedbackDisplay.textContent = '¡Muy bien! Tienes una buena base, repasa los bloques donde has fallado un poco.';
+            feedbackDisplay.textContent = '¡PERFECTO! ¡Ya dominas el temario! ¡A descansar y a por ese examen de mañana!';
+        } else if (score >= 25) {
+            feedbackDisplay.textContent = '¡Casi perfecto! Estás muy cerca de dominar todo. Repasa lo que has fallado.';
+        } else if (score >= 18) {
+            feedbackDisplay.textContent = '¡Buen trabajo! Sigue repasando el resumen en las áreas donde fallaste.';
         } else {
-            feedbackDisplay.textContent = '¡Ánimo! Repasa las pistas que te ha dado Profe-IA y vuelve a intentarlo. ¡Tú puedes!';
+            feedbackDisplay.textContent = '¡Ánimo! Vuelve a leer el resumen con mucha atención y repite el quiz. ¡Confío en ti!';
         }
 
         form.classList.add('hidden');
