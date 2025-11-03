@@ -3,221 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de Repaso: Física y Química</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Super-Quiz de Lengua 🚀</title>
     <style>
-        /* Estilo para un scroll suave */
-        html {
-            scroll-behavior: smooth;
+        /* Estilos generales para un diseño limpio y responsive */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
         }
-        /* Estilo para los placeholders */
-        ::placeholder {
-            color: #9ca3af;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
-        .theory-box {
-            background-color: #f3f4f6; /* Un gris un poco más claro */
-            border-left: 4px solid #4f46e5; /* Borde izquierdo índigo */
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0.25rem;
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 25px;
+            border-left: 5px solid #007bff;
+            padding-left: 10px;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .summary {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        .question {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .options label:hover {
+            background-color: #f0f0f0;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #4CAF50; /* Color del radio button */
+        }
+        #result-area {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffe0b2;
+            border: 2px dashed #ff9800;
+        }
+        #score {
+            font-size: 2em;
+            color: #e65100;
+            font-weight: bold;
+        }
+        #feedback {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans p-4 sm:p-6 md:p-8">
-    <div class="max-w-4xl mx-auto">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-indigo-600">Ejercicios de Repaso de Física y Química</h1>
-            <p class="text-lg text-gray-600 mt-2">Introduce tus respuestas y comprueba los resultados al instante.</p>
-        </header>
+<body>
 
-        <main id="exercise-container" class="space-y-8">
-            <!-- Los ejercicios se cargarán aquí dinámicamente -->
-        </main>
-        
-        <footer class="text-center mt-12 text-gray-500">
-            <p>&copy; 2024 - Creado para practicar y aprender.</p>
-        </footer>
-    </div>
-    
-    <!-- Contador de Puntuación -->
-    <div id="scoreboard" class="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-xl border border-gray-200 w-48">
-        <h3 class="font-bold text-center mb-2 text-indigo-600">Puntuación</h3>
-        <div class="flex justify-around gap-4">
-            <div class="text-center">
-                <span class="font-bold text-2xl text-green-500" id="correct-count">0</span>
-                <p class="text-sm text-gray-500">Correctas</p>
+<div class="container">
+    <h1>🚀 ¡Super-Quiz de Repaso para el Examen de Lengua! 🚀</h1>
+    <p>¡Hola, campeón/campeona! Soy Profe-IA y vamos a repasar el temario de tu examen. ¡Lee las pistas y a por todas!</p>
+
+    <form id="quiz-form">
+
+        <div class="question-block">
+            <h2>⭐ Bloque 1: El Nombre (Sustantivo) y sus Clases (8 Preguntas)</h2>
+            <div class="summary">
+                **💡 Pista Profe-IA:** Los **nombres** (o sustantivos) sirven para nombrar personas, animales, cosas, lugares o ideas. Pueden ser: **Comunes** (mesa, perro) o **Propios** (Andalucía, María); **Individuales** (oveja) o **Colectivos** (rebaño); **Concretos** (se pueden tocar) o **Abstractos** (ideas o sentimientos).
             </div>
-            <div class="text-center">
-                <span class="font-bold text-2xl text-red-500" id="incorrect-count">0</span>
-                <p class="text-sm text-gray-500">Incorrectas</p>
+
+            <div class="question">1. ¿Qué tipo de nombre es 'Andalucía'?</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="A"> Común</label>
+                <label><input type="radio" name="q1" value="B"> Propio</label>
+                <label><input type="radio" name="q1" value="C"> Abstracto</label>
+            </div>
+
+            <div class="question">2. La palabra 'alegría' es un nombre...</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="A"> Concreto</label>
+                <label><input type="radio" name="q2" value="B"> Abstracto</label>
+                <label><input type="radio" name="q2" value="C"> Individual</label>
+            </div>
+
+            <div class="question">3. ¿Cuál de estos es un nombre individual?</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> Pinar (muchos pinos)</label>
+                <label><input type="radio" name="q3" value="B"> Árbol</label>
+                <label><input type="radio" name="q3" value="C"> Rebaño (muchas ovejas)</label>
+            </div>
+
+            <div class="question">4. ¿Cuál de estos es un nombre colectivo?</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> Persona</label>
+                <label><input type="radio" name="q4" value="B"> Archipiélago (muchas islas)</label>
+                <label><input type="radio" name="q4" value="C"> Mesa</label>
+            </div>
+
+            <div class="question">5. ¿El nombre 'libro' es un nombre común o propio?</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> Común</label>
+                <label><input type="radio" name="q5" value="B"> Propio</label>
+            </div>
+
+            <div class="question">6. ¿Qué nombre es de género femenino?</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="A"> El sol</label>
+                <label><input type="radio" name="q6" value="B"> La casa</label>
+                <label><input type="radio" name="q6" value="C"> Un coche</label>
+            </div>
+
+            <div class="question">7. El plural de 'luz' es...</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="A"> Luzes</label>
+                <label><input type="radio" name="q7" value="B"> Luces</label>
+                <label><input type="radio" name="q7" value="C"> Lúces</label>
+            </div>
+
+            <div class="question">8. El nombre 'vaso' es...</div>
+            <div class="options">
+                <label><input type="radio" name="q8" value="A"> Común, individual, concreto</label>
+                <label><input type="radio" name="q8" value="B"> Propio, individual, abstracto</label>
             </div>
         </div>
+
+        <div class="question-block">
+            <h2>✏️ Bloque 2: Palabras Derivadas, Compuestas y Familia de Palabras (8 Preguntas)</h2>
+            <div class="summary">
+                **💡 Pista Profe-IA:** La **familia de palabras** comparte la misma **raíz** o parte principal (ej: *pan, pan*adero, *pan*ecillo). Una palabra **derivada** nace de otra añadiéndole un prefijo (antes) o sufijo (después) (ej: *des*hacer). Una palabra **compuesta** se forma uniendo dos palabras completas (ej: *abre* + *latas* = *abrelatas*).
+            </div>
+
+            <div class="question">9. ¿Cuál de estas palabras NO pertenece a la familia de 'mar'?</div>
+            <div class="options">
+                <label><input type="radio" name="q9" value="A"> Marino</label>
+                <label><input type="radio" name="q9" value="B"> Barco</label>
+                <label><input type="radio" name="q9" value="C"> Marea</label>
+            </div>
+
+            <div class="question">10. 'Paraguas' es una palabra...</div>
+            <div class="options">
+                <label><input type="radio" name="q10" value="A"> Derivada</label>
+                <label><input type="radio" name="q10" value="B"> Simple</label>
+                <label><input type="radio" name="q10" value="C"> Compuesta</label>
+            </div>
+
+            <div class="question">11. 'Florero' (flor + ero) es una palabra...</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="A"> Derivada</label>
+                <label><input type="radio" name="q11" value="B"> Compuesta</label>
+            </div>
+
+            <div class="question">12. La raíz de la familia de palabras 'casita', 'caserón', 'caseta' es...</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="A"> Caserón</label>
+                <label><input type="radio" name="q12" value="B"> Cas</label>
+                <label><input type="radio" name="q12" value="C"> Casa</label>
+            </div>
+
+            <div class="question">13. 'Inmóvil' (in + móvil) es un ejemplo de palabra...</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="A"> Compuesta</label>
+                <label><input type="radio" name="q13" value="B"> Derivada (con prefijo)</label>
+            </div>
+
+            <div class="question">14. ¿Qué par de palabras está formado por la unión de dos palabras simples?</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="A"> Panadero y deshacer</label>
+                <label><input type="radio" name="q14" value="B"> Lavacoches y medianoche</label>
+            </div>
+
+            <div class="question">15. Una palabra derivada se forma añadiendo a la raíz un...</div>
+            <div class="options">
+                <label><input type="radio" name="q15" value="A"> Nombre común</label>
+                <label><input type="radio" name="q15" value="B"> Prefijo o sufijo</label>
+            </div>
+
+            <div class="question">16. ¿Cuál es la palabra primitiva de la que derivan 'frutería', 'afrutado' y 'frutal'?</div>
+            <div class="options">
+                <label><input type="radio" name="q16" value="A"> Fruto</label>
+                <label><input type="radio" name="q16" value="B"> Fruta</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <h2>🛑 Bloque 3: Ortografía - Signos de Puntuación (10 Preguntas)</h2>
+            <div class="summary">
+                **💡 Pista Profe-IA:** El **punto** (.) marca el final de una frase o párrafo. La **coma** (,) separa elementos en una lista o aclaraciones. El **punto y coma** (;) es una pausa mayor que la coma y menor que el punto. Los **dos puntos** (:) anuncian una explicación o una lista. Los **puntos suspensivos** (...) indican una interrupción o que la lista continúa. Las **comillas** ("") se usan para citar o para títulos.
+            </div>
+
+            <div class="question">17. ¿Qué signo usamos para separar los elementos de una lista?</div>
+            <div class="options">
+                <label><input type="radio" name="q17" value="A"> Punto y coma</label>
+                <label><input type="radio" name="q17" value="B"> Coma</label>
+            </div>
+
+            <div class="question">18. ¿Qué signo se usa para anunciar una enumeración? Ejemplo: Llevo tres cosas: lápiz, goma y estuche.</div>
+            <div class="options">
+                <label><input type="radio" name="q18" value="A"> Dos puntos</label>
+                <label><input type="radio" name="q18" value="B"> Punto</label>
+            </div>
+
+            <div class="question">19. ¿Qué signo se coloca al final de un texto, si no es una pregunta o una exclamación?</div>
+            <div class="options">
+                <label><input type="radio" name="q19" value="A"> Punto final</label>
+                <label><input type="radio" name="q19" value="B"> Coma</label>
+            </div>
+
+            <div class="question">20. ¿Qué indican los puntos suspensivos (...) en una frase?</div>
+            <div class="options">
+                <label><input type="radio" name="q20" value="A"> Fin de la oración</label>
+                <label><input type="radio" name="q20" value="B"> Continuación o duda</label>
+            </div>
+
+            <div class="question">21. ¿Qué signo de puntuación usamos para escribir el título de un libro o una cita?</div>
+            <div class="options">
+                <label><input type="radio" name="q21" value="A"> Punto y coma</label>
+                <label><input type="radio" name="q21" value="B"> Comillas</label>
+            </div>
+
+            <div class="question">22. En esta frase, ¿dónde va la coma? "Tengo un perro un gato y un pájaro"</div>
+            <div class="options">
+                <label><input type="radio" name="q22" value="A"> Después de 'perro' y 'gato'</label>
+                <label><input type="radio" name="q22" value="B"> Solo después de 'perro'</label>
+            </div>
+
+            <div class="question">23. ¿Qué signo usarías para separar dos oraciones largas que están relacionadas?</div>
+            <div class="options">
+                <label><input type="radio" name="q23" value="A"> Punto y coma</label>
+                <label><input type="radio" name="q23" value="B"> Coma</label>
+            </div>
+
+            <div class="question">24. ¿Es correcto escribir una lista de objetos después de dos puntos? Ejemplo: Necesito: pan, leche, huevos.</div>
+            <div class="options">
+                <label><input type="radio" name="q24" value="A"> Sí, es su función.</label>
+                <label><input type="radio" name="q24" value="B"> No, es incorrecto.</label>
+            </div>
+
+            <div class="question">25. El punto final (.), punto y aparte (.), y punto y seguido (.) son tipos de...</div>
+            <div class="options">
+                <label><input type="radio" name="q25" value="A"> Comillas</label>
+                <label><input type="radio" name="q25" value="B"> Punto</label>
+            </div>
+
+            <div class="question">26. ¿Qué signo falta? "Mi maestra dijo Cállate por favor"</div>
+            <div class="options">
+                <label><input type="radio" name="q26" value="A"> Puntos suspensivos</label>
+                <label><input type="radio" name="q26" value="B"> Comillas</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <h2>🗣️ Bloque 4: Comunicación y Expresión Escrita (8 Preguntas)</h2>
+            <div class="summary">
+                **💡 Pista Profe-IA:** En la **comunicación**, hay un **emisor** (quien envía el mensaje), un **receptor** (quien lo recibe), un **mensaje** (lo que se dice), un **código** (el idioma o las señales) y un **canal** (por donde viaja el mensaje, ej: el aire, el teléfono). El **decálogo** es un conjunto de 10 reglas o normas para algo.
+            </div>
+
+            <div class="question">27. ¿Quién es la persona que transmite la información en la comunicación?</div>
+            <div class="options">
+                <label><input type="radio" name="q27" value="A"> Receptor</label>
+                <label><input type="radio" name="q27" value="B"> Emisor</label>
+            </div>
+
+            <div class="question">28. ¿Qué elemento de la comunicación es el idioma que utilizamos (ej: el español)?</div>
+            <div class="options">
+                <label><input type="radio" name="q28" value="A"> Mensaje</label>
+                <label><input type="radio" name="q28" value="B"> Código</label>
+            </div>
+
+            <div class="question">29. Si lees un libro, ¿quién es el receptor?</div>
+            <div class="options">
+                <label><input type="radio" name="q29" value="A"> El escritor del libro</label>
+                <label><input type="radio" name="q29" value="B"> Tú</label>
+            </div>
+
+            <div class="question">30. El mensaje es...</div>
+            <div class="options">
+                <label><input type="radio" name="q30" value="A"> Lo que se dice o escribe</label>
+                <label><input type="radio" name="q30" value="B"> La persona que escucha</label>
+            </div>
+
+            <div class="question">31. ¿Qué es la comunicación no verbal?</div>
+            <div class="options">
+                <label><input type="radio" name="q31" value="A"> La que usa palabras</label>
+                <label><input type="radio" name="q31" value="B"> La que usa gestos, imágenes o sonidos</label>
+            </div>
+
+            <div class="question">32. ¿Cuántas reglas tiene un decálogo?</div>
+            <div class="options">
+                <label><input type="radio" name="q32" value="A"> Diez</label>
+                <label><input type="radio" name="q32" value="B"> Veinte</label>
+            </div>
+
+            <div class="question">33. Si hablas por teléfono, ¿cuál es el canal?</div>
+            <div class="options">
+                <label><input type="radio" name="q33" value="A"> El aire</label>
+                <label><input type="radio" name="q33" value="B"> El teléfono/la línea</label>
+            </div>
+
+            <div class="question">34. En la comunicación escrita, el código suele ser...</div>
+            <div class="options">
+                <label><input type="radio" name="q34" value="A"> El mismo idioma</label>
+                <label><input type="radio" name="q34" value="B"> Los gestos</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <h2>📚 Bloque 5: Lectura y Comprensión (8 Preguntas)</h2>
+            <div class="summary">
+                **💡 Pista Profe-IA:** La **comprensión lectora** es entender lo que se lee. Hay que fijarse en la idea principal, los detalles y el orden de los sucesos. Recuerda leer siempre con atención, ¡es la clave del éxito!
+            </div>
+
+            <div class="question">35. ¿Qué significa 'Comprensión Oral'?</div>
+            <div class="options">
+                <label><input type="radio" name="q35" value="A"> Entender lo que se lee</label>
+                <label><input type="radio" name="q35" value="B"> Entender lo que se escucha</label>
+            </div>
+
+            <div class="question">36. Para entender bien un texto, ¿qué es más importante?</div>
+            <div class="options">
+                <label><input type="radio" name="q36" value="A"> La velocidad de la lectura</label>
+                <label><input type="radio" name="q36" value="B"> Entender la idea principal</label>
+            </div>
+
+            <div class="question">37. En la comprensión escrita, ¿qué debemos hacer para saber cómo se desarrollan los hechos?</div>
+            <div class="options">
+                <label><input type="radio" name="q37" value="A"> Saltarnos los párrafos</label>
+                <label><input type="radio" name="q37" value="B"> Entender la secuencia y los detalles</label>
+            </div>
+
+            <div class="question">38. ¿Cuál es el primer paso para mejorar la comprensión lectora?</div>
+            <div class="options">
+                <label><input type="radio" name="q38" value="A"> Dibujar el texto</label>
+                <label><input type="radio" name="q38" value="B"> Leer con mucha atención</label>
+            </div>
+
+            <div class="question">39. Si no entiendes una palabra mientras lees, lo mejor es...</div>
+            <div class="options">
+                <label><input type="radio" name="q39" value="A"> Dejar de leer</label>
+                <label><input type="radio" name="q39" value="B"> Buscar su significado o deducirlo del contexto</label>
+            </div>
+
+            <div class="question">40. ¿Qué debemos buscar después de leer un texto corto?</div>
+            <div class="options">
+                <label><input type="radio" name="q40" value="A"> Quién es el autor</label>
+                <label><input type="radio" name="q40" value="B"> El tema principal del que habla</label>
+            </div>
+        </div>
+
+        <button type="submit">¡TERMINAR Y VER RESULTADOS!</button>
+    </form>
+
+    <div id="result-area" class="hidden">
+        <h2>🎉 ¡RESULTADOS DEL SUPER-QUIZ! 🎉</h2>
+        <p>Tu puntuación ha sido:</p>
+        <div id="score">0/40</div>
+        <p id="feedback"></p>
+        <button onclick="location.reload()">Hacer el Repaso de Nuevo</button>
     </div>
 
+</div>
 
-    <script>
-        let correctCount = 0;
-        let incorrectCount = 0;
-        const answeredQuestions = new Set(); // Almacena IDs de preguntas ya respondidas
+<script>
+    // Respuestas correctas (A=A, B=B, C=C)
+    const correctAnswers = {
+        q1: 'B', q2: 'B', q3: 'B', q4: 'B', q5: 'A', q6: 'B', q7: 'B', q8: 'A',
+        q9: 'B', q10: 'C', q11: 'A', q12: 'B', q13: 'B', q14: 'B', q15: 'B', q16: 'B',
+        q17: 'B', q18: 'A', q19: 'A', q20: 'B', q21: 'B', q22: 'A', q23: 'A', q24: 'A', q25: 'B', q26: 'B',
+        q27: 'B', q28: 'B', q29: 'B', q30: 'A', q31: 'B', q32: 'A', q33: 'B', q34: 'A',
+        q35: 'B', q36: 'B', q37: 'B', q38: 'B', q39: 'B', q40: 'B'
+    };
 
-        const exercises = [
-            {
-                topic: 'Conversión de unidades de longitud',
-                theory: 'Imagina que quieres "traducir" una unidad a otra. Para eso, usamos los <strong>factores de conversión</strong>.<br><strong>La Regla de Oro:</strong> Multiplica tu número por una fracción. Arriba pones la unidad a la que quieres llegar, y abajo la que quieres eliminar. ¡Así se tachan y listo!<br><em>🔍 Ejemplo: Convertir 2,5 km a m.</em><br><code>2,5 km × (1000 m / 1 km) = 2500 m</code><br>Como "km" está arriba y abajo, se cancelan, dejando solo los "m".',
-                questions: [
-                    { question: '1. Expresa 12,5 kilómetros (km) en metros (m).', answer: '12500', unit: 'm' },
-                    { question: '2. Convierte 340 centímetros (cm) a metros (m).', answer: '3.4', unit: 'm' },
-                    { question: '3. Pasa 1.500 milímetros (mm) a hectómetros (Hm).', answer: '0.015', unit: 'Hm' },
-                    { question: '4. Expresa 0,04 decámetros (dam) en centímetros (cm).', answer: '40', unit: 'cm' },
-                    { question: '5. Convierte 250 metros (m) a kilómetros (km).', answer: '0.25', unit: 'km' }
-                ]
-            },
-            {
-                topic: 'Conversión de unidades compuestas',
-                theory: 'Aquí hay más de una unidad, ¡pero no te asustes! El truco es cambiar cada una por separado, con su propio factor de conversión.<br><em>🔍 Ejemplo: Convertir 90 km/h a m/s.</em><br>Hacemos dos conversiones a la vez:<br>1️⃣ <strong>Distancia:</strong> de kilómetros (km) a metros (m).<br>2️⃣ <strong>Tiempo:</strong> de horas (h) a segundos (s).<br><code>90 km/h × (1000 m / 1 km) × (1 h / 3600 s) = 25 m/s</code><br>¡Tachamos "km" con "km" y "h" con "h" y ya lo tenemos!',
-                questions: [
-                    { question: '1. Convierte una velocidad de 72 kilómetros por hora (km/h) a metros por segundo (m/s).', answer: '20', unit: 'm/s' },
-                    { question: '2. Pasa una velocidad de 15 metros por segundo (m/s) a kilómetros por hora (km/h).', answer: '54', unit: 'km/h' },
-                    { question: '3. Expresa una densidad de 1.000 kg/m³ a g/cm³.', answer: '1', unit: 'g/cm³' },
-                    { question: '4. Convierte 20 centímetros por minuto (cm/min) a metros por segundo (m/s).', answer: '0.0033', unit: 'm/s (aprox.)', tolerance: 0.0001 },
-                    { question: '5. Pasa una densidad de 2,5 gramos por litro (g/L) a kilogramos por metro cúbico (kg/m³).', answer: '2.5', unit: 'kg/m³' }
-                ]
-            },
-            {
-                topic: 'Factores de conversión simples',
-                theory: 'Este método es una receta que siempre funciona:<br><code>Valor que tienes × (Unidad a la que vas / Unidad que tienes) = Resultado</code><br>La "unidad que tienes" se cancela y te quedas con la que querías.<br><em>🔍 Ejemplo: Convertir 180 minutos a horas (sabiendo que 1 h = 60 min).</em><br><code>180 min × (1 h / 60 min) = 3 h</code>',
-                questions: [
-                    { question: '1. Sabiendo que 1 hora son 60 minutos, convierte 4,5 horas a minutos.', answer: '270', unit: 'minutos' },
-                    { question: '2. Sabiendo que 1 kg son 1.000 g, convierte 0,56 kg a g.', answer: '560', unit: 'g' },
-                    { question: '3. Sabiendo que 1 L son 1.000 mL, convierte 300 mL a L.', answer: '0.3', unit: 'L' },
-                    { question: '4. Sabiendo que 1 m son 100 cm, convierte 80 cm a m.', answer: '0.8', unit: 'm' },
-                    { question: '5. Sabiendo que 1 g son 1.000 mg, convierte 5.200 mg a g.', answer: '5.2', unit: 'g' }
-                ]
-            },
-            {
-                topic: 'Expresar números en notación científica y decimal',
-                theory: 'Esto sirve para escribir números gigantes o súper pequeños de forma cómoda.<br><strong>De número normal a científico:</strong><br>Mueve la coma hasta que solo quede una cifra delante (que no sea cero). Los saltos que das son el exponente.<br>➡️ Si el número era grande (>1), el exponente es positivo.<br>⬅️ Si era pequeño (<1), el exponente es negativo.<br><em>🔍 Ejemplo: 0,0045 ⟶ movemos la coma 3 sitios a la derecha ⟶ 4,5 x 10⁻³</em><br><strong>De científico a normal:</strong><br>Mueve la coma según el exponente. Positivo a la derecha, negativo a la izquierda.<br><em>🔍 Ejemplo: 2,1 x 10⁴ ⟶ movemos la coma 4 sitios a la derecha ⟶ 21000</em>',
-                questions: [
-                    { question: '1. Expresa el número 345.000.000 en notación científica.', answer: ['3.45e+8', '3.45x10^8'], unit: '' },
-                    { question: '2. Expresa el número 0,0000078 en notación científica.', answer: ['7.8e-6', '7.8x10^-6'], unit: '' },
-                    { question: '3. Escribe el número 5,4 x 10⁵ en notación decimal.', answer: '540000', unit: '' },
-                    { question: '4. Escribe el número 1,22 x 10⁻⁴ en notación decimal.', answer: '0.000122', unit: '' },
-                    { question: '5. Expresa el número 0,00506 en notación científica.', answer: ['5.06e-3', '5.06x10^-3'], unit: '' }
-                ]
-            },
-            {
-                topic: 'Redondeo de números decimales',
-                theory: 'Redondear es simplificar. ¡Sigue estos pasos!<br>1️⃣ Busca la cifra hasta la que quieres redondear (ej: las centésimas).<br>2️⃣ Mira a su "vecino" de la derecha.<br>📈 Si el vecino es <strong>5 o más grande</strong> (5, 6, 7, 8, 9) → Súmale 1 a tu cifra.<br>😐 Si el vecino es <strong>más pequeño que 5</strong> (0, 1, 2, 3, 4) → Tu cifra se queda igual.<br>3️⃣ ¡Borra todos los vecinos de la derecha!<br><em>🔍 Ejemplo: Redondear 7,837 a las centésimas.</em><br>Tu cifra es el <strong>3</strong>. Su vecino es el <strong>7</strong>. Como es mayor que 5, el 3 sube a 4. Resultado: <strong>7,84</strong>',
-                questions: [
-                    { question: '1. Redondea 14,5678 a las centésimas (2 cifras decimales).', answer: '14.57', unit: '' },
-                    { question: '2. Redondea 3,9981 a las centésimas (2 cifras decimales).', answer: '4.00', unit: '' },
-                    { question: '3. Redondea 0,12345 a las milésimas (3 cifras decimales).', answer: '0.123', unit: '' },
-                    { question: '4. Redondea 8,5000 a la décima (1 cifra decimal).', answer: '8.5', unit: '' },
-                    { question: '5. Redondea 45,695 a las centésimas (2 cifras decimales).', answer: '45.70', unit: '' }
-                ]
-            }
-        ];
+    const form = document.getElementById('quiz-form');
+    const resultArea = document.getElementById('result-area');
+    const scoreDisplay = document.getElementById('score');
+    const feedbackDisplay = document.getElementById('feedback');
+    const totalQuestions = 40;
 
-        const container = document.getElementById('exercise-container');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let score = 0;
+        const formData = new FormData(form);
 
-        // Función para actualizar el contador en la pantalla
-        function updateScoreboard() {
-            document.getElementById('correct-count').textContent = correctCount;
-            document.getElementById('incorrect-count').textContent = incorrectCount;
-        }
-
-        // Función para normalizar y comparar respuestas
-        function checkAnswer(userAnswer, correctAnswer, tolerance = 0.001) {
-            const normalizedUserAnswer = userAnswer.replace(/,/g, '.').replace(/\s/g, '').toLowerCase();
-
-            if (Array.isArray(correctAnswer)) {
-                // Para notación científica y otras respuestas con múltiples formatos válidos
-                const normalizedCorrectAnswers = correctAnswer.map(ans => 
-                    ans.replace(/,/g, '.').replace(/\s/g, '').toLowerCase()
-                );
-                return normalizedCorrectAnswers.includes(normalizedUserAnswer);
-            } else {
-                // Para respuestas numéricas estándar
-                const userNum = parseFloat(normalizedUserAnswer);
-                const correctNum = parseFloat(correctAnswer);
-                if (!isNaN(userNum) && !isNaN(correctNum)) {
-                    // Compara usando una tolerancia para manejar pequeñas diferencias en decimales
-                    return Math.abs(userNum - correctNum) < tolerance;
-                }
-                return normalizedUserAnswer === correctAnswer.toLowerCase();
+        for (const [question, expectedAnswer] of Object.entries(correctAnswers)) {
+            const userAnswer = formData.get(question);
+            if (userAnswer === expectedAnswer) {
+                score++;
             }
         }
 
-
-        // Generar el HTML para cada ejercicio
-        exercises.forEach((topic, topicIndex) => {
-            const section = document.createElement('section');
-            section.className = 'bg-white p-6 rounded-lg shadow-md';
-            section.innerHTML = `
-                <h2 class="text-2xl font-semibold text-indigo-500 mb-4">${topic.topic}</h2>
-                <div class="theory-box text-sm text-gray-700 space-y-2">${topic.theory}</div>
-            `;
-            
-            const questionsList = document.createElement('div');
-            questionsList.className = 'space-y-6';
-            
-            topic.questions.forEach((q, questionIndex) => {
-                const questionDiv = document.createElement('div');
-                const uniqueId = `q-${topicIndex}-${questionIndex}`;
-
-                questionDiv.innerHTML = `
-                    <p class="text-gray-700 mb-2">${q.question}</p>
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                        <input id="input-${uniqueId}" type="text" class="flex-grow p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition" placeholder="Tu respuesta...">
-                        <button onclick="verify('${uniqueId}')" class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition-colors duration-300 font-semibold">Comprobar</button>
-                    </div>
-                    <div id="result-${uniqueId}" class="mt-2 text-sm h-6"></div> <!-- Espacio para el resultado -->
-                `;
-                questionsList.appendChild(questionDiv);
-            });
-
-            section.appendChild(questionsList);
-            container.appendChild(section);
-        });
-
-        // Función global para verificar la respuesta
-        window.verify = function(id) {
-            const [_, topicIndex, questionIndex] = id.split('-');
-            const exercise = exercises[topicIndex].questions[questionIndex];
-            const userInput = document.getElementById(`input-${id}`);
-            const resultDiv = document.getElementById(`result-${id}`);
-            
-            if (userInput.value.trim() === '') {
-                resultDiv.innerHTML = `<span class="font-semibold text-yellow-600">Por favor, introduce una respuesta.</span>`;
-                return;
-            }
-
-            const isCorrect = checkAnswer(userInput.value, exercise.answer, exercise.tolerance);
-            
-            // Solo actualiza la puntuación si es la primera vez que se responde esta pregunta
-            if (!answeredQuestions.has(id)) {
-                if (isCorrect) {
-                    correctCount++;
-                } else {
-                    incorrectCount++;
-                }
-                answeredQuestions.add(id);
-                updateScoreboard();
-            }
-
-            // Muestra siempre el mensaje de correcto/incorrecto
-            if (isCorrect) {
-                resultDiv.innerHTML = `<span class="font-semibold text-green-600">¡Correcto! ✔️</span>`;
-                userInput.classList.remove('border-red-500');
-                userInput.classList.add('border-green-500');
-            } else {
-                let correctAnswerText = Array.isArray(exercise.answer) ? exercise.answer[0] : exercise.answer;
-                resultDiv.innerHTML = `<span class="font-semibold text-red-600">Incorrecto. La respuesta es ${correctAnswerText} ${exercise.unit}.</span>`;
-                userInput.classList.remove('border-green-500');
-                userInput.classList.add('border-red-500');
-            }
+        // Mostrar resultados
+        scoreDisplay.textContent = `${score}/${totalQuestions}`;
+        
+        if (score === totalQuestions) {
+            feedbackDisplay.textContent = '¡Impresionante! ¡Dominas la Lengua! ¡A por el 10 en el examen!';
+        } else if (score >= 32) {
+            feedbackDisplay.textContent = '¡Genial! Tienes el temario muy controlado. ¡Un último repaso y listo!';
+        } else if (score >= 20) {
+            feedbackDisplay.textContent = '¡Muy bien! Tienes una buena base, repasa los bloques donde has fallado un poco.';
+        } else {
+            feedbackDisplay.textContent = '¡Ánimo! Repasa las pistas que te ha dado Profe-IA y vuelve a intentarlo. ¡Tú puedes!';
         }
-    </script>
+
+        form.classList.add('hidden');
+        resultArea.classList.remove('hidden');
+        window.scrollTo(0, 0); // Ir al principio para ver el resultado
+    });
+</script>
+
 </body>
 </html>
-
