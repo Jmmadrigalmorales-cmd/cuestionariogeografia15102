@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen Rápido de Refuerzo de Lengua 📝</title>
+    <title>Quiz de Refuerzo con Feedback Instantáneo - Profe-IA</title>
     <style>
-        /* Estilos generales (mismos del examen anterior para coherencia) */
+        /* Estilos base */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f0f4f8;
             color: #333;
             line-height: 1.6;
             margin: 0;
@@ -19,362 +19,505 @@
             margin: 0 auto;
             background: #fff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         h1 {
-            color: #FF5722; /* Color Naranja más fuerte */
+            color: #8E24AA; /* Morado Oscuro */
             text-align: center;
-            border-bottom: 3px solid #FF5722;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            border-bottom: 3px solid #8E24AA;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
         }
         h2 {
-            color: #3f51b5; /* Índigo */
-            margin-top: 25px;
-            border-left: 5px solid #3f51b5;
-            padding-left: 10px;
-        }
-        .question-block {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+            color: #D81B60; /* Fucsia */
+            margin-top: 35px;
+            border-left: 6px solid #D81B60;
+            padding-left: 12px;
+            font-size: 1.5em;
         }
         .summary {
-            background-color: #e8eaf6; /* Azul claro para el resumen */
-            border-left: 5px solid #3f51b5;
+            background-color: #f3e5f5; /* Lila muy claro */
+            border-left: 5px solid #AB47BC;
             padding: 15px;
             margin-bottom: 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-style: italic;
+        }
+        .question-block {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #ffffff;
         }
         .question {
             font-weight: bold;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            color: #444;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: #455A64; /* Azul grisáceo */
+            font-size: 1.1em;
         }
         .options label {
             display: block;
-            margin-bottom: 8px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 12px;
+            background-color: #fafafa;
+            border: 1px solid #cfd8dc;
+            border-radius: 6px;
             transition: background-color 0.3s;
             cursor: pointer;
         }
         .options label:hover {
-            background-color: #f0f0f0;
+            background-color: #eceff1;
         }
         .options input[type="radio"] {
             margin-right: 10px;
-            accent-color: #FF5722;
+            accent-color: #D81B60;
         }
-        #result-area {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #e0f7fa; /* Cian claro */
-            border: 2px dashed #00bcd4; /* Cian */
-        }
-        #score {
-            font-size: 2em;
-            color: #00838f;
-            font-weight: bold;
-        }
-        #feedback {
-            font-size: 1.2em;
+        .check-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             margin-top: 10px;
         }
-        button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #FF5722;
+        .check-btn {
+            padding: 10px 15px;
+            background-color: #673AB7; /* Morado */
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
             transition: background-color 0.3s;
+            font-weight: bold;
         }
-        button:hover {
-            background-color: #f4511e;
+        .check-btn:hover:not(:disabled) {
+            background-color: #512DA8;
         }
-        .hidden {
-            display: none;
+        .check-btn:disabled {
+            background-color: #bdbdbd;
+            cursor: not-allowed;
+        }
+        .feedback {
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .correct {
+            background-color: #E8F5E9; /* Verde muy claro */
+            color: #4CAF50; /* Verde */
+            border: 1px solid #4CAF50;
+        }
+        .incorrect {
+            background-color: #FFEBEE; /* Rojo muy claro */
+            color: #F44336; /* Rojo */
+            border: 1px solid #F44336;
+        }
+        #score-display {
+            position: sticky;
+            top: 0;
+            background-color: #FFF3E0; /* Naranja claro */
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px dashed #FF9800; /* Naranja */
+            font-size: 1.2em;
+            font-weight: bold;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📝 Examen Rápido de Refuerzo Profe-IA (30 Preguntas)</h1>
-    <p>¡Este examen es más rápido y se centra en los conceptos clave que acabas de repasar! ¡Tú puedes con esto!</p>
+    <h1>💡 Refuerzo Interactivo de Lengua (30 Preguntas)</h1>
+    <div id="score-display">Puntuación: <span id="current-score">0</span> / 30</div>
+    <p>¡Hola! Aquí tienes tu prueba con **comprobación instantánea**. Lee la pregunta, selecciona una opción y pulsa **"Comprobar"** para ver si es correcta. ¡Vamos a por todas!</p>
 
     <form id="quiz-form">
 
         <div class="question-block">
-            <h2>🗣️ Bloque 1: Comunicación y Comprensión (6 Preguntas)</h2>
+            <h2>🗣️ Bloque 1: Comunicación y Comprensión (10 Preguntas)</h2>
             <div class="summary">
-                **💡 Pista Profe-IA:** La comunicación tiene 5 elementos: **Emisor** (envía), **Receptor** (recibe), **Mensaje** (la info), **Código** (idioma) y **Canal** (medio). ¡Recuerda leer con **atención** para la comprensión!
+                **💡 Pista Profe-IA:** La comunicación tiene 5 elementos: **Emisor** (envía), **Receptor** (recibe), **Mensaje** (la info), **Código** (idioma) y **Canal** (medio). ¡El **decálogo** son 10 reglas!
             </div>
 
-            <div class="question">1. ¿Cuál es el rol de la persona que recibe la información en el acto comunicativo?</div>
-            <div class="options">
-                <label><input type="radio" name="q1" value="A"> Emisor</label>
-                <label><input type="radio" name="q1" value="B"> Receptor</label>
+            <div class="question">1. ¿Qué elemento de la comunicación es el idioma que se utiliza para transmitir la información?</div>
+            <div class="options" id="options-q1">
+                <label><input type="radio" name="q1" value="A"> Mensaje</label>
+                <label><input type="radio" name="q1" value="B"> Código</label>
+                <label><input type="radio" name="q1" value="C"> Canal</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(1)">Comprobar</button>
+                <div id="feedback-q1" class="feedback"></div>
             </div>
 
-            <div class="question">2. Si ves las noticias en la televisión, ¿cuál es el canal?</div>
-            <div class="options">
-                <label><input type="radio" name="q2" value="A"> El mensaje</label>
-                <label><input type="radio" name="q2" value="B"> El televisor/la señal</label>
+            <div class="question">2. Si un niño está leyendo un cartel publicitario en la calle, ¿quién es el Emisor?</div>
+            <div class="options" id="options-q2">
+                <label><input type="radio" name="q2" value="A"> La empresa que creó el cartel</label>
+                <label><input type="radio" name="q2" value="B"> El niño</label>
+                <label><input type="radio" name="q2" value="C"> El cartel</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(2)">Comprobar</button>
+                <div id="feedback-q2" class="feedback"></div>
             </div>
 
-            <div class="question">3. ¿Cuál es el código si dos personas hablan por señas?</div>
-            <div class="options">
-                <label><input type="radio" name="q3" value="A"> El español</label>
-                <label><input type="radio" name="q3" value="B"> El lenguaje de signos</label>
+            <div class="question">3. ¿Qué habilidad es necesaria para la **Comprensión Oral**?</div>
+            <div class="options" id="options-q3">
+                <label><input type="radio" name="q3" value="A"> Entender un texto escrito</label>
+                <label><input type="radio" name="q3" value="B"> Entender lo que se escucha</label>
             </div>
-            
-            <div class="question">4. El **decálogo** es un texto que contiene...</div>
-            <div class="options">
-                <label><input type="radio" name="q4" value="A"> Diez normas o reglas</label>
-                <label><input type="radio" name="q4" value="B"> Una única historia</label>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(3)">Comprobar</button>
+                <div id="feedback-q3" class="feedback"></div>
             </div>
 
-            <div class="question">5. ¿Qué debemos buscar al leer un texto para tener una buena **comprensión escrita**?</div>
-            <div class="options">
-                <label><input type="radio" name="q5" value="A"> La idea principal y los detalles</label>
-                <label><input type="radio" name="q5" value="B"> El color del libro</label>
+            <div class="question">4. El **decálogo** tiene...</div>
+            <div class="options" id="options-q4">
+                <label><input type="radio" name="q4" value="A"> Cinco normas</label>
+                <label><input type="radio" name="q4" value="B"> Diez normas</label>
+                <label><input type="radio" name="q4" value="C"> Una sola norma</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(4)">Comprobar</button>
+                <div id="feedback-q4" class="feedback"></div>
             </div>
 
-            <div class="question">6. Entender lo que te dicen por teléfono es un ejemplo de...</div>
-            <div class="options">
-                <label><input type="radio" name="q6" value="A"> Comprensión oral</label>
-                <label><input type="radio" name="q6" value="B"> Comprensión escrita</label>
+            <div class="question">5. ¿Cuál es la forma de comunicación que utiliza gestos, señales o imágenes?</div>
+            <div class="options" id="options-q5">
+                <label><input type="radio" name="q5" value="A"> Comunicación verbal</label>
+                <label><input type="radio" name="q5" value="B"> Comunicación escrita</label>
+                <label><input type="radio" name="q5" value="C"> Comunicación no verbal</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(5)">Comprobar</button>
+                <div id="feedback-q5" class="feedback"></div>
+            </div>
+
+            <div class="question">6. ¿Quién es el Receptor si un profesor da la clase en voz alta?</div>
+            <div class="options" id="options-q6">
+                <label><input type="radio" name="q6" value="A"> El profesor</label>
+                <label><input type="radio" name="q6" value="B"> Los alumnos</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(6)">Comprobar</button>
+                <div id="feedback-q6" class="feedback"></div>
+            </div>
+
+            <div class="question">7. El *canal* de comunicación cuando envías un mensaje de texto es...</div>
+            <div class="options" id="options-q7">
+                <label><input type="radio" name="q7" value="A"> El aire</label>
+                <label><input type="radio" name="q7" value="B"> El teléfono/Internet</label>
+                <label><input type="radio" name="q7" value="C"> Las palabras</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(7)">Comprobar</button>
+                <div id="feedback-q7" class="feedback"></div>
+            </div>
+
+            <div class="question">8. El *mensaje* es...</div>
+            <div class="options" id="options-q8">
+                <label><input type="radio" name="q8" value="A"> Lo que se quiere decir o comunicar</label>
+                <label><input type="radio" name="q8" value="B"> La persona que habla</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(8)">Comprobar</button>
+                <div id="feedback-q8" class="feedback"></div>
+            </div>
+
+            <div class="question">9. Para una buena comprensión lectora, ¿es necesario leer muy rápido?</div>
+            <div class="options" id="options-q9">
+                <label><input type="radio" name="q9" value="A"> Sí, siempre.</label>
+                <label><input type="radio" name="q9" value="B"> No, es mejor leer con atención para entender.</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(9)">Comprobar</button>
+                <div id="feedback-q9" class="feedback"></div>
+            </div>
+
+            <div class="question">10. ¿Cuál de estos es un Decálogo?</div>
+            <div class="options" id="options-q10">
+                <label><input type="radio" name="q10" value="A"> Las 10 reglas para cuidar el planeta</label>
+                <label><input type="radio" name="q10" value="B"> Una lista de la compra</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(10)">Comprobar</button>
+                <div id="feedback-q10" class="feedback"></div>
             </div>
         </div>
 
         <div class="question-block">
-            <h2>⭐ Bloque 2: Sustantivos y Formación de Palabras (12 Preguntas)</h2>
+            <h2>⭐ Bloque 2: Sustantivos y Formación de Palabras (10 Preguntas)</h2>
             <div class="summary">
-                **💡 Pista Profe-IA:** Recuerda: **Propio** (con mayúscula), **Abstracto** (no se toca), **Colectivo** (conjunto), **Derivada** (prefijo/sufijo), **Compuesta** (dos palabras unidas).
+                **💡 Pista Profe-IA:** **Propio** $\rightarrow$ Mayúscula. **Abstracto** $\rightarrow$ No se toca (ideas). **Colectivo** $\rightarrow$ Conjunto. **Derivada** $\rightarrow$ Tiene prefijo/sufijo. **Compuesta** $\rightarrow$ Une dos palabras simples.
             </div>
 
-            <div class="question">7. El nombre 'felicidad' es...</div>
-            <div class="options">
-                <label><input type="radio" name="q7" value="A"> Concreto</label>
-                <label><input type="radio" name="q7" value="B"> Abstracto</label>
+            <div class="question">11. El nombre 'paciencia' es...</div>
+            <div class="options" id="options-q11">
+                <label><input type="radio" name="q11" value="A"> Concreto</label>
+                <label><input type="radio" name="q11" value="B"> Propio</label>
+                <label><input type="radio" name="q11" value="C"> Abstracto</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(11)">Comprobar</button>
+                <div id="feedback-q11" class="feedback"></div>
             </div>
 
-            <div class="question">8. ¿Cuál de estos es un nombre **propio**?</div>
-            <div class="options">
-                <label><input type="radio" name="q8" value="A"> Montaña</label>
-                <label><input type="radio" name="q8" value="B"> Giralda</label>
+            <div class="question">12. ¿Cuál de estos es un nombre **colectivo**?</div>
+            <div class="options" id="options-q12">
+                <label><input type="radio" name="q12" value="A"> Perro</label>
+                <label><input type="radio" name="q12" value="B"> Jauría (conjunto de perros)</label>
+                <label><input type="radio" name="q12" value="C"> Carlos</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(12)">Comprobar</button>
+                <div id="feedback-q12" class="feedback"></div>
             </div>
 
-            <div class="question">9. El nombre **'pinar'** (conjunto de pinos) es...</div>
-            <div class="options">
-                <label><input type="radio" name="q9" value="A"> Individual</label>
-                <label><input type="radio" name="q9" value="B"> Colectivo</label>
-            </div>
-
-            <div class="question">10. El plural de un nombre se usa para indicar...</div>
-            <div class="options">
-                <label><input type="radio" name="q10" value="A"> Una sola unidad</label>
-                <label><input type="radio" name="q10" value="B"> Varias unidades</label>
-            </div>
-
-            <div class="question">11. ¿Cuál de estas palabras NO pertenece a la familia de 'sol'?</div>
-            <div class="options">
-                <label><input type="radio" name="q11" value="A"> Solitario</label>
-                <label><input type="radio" name="q11" value="B"> Asolar</label>
-            </div>
-
-            <div class="question">12. La palabra **'limpiacristales'** es...</div>
-            <div class="options">
-                <label><input type="radio" name="q12" value="A"> Derivada</label>
-                <label><input type="radio" name="q12" value="B"> Compuesta</label>
-            </div>
-
-            <div class="question">13. La palabra **'prehistoria'** (pre + historia) es un ejemplo de palabra...</div>
-            <div class="options">
-                <label><input type="radio" name="q13" value="A"> Derivada (con prefijo)</label>
+            <div class="question">13. 'Sacapuntas' (saca + puntas) es una palabra...</div>
+            <div class="options" id="options-q13">
+                <label><input type="radio" name="q13" value="A"> Derivada</label>
                 <label><input type="radio" name="q13" value="B"> Compuesta</label>
             </div>
-
-            <div class="question">14. ¿Cuál es la **raíz** de la familia de palabras *zapato, zapatería, zapatilla*?</div>
-            <div class="options">
-                <label><input type="radio" name="q14" value="A"> Zapat</label>
-                <label><input type="radio" name="q14" value="B"> Zapato</label>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(13)">Comprobar</button>
+                <div id="feedback-q13" class="feedback"></div>
             </div>
 
-            <div class="question">15. Una palabra derivada se forma añadiendo a la raíz un...</div>
-            <div class="options">
-                <label><input type="radio" name="q15" value="A"> Prefijo o sufijo</label>
-                <label><input type="radio" name="q15" value="B"> Nombre propio</label>
+            <div class="question">14. ¿Qué nombre es **propio**?</div>
+            <div class="options" id="options-q14">
+                <label><input type="radio" name="q14" value="A"> Gato</label>
+                <label><input type="radio" name="q14" value="B"> Miau (nombre de un gato)</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(14)">Comprobar</button>
+                <div id="feedback-q14" class="feedback"></div>
             </div>
 
-            <div class="question">16. ¿Qué tipo de nombre es **'bandada'** (conjunto de pájaros)?</div>
-            <div class="options">
-                <label><input type="radio" name="q16" value="A"> Individual</label>
-                <label><input type="radio" name="q16" value="B"> Colectivo</label>
+            <div class="question">15. La raíz de la familia de palabras 'florista', 'florecer', 'floral' es...</div>
+            <div class="options" id="options-q15">
+                <label><input type="radio" name="q15" value="A"> Flor</label>
+                <label><input type="radio" name="q15" value="B"> Florecer</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(15)">Comprobar</button>
+                <div id="feedback-q15" class="feedback"></div>
             </div>
 
-            <div class="question">17. El nombre **'agua'** es...</div>
-            <div class="options">
-                <label><input type="radio" name="q17" value="A"> Concreto</label>
-                <label><input type="radio" name="q17" value="B"> Abstracto</label>
+            <div class="question">16. La palabra **'deshacer'** (des + hacer) es...</div>
+            <div class="options" id="options-q16">
+                <label><input type="radio" name="q16" value="A"> Compuesta</label>
+                <label><input type="radio" name="q16" value="B"> Derivada (con prefijo)</label>
             </div>
-            
-            <div class="question">18. La palabra **'saltamontes'** es un ejemplo de palabra...</div>
-            <div class="options">
-                <label><input type="radio" name="q18" value="A"> Derivada</label>
-                <label><input type="radio" name="q18" value="B"> Compuesta</label>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(16)">Comprobar</button>
+                <div id="feedback-q16" class="feedback"></div>
+            </div>
+
+            <div class="question">17. ¿Qué palabra es **común, individual y concreto**?</div>
+            <div class="options" id="options-q17">
+                <label><input type="radio" name="q17" value="A"> Sevilla</label>
+                <label><input type="radio" name="q17" value="B"> Botella</label>
+                <label><input type="radio" name="q17" value="C"> Tristeza</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(17)">Comprobar</button>
+                <div id="feedback-q17" class="feedback"></div>
+            </div>
+
+            <div class="question">18. La palabra primitiva de la que deriva 'niñera' es...</div>
+            <div class="options" id="options-q18">
+                <label><input type="radio" name="q18" value="A"> Niño</label>
+                <label><input type="radio" name="q18" value="B"> Cuidar</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(18)">Comprobar</button>
+                <div id="feedback-q18" class="feedback"></div>
+            </div>
+
+            <div class="question">19. ¿El nombre 'aire' es concreto o abstracto?</div>
+            <div class="options" id="options-q19">
+                <label><input type="radio" name="q19" value="A"> Abstracto</label>
+                <label><input type="radio" name="q19" value="B"> Concreto</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(19)">Comprobar</button>
+                <div id="feedback-q19" class="feedback"></div>
+            </div>
+
+            <div class="question">20. ¿Qué palabra se forma uniendo dos palabras simples?</div>
+            <div class="options" id="options-q20">
+                <label><input type="radio" name="q20" value="A"> Zapatero</label>
+                <label><input type="radio" name="q20" value="B"> Mediodía</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(20)">Comprobar</button>
+                <div id="feedback-q20" class="feedback"></div>
             </div>
         </div>
 
         <div class="question-block">
-            <h2>🛑 Bloque 3: Ortografía - Signos de Puntuación (12 Preguntas)</h2>
+            <h2>🛑 Bloque 3: Ortografía - Signos de Puntuación (10 Preguntas)</h2>
             <div class="summary">
-                **💡 Pista Profe-IA:** Los **dos puntos (:)** anuncian listas y las **comillas (" ")** citas. La **coma (,)** separa elementos de listas. Los **puntos suspensivos (...)** indican interrupción o que hay más.
+                **💡 Pista Profe-IA:** **(.)** Final. **(,)** Listas/aclaraciones. **(:)** Anuncia listas/citas. **(...)** Interrupción. **(" ")** Citas/títulos.
             </div>
 
-            <div class="question">19. ¿Qué signo se usa para separar los elementos de una enumeración (lista)?</div>
-            <div class="options">
-                <label><input type="radio" name="q19" value="A"> Punto y coma</label>
-                <label><input type="radio" name="q19" value="B"> Coma</label>
+            <div class="question">21. ¿Qué signo se usa para anunciar una cita o una enumeración (lista)?</div>
+            <div class="options" id="options-q21">
+                <label><input type="radio" name="q21" value="A"> Punto y coma</label>
+                <label><input type="radio" name="q21" value="B"> Dos puntos</label>
+                <label><input type="radio" name="q21" value="C"> Coma</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(21)">Comprobar</button>
+                <div id="feedback-q21" class="feedback"></div>
             </div>
 
-            <div class="question">20. El signo que se coloca al final de una oración es el...</div>
-            <div class="options">
-                <label><input type="radio" name="q20" value="A"> Dos puntos</label>
-                <label><input type="radio" name="q20" value="B"> Punto</label>
+            <div class="question">22. ¿Cuál es el signo que se usa para introducir una aclaración dentro de una frase, como si fuera una pausa breve?</div>
+            <div class="options" id="options-q22">
+                <label><input type="radio" name="q22" value="A"> Coma</label>
+                <label><input type="radio" name="q22" value="B"> Punto</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(22)">Comprobar</button>
+                <div id="feedback-q22" class="feedback"></div>
             </div>
 
-            <div class="question">21. ¿Qué signo debes usar para anunciar una lista? Ejemplo: Hemos comprado: queso, pan y leche.</div>
-            <div class="options">
-                <label><input type="radio" name="q21" value="A"> Dos puntos</label>
-                <label><input type="radio" name="q21" value="B"> Punto y coma</label>
-            </div>
-
-            <div class="question">22. ¿Qué indican los **puntos suspensivos** en una frase?</div>
-            <div class="options">
-                <label><input type="radio" name="q22" value="A"> Interrupción, duda o lista incompleta</label>
-                <label><input type="radio" name="q22" value="B"> El final de un texto</label>
-            </div>
-
-            <div class="question">23. ¿Qué signo se usa para escribir una cita textual de otra persona?</div>
-            <div class="options">
-                <label><input type="radio" name="q23" value="A"> Puntos suspensivos</label>
+            <div class="question">23. Si quiero escribir que una frase es una cita exacta de alguien, ¿qué signo debo usar?</div>
+            <div class="options" id="options-q23">
+                <label><input type="radio" name="q23" value="A"> Punto y coma</label>
                 <label><input type="radio" name="q23" value="B"> Comillas</label>
             </div>
-
-            <div class="question">24. En la frase: "Mi hermana, que es muy alta, jugaba al baloncesto." ¿Por qué se usa la coma?</div>
-            <div class="options">
-                <label><input type="radio" name="q24" value="A"> Para separar elementos de una lista</label>
-                <label><input type="radio" name="q24" value="B"> Para marcar una aclaración o inciso</label>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(23)">Comprobar</button>
+                <div id="feedback-q23" class="feedback"></div>
             </div>
 
-            <div class="question">25. El punto y coma (;) marca una pausa...</div>
-            <div class="options">
-                <label><input type="radio" name="q25" value="A"> Menor que la coma</label>
-                <label><input type="radio" name="q25" value="B"> Mayor que la coma y menor que el punto</label>
+            <div class="question">24. ¿Qué tipo de punto separa ideas diferentes dentro del mismo párrafo?</div>
+            <div class="options" id="options-q24">
+                <label><input type="radio" name="q24" value="A"> Punto y seguido</label>
+                <label><input type="radio" name="q24" value="B"> Punto y aparte</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(24)">Comprobar</button>
+                <div id="feedback-q24" class="feedback"></div>
             </div>
 
-            <div class="question">26. ¿Qué tipo de punto se usa para separar oraciones dentro de un mismo párrafo?</div>
-            <div class="options">
-                <label><input type="radio" name="q26" value="A"> Punto y aparte</label>
-                <label><input type="radio" name="q26" value="B"> Punto y seguido</label>
+            <div class="question">25. El signo de puntuación que marca una pausa mayor que la coma, pero no es el final de la idea, es el...</div>
+            <div class="options" id="options-q25">
+                <label><input type="radio" name="q25" value="A"> Dos puntos</label>
+                <label><input type="radio" name="q25" value="B"> Punto y coma</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(25)">Comprobar</button>
+                <div id="feedback-q25" class="feedback"></div>
             </div>
 
-            <div class="question">27. ¿Es correcto usar los dos puntos antes de la palabra **'por ejemplo'**?</div>
-            <div class="options">
-                <label><input type="radio" name="q27" value="A"> Sí, es correcto.</label>
-                <label><input type="radio" name="q27" value="B"> No, es incorrecto.</label>
+            <div class="question">26. ¿Cómo se usan los puntos suspensivos en una lista?</div>
+            <div class="options" id="options-q26">
+                <label><input type="radio" name="q26" value="A"> Para indicar que la lista está completa</label>
+                <label><input type="radio" name="q26" value="B"> Para indicar que la lista es incompleta y continúa</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(26)">Comprobar</button>
+                <div id="feedback-q26" class="feedback"></div>
             </div>
 
-            <div class="question">28. ¿Qué signo de puntuación cierra una frase después de una exclamación?</div>
-            <div class="options">
-                <label><input type="radio" name="q28" value="A"> Punto final</label>
-                <label><input type="radio" name="q28" value="B"> Signo de exclamación (!)</label>
+            <div class="question">27. ¿Qué signo falta? "Mi mochila lleva: libros cuadernos y lápices"</div>
+            <div class="options" id="options-q27">
+                <label><input type="radio" name="q27" value="A"> Comas (después de libros y cuadernos)</label>
+                <label><input type="radio" name="q27" value="B"> Punto final</label>
             </div>
-            
-            <div class="question">29. Los dos puntos (:) se escriben siempre después de una palabra o frase y...</div>
-            <div class="options">
-                <label><input type="radio" name="q29" value="A"> Antes de la palabra que anuncian</label>
-                <label><input type="radio" name="q29" value="B"> Después de la palabra que anuncian</label>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(27)">Comprobar</button>
+                <div id="feedback-q27" class="feedback"></div>
             </div>
-            
-            <div class="question">30. En esta frase, ¿dónde se usarían comillas? "Mi trabajo se titula El maravilloso mundo de los nombres."</div>
-            <div class="options">
-                <label><input type="radio" name="q30" value="A"> Alrededor de 'Mi trabajo'</label>
-                <label><input type="radio" name="q30" value="B"> Alrededor de 'El maravilloso mundo de los nombres'</label>
+
+            <div class="question">28. ¿Es correcto escribir el punto final si la frase termina con una interrogación (?) o exclamación (!)?</div>
+            <div class="options" id="options-q28">
+                <label><input type="radio" name="q28" value="A"> No, el signo de cierre ya hace la función de punto.</label>
+                <label><input type="radio" name="q28" value="B"> Sí, siempre hay que poner punto final.</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(28)">Comprobar</button>
+                <div id="feedback-q28" class="feedback"></div>
+            </div>
+
+            <div class="question">29. ¿Qué signo usarías para escribir el título de una película?</div>
+            <div class="options" id="options-q29">
+                <label><input type="radio" name="q29" value="A"> Comillas ("")</label>
+                <label><input type="radio" name="q29" value="B"> Punto y coma (;)</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(29)">Comprobar</button>
+                <div id="feedback-q29" class="feedback"></div>
+            </div>
+
+            <div class="question">30. Si escribes una carta y después de poner "Estimado/a Juan:" ¿qué signo has usado?</div>
+            <div class="options" id="options-q30">
+                <label><input type="radio" name="q30" value="A"> Coma</label>
+                <label><input type="radio" name="q30" value="B"> Dos puntos</label>
+            </div>
+            <div class="check-area">
+                <button type="button" class="check-btn" onclick="checkAnswer(30)">Comprobar</button>
+                <div id="feedback-q30" class="feedback"></div>
             </div>
         </div>
-
-        <button type="submit">¡TERMINAR Y VER RESULTADOS!</button>
     </form>
-
-    <div id="result-area" class="hidden">
-        <h2>🎉 ¡RESULTADOS DEL EXAMEN DE REFUERZO! 🎉</h2>
-        <p>Tu puntuación ha sido:</p>
-        <div id="score">0/30</div>
-        <p id="feedback"></p>
-        <button onclick="location.reload()">Hacer el Examen de Nuevo</button>
-    </div>
-
 </div>
 
 <script>
-    // Respuestas correctas (A=A, B=B)
+    // Respuestas correctas (A, B, C)
     const correctAnswers = {
-        q1: 'B', q2: 'B', q3: 'B', q4: 'A', q5: 'A', q6: 'A',
-        q7: 'B', q8: 'B', q9: 'B', q10: 'B', q11: 'A', q12: 'B', q13: 'A', q14: 'A', q15: 'A', q16: 'B', q17: 'A', q18: 'B',
-        q19: 'B', q20: 'B', q21: 'A', q22: 'A', q23: 'B', q24: 'B', q25: 'B', q26: 'B', q27: 'A', q28: 'B', q29: 'A', q30: 'B'
+        q1: 'B', q2: 'A', q3: 'B', q4: 'B', q5: 'C', q6: 'B', q7: 'B', q8: 'A', q9: 'B', q10: 'A',
+        q11: 'C', q12: 'B', q13: 'B', q14: 'B', q15: 'A', q16: 'B', q17: 'B', q18: 'A', q19: 'B', q20: 'B',
+        q21: 'B', q22: 'A', q23: 'B', q24: 'A', q25: 'B', q26: 'B', q27: 'A', q28: 'A', q29: 'A', q30: 'B'
     };
 
+    let score = 0;
+    const scoreDisplay = document.getElementById('current-score');
     const form = document.getElementById('quiz-form');
-    const resultArea = document.getElementById('result-area');
-    const scoreDisplay = document.getElementById('score');
-    const feedbackDisplay = document.getElementById('feedback');
-    const totalQuestions = 30;
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        let score = 0;
-        const formData = new FormData(form);
+    function checkAnswer(qNum) {
+        const qName = `q${qNum}`;
+        const userAnswer = document.querySelector(`input[name="${qName}"]:checked`);
+        const feedbackDiv = document.getElementById(`feedback-${qNum}`);
+        const checkButton = document.querySelector(`.check-btn[onclick="checkAnswer(${qNum})"]`);
+        const optionsDiv = document.getElementById(`options-${qNum}`);
 
-        for (const [question, expectedAnswer] of Object.entries(correctAnswers)) {
-            const userAnswer = formData.get(question);
-            if (userAnswer === expectedAnswer) {
-                score++;
-            }
+        if (!userAnswer) {
+            feedbackDiv.textContent = '¡Selecciona una opción antes de comprobar!';
+            feedbackDiv.className = 'feedback incorrect';
+            return;
         }
 
-        // Mostrar resultados
-        scoreDisplay.textContent = `${score}/${totalQuestions}`;
-        
-        if (score === totalQuestions) {
-            feedbackDisplay.textContent = '¡PERFECTO! ¡Ya dominas el temario! ¡A descansar y a por ese examen de mañana!';
-        } else if (score >= 25) {
-            feedbackDisplay.textContent = '¡Casi perfecto! Estás muy cerca de dominar todo. Repasa lo que has fallado.';
-        } else if (score >= 18) {
-            feedbackDisplay.textContent = '¡Buen trabajo! Sigue repasando el resumen en las áreas donde fallaste.';
+        // Deshabilitar botón y opciones
+        checkButton.disabled = true;
+        const radioButtons = optionsDiv.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => radio.disabled = true);
+
+        const isCorrect = userAnswer.value === correctAnswers[qName];
+
+        if (isCorrect) {
+            score++;
+            scoreDisplay.textContent = score;
+            feedbackDiv.textContent = '¡CORRECTO! 🎉';
+            feedbackDiv.className = 'feedback correct';
         } else {
-            feedbackDisplay.textContent = '¡Ánimo! Vuelve a leer el resumen con mucha atención y repite el quiz. ¡Confío en ti!';
+            feedbackDiv.textContent = 'INCORRECTO. 😔 Revisa el resumen.';
+            feedbackDiv.className = 'feedback incorrect';
+            // Opcional: Mostrar la respuesta correcta (para un refuerzo aún mayor)
+            // Aquí no la muestro para fomentar el auto-refuerzo.
         }
+    }
 
-        form.classList.add('hidden');
-        resultArea.classList.remove('hidden');
-        window.scrollTo(0, 0); // Ir al principio para ver el resultado
+    // Prevén el envío del formulario al pulsar Enter, para que solo funcione el botón "Comprobar"
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert(`Has terminado el repaso interactivo. Tu puntuación final es: ${score} / 30. ¡A repasar lo que fallaste!`);
     });
 </script>
 
