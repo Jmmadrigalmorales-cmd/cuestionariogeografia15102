@@ -3,418 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repaso de Lengua 2º ESO: ¡A Jugar con Profe-IA!</title>
+    <title>Gran Repaso 2º ESO: Literatura y Morfología</title>
     <style>
+        :root {
+            --primary: #6a1b9a; /* Morado educativo */
+            --secondary: #ab47bc;
+            --light: #f3e5f5;
+            --success: #2e7d32;
+            --error: #c62828;
+            --text: #333;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f8ff; /* Azul cielo claro */
-            color: #333;
+            background-color: #fafafa;
+            color: var(--text);
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            line-height: 1.6;
         }
         .container {
-            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
         }
         h1 {
-            color: #4682b4; /* Azul acero */
-            margin-bottom: 25px;
-            font-size: 2.2em;
-            position: relative;
-            animation: fadeInDown 1s ease-out;
+            color: var(--primary);
+            margin: 0;
         }
-        h1::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: #87ceeb; /* Azul cielo */
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-        .intro, .quiz-section {
-            margin-bottom: 30px;
-            text-align: left;
-            border-left: 5px solid #87ceeb; /* Azul cielo */
+        h2 {
+            color: var(--secondary);
+            margin-top: 40px;
+            border-left: 5px solid var(--primary);
             padding-left: 15px;
-            background-color: #e0f7fa; /* Azul muy claro */
-            padding: 15px;
-            border-radius: 8px;
-            animation: fadeInUp 1s ease-out;
         }
-        .intro p, .quiz-section p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            color: #555;
-        }
-        .help-box {
-            background-color: #d4edda; /* Verde claro */
-            border-left: 5px solid #28a745; /* Verde más oscuro */
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            text-align: left;
-            font-style: italic;
-            color: #155724;
-            animation: bounceIn 1s ease-out;
-        }
-        .question-block {
-            background-color: #f8fafd;
-            border: 1px solid #cce5ff;
+        .intro-box {
+            background-color: var(--light);
             padding: 20px;
-            margin-bottom: 25px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            text-align: left;
-            animation: slideInLeft 0.8s ease-out;
+            margin-bottom: 30px;
         }
-        .question-text {
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            color: #36454F; /* Gris oscuro */
+        .tip-box {
+            background-color: #e1f5fe; /* Azulito claro */
+            border: 2px solid #039be5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+        }
+        .tip-box::before {
+            content: '💡 Pista de Profe-IA';
+            background: #039be5;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
             font-weight: bold;
         }
-        .options label {
-            display: block;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-size: 1.1em;
-            padding: 10px 15px;
-            background-color: #f0f8ff;
-            border: 1px solid #b0e0e6;
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: transform 0.2s;
         }
-        .options label:hover {
-            background-color: #e0f7fa;
-            border-color: #87ceeb;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        .question:hover {
+            background-color: #fffbf0;
         }
-        .options input[type="radio"] {
+        .q-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        .option-label {
+            display: block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .option-label:hover {
+            background-color: var(--light);
+        }
+        input[type="radio"] {
             margin-right: 10px;
-            transform: scale(1.2);
         }
         .feedback {
-            margin-top: 15px;
+            margin-top: 10px;
             font-weight: bold;
-            font-size: 1.1em;
-            min-height: 25px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
         }
-        .feedback.correct {
-            color: #28a745; /* Verde */
-        }
-        .feedback.incorrect {
-            color: #dc3545; /* Rojo */
-        }
-        button {
-            background-color: #4682b4; /* Azul acero */
+        .correct-msg { background-color: #dcedc8; color: var(--success); }
+        .incorrect-msg { background-color: #ffcdd2; color: var(--error); }
+        
+        #submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
             color: white;
-            padding: 12px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
+            font-size: 1.2em;
             cursor: pointer;
-            font-size: 1.1em;
             margin-top: 30px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
         }
-        button:hover {
-            background-color: #5a9bd4; /* Azul más claro */
-            transform: translateY(-2px);
+        #submit-btn:hover {
+            background-color: #4a148c;
         }
-        button:active {
-            transform: translateY(0);
-        }
-        .score-section {
-            margin-top: 40px;
-            padding: 25px;
-            background-color: #e0f7fa;
-            border: 2px solid #87ceeb;
-            border-radius: 15px;
-            font-size: 1.4em;
+        #result {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.5em;
             font-weight: bold;
-            color: #4682b4;
-            animation: zoomIn 1s ease-out;
-        }
-        .score-section p span {
-            font-size: 1.8em;
-            color: #28a745;
-        }
-
-        /* Animaciones */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes bounceIn {
-            from, 20%, 40%, 60%, 80%, to {
-                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-            }
-            0% { opacity: 0; transform: scale3d(.3, .3, .3); }
-            20% { transform: scale3d(1.1, 1.1, 1.1); }
-            40% { transform: scale3d(.9, .9, .9); }
-            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
-            80% { transform: scale3d(.97, .97, .97); }
-            to { opacity: 1; transform: scale3d(1, 1, 1); }
-        }
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale3d(.3, .3, .3); }
-            50% { opacity: 1; }
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¡Hola, Violeta! ¡Vamos a Repasar para tu Examen!</h1>
-        <div class="intro">
-            <p>¡Hola, Violeta! Soy Profe-IA y estoy aquí para ayudarte a prepararte para tu examen de Lengua. He preparado un juego interactivo con 10 preguntas para que repases los conceptos clave de forma divertida. ¡Cada respuesta correcta te acerca un pasito más al éxito!</p>
-            <p>Lee con atención cada pregunta y elige la opción que creas correcta. ¡No te preocupes si te equivocas, lo importante es aprender!</p>
-        </div>
 
-        <div id="quiz-container">
-            <div class="help-box">
-                <strong>¡Un consejito para el resumen!</strong> Recuerda que resumir es como contar una película en muy pocas palabras: hay que quitar los detalles, quedarnos con lo principal y contarlo con nuestras propias palabras, ¡pero sin añadir opiniones personales!
-            </div>
-            <div class="question-block" id="q1">
-                <p class="question-text">1. ¿Cuál es el objetivo principal de hacer un resumen?</p>
-                <div class="options">
-                    <label><input type="radio" name="q1" value="a">A. Añadir mi opinión personal sobre el texto.</label>
-                    <label><input type="radio" name="q1" value="b">B. Copiar las frases más bonitas del texto original.</label>
-                    <label><input type="radio" name="q1" value="c">C. Reducir un texto a sus ideas principales con mis propias palabras, sin detalles ni opiniones.</label>
-                    <label><input type="radio" name="q1" value="d">D. Hacer el texto más largo y complejo.</label>
-                </div>
-                <div class="feedback" id="feedback1"></div>
-            </div>
+<div class="container">
+    <header>
+        <h1>Repaso Intensivo: Literatura y Palabras</h1>
+        <p>¡Hola Violeta! Vamos a por esas 20 preguntas. Tómate tu tiempo y lee las pistas.</p>
+    </header>
 
-            <div class="question-block" id="q2">
-                <p class="question-text">2. Si haces un resumen, ¿debes incluir todos los ejemplos y detalles que aparecen en el texto original?</p>
-                <div class="options">
-                    <label><input type="radio" name="q2" value="a">A. Sí, siempre para que sea muy completo.</label>
-                    <label><input type="radio" name="q2" value="b">B. No, los ejemplos y detalles se eliminan para quedarnos con lo esencial.</label>
-                    <label><input type="radio" name="q2" value="c">C. Solo los ejemplos que te parezcan interesantes.</label>
-                    <label><input type="radio" name="q2" value="d">D. Depende del tipo de texto.</label>
-                </div>
-                <div class="feedback" id="feedback2"></div>
-            </div>
-
-            <div class="question-block" id="q3">
-                <p class="question-text">3. Cuando resumimos, ¿es importante utilizar nuestras propias palabras?</p>
-                <div class="options">
-                    <label><input type="radio" name="q3" value="a">A. No, es mejor copiar frases del texto original para ser exactos.</label>
-                    <label><input type="radio" name="q3" value="b">B. Sí, para demostrar que hemos comprendido el texto y no solo lo hemos copiado.</label>
-                    <label><input type="radio" name="q3" value="c">C. Solo si el texto original es muy difícil.</label>
-                    <label><input type="radio" name="q3" value="d">D. No importa cómo lo hagamos.</label>
-                </div>
-                <div class="feedback" id="feedback3"></div>
-            </div>
-
-            <div class="help-box">
-                <strong>¡A recordar los géneros literarios!</strong> Piensa que son como las categorías de las películas o series. Cada una tiene sus características. La lírica expresa sentimientos, la narrativa cuenta historias y el teatro se representa. ¡Facilísimo!
-            </div>
-            <div class="question-block" id="q4">
-                <p class="question-text">4. ¿Qué género literario se caracteriza por expresar los sentimientos y emociones del autor, normalmente en verso?</p>
-                <div class="options">
-                    <label><input type="radio" name="q4" value="a">A. Género Narrativo</label>
-                    <label><input type="radio" name="q4" value="b">B. Género Lírico</label>
-                    <label><input type="radio" name="q4" value="c">C. Género Dramático</label>
-                    <label><input type="radio" name="q4" value="d">D. Género Periodístico</label>
-                </div>
-                <div class="feedback" id="feedback4"></div>
-            </div>
-
-            <div class="question-block" id="q5">
-                <p class="question-text">5. ¿A qué género literario pertenecen las novelas, los cuentos y las fábulas?</p>
-                <div class="options">
-                    <label><input type="radio" name="q5" value="a">A. Género Lírico</label>
-                    <label><input type="radio" name="q5" value="b">B. Género Dramático</label>
-                    <label><input type="radio" name="q5" value="c">C. Género Narrativo</label>
-                    <label><input type="radio" name="q5" value="d">D. Género Didáctico</label>
-                </div>
-                <div class="feedback" id="feedback5"></div>
-            </div>
-
-            <div class="question-block" id="q6">
-                <p class="question-text">6. ¿Qué género literario está pensado para ser representado ante un público en un escenario?</p>
-                <div class="options">
-                    <label><input type="radio" name="q6" value="a">A. Género Narrativo</label>
-                    <label><input type="radio" name="q6" value="b">B. Género Lírico</label>
-                    <label><input type="radio" name="q6" value="c">C. Género Dramático</label>
-                    <label><input type="radio" name="q6" value="d">D. Género Epistolar</label>
-                </div>
-                <div class="feedback" id="feedback6"></div>
-            </div>
-
-            <div class="help-box">
-                <strong>¡Truco para las palabras y su estructura!</strong> Recuerda que las palabras tienen una "raíz" o "lexema" que no cambia y nos da el significado principal. Luego tienen "afijos" (prefijos y sufijos) que se añaden y modifican su significado. ¡Piensa en un árbol con su tronco y sus ramas!
-            </div>
-            <div class="question-block" id="q7">
-                <p class="question-text">7. ¿Cómo se llama la parte de una palabra que contiene el significado fundamental y no suele variar?</p>
-                <div class="options">
-                    <label><input type="radio" name="q7" value="a">A. Prefijo</label>
-                    <label><input type="radio" name="q7" value="b">B. Sufijo</label>
-                    <label><input type="radio" name="q7" value="c">C. Lexema o raíz</label>
-                    <label><input type="radio" name="q7" value="d">D. Morfema</label>
-                </div>
-                <div class="feedback" id="feedback7"></div>
-            </div>
-
-            <div class="question-block" id="q8">
-                <p class="question-text">8. ¿Qué tipo de palabras son las que no pueden descomponerse en partes más pequeñas con significado, como "sol" o "mar"?</p>
-                <div class="options">
-                    <label><input type="radio" name="q8" value="a">A. Palabras derivadas</label>
-                    <label><input type="radio" name="q8" value="b">B. Palabras simples</label>
-                    <label><input type="radio" name="q8" value="c">C. Palabras compuestas</label>
-                    <label><input type="radio" name="q8" value="d">D. Palabras parasintéticas</label>
-                </div>
-                <div class="feedback" id="feedback8"></div>
-            </div>
-
-            <div class="question-block" id="q9">
-                <p class="question-text">9. La palabra "submarino" está formada por un prefijo ("sub-"), un lexema ("mar-") y un sufijo ("-ino"). ¿Qué tipo de palabra es según su estructura?</p>
-                <div class="options">
-                    <label><input type="radio" name="q9" value="a">A. Simple</label>
-                    <label><input type="radio" name="q9" value="b">B. Compuesta</label>
-                    <label><input type="radio" name="q9" value="c">C. Derivada</label>
-                    <label><input type="radio" name="q9" value="d">D. Parasintética</label>
-                </div>
-                <div class="feedback" id="feedback9"></div>
-            </div>
-
-            <div class="question-block" id="q10">
-                <p class="question-text">10. ¿Qué son las palabras compuestas?</p>
-                <div class="options">
-                    <label><input type="radio" name="q10" value="a">A. Palabras que tienen un prefijo y un sufijo.</label>
-                    <label><input type="radio" name="q10" value="b">B. Palabras formadas por la unión de dos o más lexemas (raíces), como "paraguas" (parar + aguas).</label>
-                    <label><input type="radio" name="q10" value="c">C. Palabras que terminan en -ción.</label>
-                    <label><input type="radio" name="q10" value="d">D. Palabras con más de cinco letras.</label>
-                </div>
-                <div class="feedback" id="feedback10"></div>
-            </div>
-
-            <button onclick="checkAnswers()">Terminar Examen y Ver Puntuación</button>
-            <div class="score-section" id="score-section" style="display:none;">
-                <p>¡Has terminado, Violeta! Tu puntuación final es: <span id="final-score"></span>/10</p>
-                <p id="score-message"></p>
-            </div>
-        </div>
+    <div class="intro-box">
+        <p>Este examen consta de dos partes:</p>
+        <ol>
+            <li><strong>Los Géneros Literarios:</strong> ¿Quién habla? ¿Cómo se presenta?</li>
+            <li><strong>Estructura de la Palabra:</strong> ¿De qué piezas están hechas?</li>
+        </ol>
     </div>
 
-    <script>
-        const questions = [
-            {
-                correct: 'c',
-                feedback: '¡Exacto! El resumen busca captar la esencia del texto con tus palabras.'
-            },
-            {
-                correct: 'b',
-                feedback: '¡Correcto! Los detalles y ejemplos se omiten para ser concisos.'
-            },
-            {
-                correct: 'b',
-                feedback: '¡Muy bien! Usar tus propias palabras demuestra comprensión.'
-            },
-            {
-                correct: 'b',
-                feedback: '¡Esa es! La lírica es el género de los sentimientos.'
-            },
-            {
-                correct: 'c',
-                feedback: '¡Perfecto! Novelas y cuentos son puro género narrativo.'
-            },
-            {
-                correct: 'c',
-                feedback: '¡Sí! El género dramático es para ser representado.'
-            },
-            {
-                correct: 'c',
-                feedback: '¡Así es! El lexema es el corazón de la palabra.'
-            },
-            {
-                correct: 'b',
-                feedback: '¡Correcto! Las palabras simples no tienen afijos.'
-            },
-            {
-                correct: 'c',
-                feedback: '¡Muy bien! "Submarino" es una palabra derivada (de "mar"). ¡Ojo! También podría considerarse parasintética si tiene prefijo y sufijo a la vez y no existe la palabra sin uno de ellos. Pero en este nivel, derivada es la respuesta más adecuada por su proceso de formación.'
-            },
-            {
-                correct: 'b',
-                feedback: '¡Genial! Las palabras compuestas unen dos o más raíces.'
-            }
-        ];
+    <div class="tip-box">
+        <strong>AYUDA BLOQUE 1:</strong> Recuerda la "actitud" del autor:
+        <ul>
+            <li><strong>Narrativo:</strong> Un <em>narrador</em> cuenta una historia que les pasa a unos personajes.</li>
+            <li><strong>Lírico:</strong> El autor expresa sus <em>sentimientos</em> íntimos (yo poético). Suele ir en verso.</li>
+            <li><strong>Dramático (Teatro):</strong> No hay narrador. Los personajes hablan directamente (diálogos) y está hecho para ser <em>representado</em>.</li>
+        </ul>
+    </div>
 
-        function checkAnswers() {
-            let score = 0;
-            let allAnswered = true;
-            for (let i = 1; i <= questions.length; i++) {
-                const questionBlock = document.getElementById(`q${i}`);
-                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
-                const feedbackDiv = document.getElementById(`feedback${i}`);
+    <form id="quizForm">
+        <div id="block1"></div>
 
-                if (!selectedOption) {
-                    allAnswered = false;
-                    feedbackDiv.textContent = '¡Oh, no! ¡Tienes que elegir una opción!';
-                    feedbackDiv.className = 'feedback incorrect';
-                    continue; // Pasa a la siguiente pregunta sin comprobar esta
-                }
+        <div class="tip-box">
+            <strong>AYUDA BLOQUE 2:</strong> Las palabras son como un Lego:
+            <ul>
+                <li><strong>Lexema (Raíz):</strong> La parte que no cambia y tiene el significado principal (Flor-ero).</li>
+                <li><strong>Morfemas Flexivos:</strong> Indican género (niñ-<strong>a</strong>) o número (niñ-<strong>as</strong>), o persona/tiempo en verbos. ¡No crean palabras nuevas, solo las cambian un poco!</li>
+                <li><strong>Morfemas Derivativos:</strong> Crean palabras nuevas. Prefijos (delante: <strong>pre</strong>-historia) y Sufijos (detrás: pan-<strong>adero</strong>).</li>
+                <li><strong>Tipos:</strong> Simple (1 lexema), Compuesta (2 lexemas), Derivada (Lexema + prefijo/sufijo).</li>
+            </ul>
+        </div>
 
-                const userAnswer = selectedOption.value;
-                if (userAnswer === questions[i - 1].correct) {
-                    score++;
-                    feedbackDiv.textContent = questions[i - 1].feedback;
-                    feedbackDiv.className = 'feedback correct';
-                } else {
-                    feedbackDiv.textContent = '¡Incorrecto! Repasa este punto. ' + (i === 9 ? 'Pista: "Submarino" viene de "mar", con el prefijo "sub-" y el sufijo "-ino". ¡Es una palabra derivada!': '');
-                    feedbackDiv.className = 'feedback incorrect';
-                }
-            }
+        <div id="block2"></div>
 
-            if (allAnswered) {
-                const finalScoreSpan = document.getElementById('final-score');
-                const scoreMessageP = document.getElementById('score-message');
-                const scoreSection = document.getElementById('score-section');
+        <button type="button" id="submit-btn" onclick="calculateScore()">Corregir Examen</button>
+    </form>
 
-                finalScoreSpan.textContent = score;
-                scoreSection.style.display = 'block';
+    <div id="result"></div>
+</div>
 
-                if (score === questions.length) {
-                    scoreMessageP.textContent = '¡Impresionante, Violeta! ¡Lo has bordado! ¡Estás súper preparada para el examen!';
-                    scoreMessageP.style.color = '#28a745';
-                } else if (score >= questions.length * 0.7) {
-                    scoreMessageP.textContent = '¡Fantástico, Violeta! ¡Casi lo consigues todo! Solo un pequeño repaso y serás una experta.';
-                    scoreMessageP.style.color = '#ffc107';
-                } else {
-                    scoreMessageP.textContent = '¡Muy bien, Violeta! Sigue practicando un poquito más, ¡seguro que la próxima vez lo clavas!';
-                    scoreMessageP.style.color = '#dc3545';
-                }
+<script>
+    // Banco de preguntas
+    const db = [
+        // BLOQUE 1: GÉNEROS (0-9)
+        {
+            q: "1. ¿Cuál es la característica principal del género lírico?",
+            options: ["Contar una historia de aventuras", "Ser representado por actores", "Expresar sentimientos y emociones del autor", "Dar información objetiva"],
+            ans: 2,
+            exp: "¡Correcto! La lírica es subjetiva, se centra en el mundo interior y los sentimientos."
+        },
+        {
+            q: "2. En el género dramático (teatro), ¿quién cuenta la historia?",
+            options: ["Un narrador omnisciente", "El poeta", "Nadie, hablan los personajes directamente", "El director de la obra"],
+            ans: 2,
+            exp: "¡Exacto! En el teatro desaparece el narrador; la acción avanza a través del diálogo."
+        },
+        {
+            q: "3. ¿Qué son las acotaciones en una obra de teatro?",
+            options: ["Los diálogos de los actores", "Las indicaciones del autor sobre el escenario y gestos", "El resumen de la obra", "Los versos que riman"],
+            ans: 1,
+            exp: "¡Muy bien! Las acotaciones suelen ir entre paréntesis y guían la puesta en escena."
+        },
+        {
+            q: "4. Una novela, ¿a qué género literario pertenece?",
+            options: ["Narrativo", "Lírico", "Dramático", "Didáctico"],
+            ans: 0,
+            exp: "¡Sí! La novela narra una historia, por lo tanto es género narrativo."
+        },
+        {
+            q: "5. Si un texto dice: '¡Oh, dulce soledad, compañera de mis noches!', ¿a qué género pertenece?",
+            options: ["Narrativo", "Lírico", "Dramático", "Periodístico"],
+            ans: 1,
+            exp: "¡Correcto! Expresa una emoción intensa y personal, típico de la lírica."
+        },
+        {
+            q: "6. ¿Cuál de estos elementos es fundamental en el género narrativo?",
+            options: ["El narrador", "La rima asonante", "El escenario", "Las acotaciones"],
+            ans: 0,
+            exp: "¡Eso es! Sin narrador (alguien que cuente la historia), no hay narración."
+        },
+        {
+            q: "7. ¿Qué género se escribe casi siempre en verso?",
+            options: ["La novela", "El teatro", "La lírica", "El ensayo"],
+            ans: 2,
+            exp: "¡Bien! Aunque existe la prosa poética, la lírica tradicionalmente usa el verso."
+        },
+        {
+            q: "8. La tragedia y la comedia son subgéneros del...",
+            options: ["Género Lírico", "Género Narrativo", "Género Dramático", "Género Epistolar"],
+            ans: 2,
+            exp: "¡Perfecto! Son las formas clásicas del teatro (drama)."
+        },
+        {
+            q: "9. ¿En qué género es más importante la función expresiva del lenguaje?",
+            options: ["Lírico", "Narrativo", "Dramático", "Científico"],
+            ans: 0,
+            exp: "¡Sí! Porque busca expresar la subjetividad del emisor."
+        },
+        {
+            q: "10. ¿Qué diferencia principal hay entre una obra de teatro y una novela?",
+            options: ["La novela es más corta", "El teatro se escribe para ser visto/oído y la novela para ser leída", "El teatro no tiene personajes", "La novela siempre es real"],
+            ans: 1,
+            exp: "¡Exacto! La finalidad del teatro es la representación (espectáculo)."
+        },
 
-                // Deshabilitar los botones de radio una vez que se ha revisado
-                const radioButtons = document.querySelectorAll('input[type="radio"]');
-                radioButtons.forEach(radio => radio.disabled = true);
-            } else {
-                alert('¡Ups! Parece que no has respondido a todas las preguntas. ¡Anímate a completarlas!');
-            }
+        // BLOQUE 2: PALABRAS (10-19)
+        {
+            q: "11. ¿Qué es un lexema?",
+            options: ["Un tipo de sufijo", "La parte invariable de la palabra que aporta el significado léxico", "Una palabra sin significado", "La terminación verbal"],
+            ans: 1,
+            exp: "¡Correcto! El lexema (o raíz) es la base de la palabra (ej: FLOR en florero)."
+        },
+        {
+            q: "12. En la palabra 'niños', la 'o' y la 's' son morfemas...",
+            options: ["Derivativos", "Flexivos", "Prefijos", "Lexemas"],
+            ans: 1,
+            exp: "¡Muy bien! Indican género y número (gramática), no cambian el significado básico."
+        },
+        {
+            q: "13. ¿Qué tipo de palabra es 'sacacorchos'?",
+            options: ["Simple", "Derivada", "Compuesta", "Parasintética"],
+            ans: 2,
+            exp: "¡Sí! Une dos lexemas: SACA (sacar) + CORCHOS."
+        },
+        {
+            q: "14. ¿Qué es un prefijo?",
+            options: ["Un morfema que va después del lexema", "Un morfema que va antes del lexema", "La raíz de la palabra", "Un tipo de palabra compuesta"],
+            ans: 1,
+            exp: "¡Eso es! 'Pre' significa antes (como en pre-historia)."
+        },
+        {
+            q: "15. La palabra 'marino' (de mar) es una palabra...",
+            options: ["Simple", "Compuesta", "Derivada", "Primitiva"],
+            ans: 2,
+            exp: "¡Correcto! Deriva de 'mar' añadiendo el sufijo '-ino'."
+        },
+        {
+            q: "16. ¿Cuál de estas palabras es simple?",
+            options: ["Panadería", "Sol", "Girasol", "Infeliz"],
+            ans: 1,
+            exp: "¡Bien! 'Sol' está formada por un solo lexema sin afijos."
+        },
+        {
+            q: "17. En la palabra 'imposible', 'im-' es un...",
+            options: ["Sufijo", "Lexema", "Prefijo", "Morfema flexivo"],
+            ans: 2,
+            exp: "¡Perfecto! Va delante y cambia el significado a lo contrario."
+        },
+        {
+            q: "18. ¿Cuál de las siguientes palabras contiene un sufijo?",
+            options: ["Coche", "Librería", "Saca", "Anteojos"],
+            ans: 1,
+            exp: "¡Sí! '-ería' es un sufijo que indica lugar (donde se venden libros)."
+        },
+        {
+            q: "19. ¿Qué es una familia léxica?",
+            options: ["Palabras que riman", "Palabras que comparten el mismo lexema o raíz", "Palabras con el mismo prefijo", "Sinónimos"],
+            ans: 1,
+            exp: "¡Exacto! Ejemplo: Pan, panadero, panadería, empanar..."
+        },
+        {
+            q: "20. Identifica la palabra compuesta:",
+            options: ["Papelera", "Lavavajillas", "Caminante", "Precocinado"],
+            ans: 1,
+            exp: "¡Genial! LAVA + VAJILLAS = Compuesta."
         }
-    </script>
+    ];
+
+    function renderQuiz() {
+        const b1 = document.getElementById('block1');
+        const b2 = document.getElementById('block2');
+        
+        db.forEach((item, index) => {
+            let html = `
+                <div class="question" id="q${index}">
+                    <span class="q-text">${item.q}</span>
+                    <div class="options">
+                        ${item.options.map((opt, i) => `
+                            <label class="option-label">
+                                <input type="radio" name="q${index}" value="${i}"> ${opt}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feed${index}"></div>
+                </div>
+            `;
+            
+            if(index < 10) b1.innerHTML += html;
+            else b2.innerHTML += html;
+        });
+    }
+
+    function calculateScore() {
+        let score = 0;
+        let answered = 0;
+
+        db.forEach((item, index) => {
+            const radios = document.getElementsByName(`q${index}`);
+            const feedback = document.getElementById(`feed${index}`);
+            let val = -1;
+            
+            for(let r of radios) {
+                if(r.checked) val = parseInt(r.value);
+                r.disabled = true; // Desactivar tras corregir
+            }
+
+            feedback.style.display = "block";
+            
+            if(val === -1) {
+                feedback.className = "feedback incorrect-msg";
+                feedback.innerText = "No respondiste esta pregunta.";
+            } else if(val === item.ans) {
+                score++;
+                feedback.className = "feedback correct-msg";
+                feedback.innerText = item.exp;
+            } else {
+                feedback.className = "feedback incorrect-msg";
+                feedback.innerText = `Incorrecto. ${item.exp}`;
+            }
+        });
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `Tu nota es: <span style="color: var(--primary); font-size: 2em;">${score} / 20</span><br>`;
+        
+        if(score >= 18) resultDiv.innerHTML += "¡IMPRESIONANTE! 🌟 Estás listísima.";
+        else if(score >= 14) resultDiv.innerHTML += "¡Muy bien! 👍 Casi perfecto.";
+        else if(score >= 10) resultDiv.innerHTML += "Aprobado, pero repasa los fallos 📚.";
+        else resultDiv.innerHTML += "Hay que estudiar un poquito más 💪.";
+        
+        document.getElementById('submit-btn').style.display = 'none';
+    }
+
+    // Iniciar
+    renderQuiz();
+
+</script>
+
 </body>
 </html>
