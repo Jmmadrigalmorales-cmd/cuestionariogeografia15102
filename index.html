@@ -3,139 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gran Repaso 2º ESO: Literatura y Morfología</title>
+    <title>Test de Repaso: La Materia y sus Estados - 2º ESO</title>
     <style>
         :root {
-            --primary: #6a1b9a; /* Morado educativo */
-            --secondary: #ab47bc;
-            --light: #f3e5f5;
-            --success: #2e7d32;
-            --error: #c62828;
-            --text: #333;
+            --primary: #4F46E5;
+            --primary-hover: #4338ca;
+            --background: #F3F4F6;
+            --surface: #ffffff;
+            --text: #1F2937;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: #E5E7EB;
         }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fafafa;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--background);
             color: var(--text);
+            line-height: 1.6;
             margin: 0;
             padding: 20px;
-            line-height: 1.6;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: var(--surface);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+
         header {
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 3px solid var(--primary);
+            margin-bottom: 40px;
             padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
         }
+
         h1 {
             color: var(--primary);
-            margin: 0;
-        }
-        h2 {
-            color: var(--secondary);
-            margin-top: 40px;
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-        }
-        .intro-box {
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        .tip-box {
-            background-color: #e1f5fe; /* Azulito claro */
-            border: 2px solid #039be5;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-            position: relative;
-        }
-        .tip-box::before {
-            content: '💡 Pista de Profe-IA';
-            background: #039be5;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            font-weight: bold;
-        }
-        .question {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-        .question:hover {
-            background-color: #fffbf0;
-        }
-        .q-text {
-            font-weight: bold;
-            font-size: 1.1em;
             margin-bottom: 10px;
-            display: block;
         }
-        .options {
-            display: grid;
+
+        .description {
+            color: #6B7280;
+            font-size: 1.1em;
+        }
+
+        .question-card {
+            background-color: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
             gap: 10px;
         }
+
+        .q-num {
+            color: var(--primary);
+            min-width: 30px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
         .option-label {
-            display: block;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background-color 0.2s;
         }
+
         .option-label:hover {
-            background-color: var(--light);
+            background-color: #F9FAFB;
         }
+
         input[type="radio"] {
-            margin-right: 10px;
+            margin-right: 12px;
+            transform: scale(1.2);
         }
-        .feedback {
-            margin-top: 10px;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
+
+        /* Estilos para corrección */
+        .correct-answer {
+            background-color: #D1FAE5 !important;
+            border-color: var(--success) !important;
+            color: #065F46;
         }
-        .correct-msg { background-color: #dcedc8; color: var(--success); }
-        .incorrect-msg { background-color: #ffcdd2; color: var(--error); }
-        
-        #submit-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
+
+        .wrong-answer {
+            background-color: #FEE2E2 !important;
+            border-color: var(--error) !important;
+            color: #991B1B;
+        }
+
+        .controls {
+            margin-top: 40px;
+            text-align: center;
+            position: sticky;
+            bottom: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border);
+        }
+
+        button {
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 10px;
+            padding: 15px 40px;
             font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 30px;
-            transition: background 0.3s;
+            transition: background-color 0.2s;
         }
-        #submit-btn:hover {
-            background-color: #4a148c;
+
+        button:hover {
+            background-color: var(--primary-hover);
         }
-        #result {
-            text-align: center;
-            margin-top: 30px;
+
+        #result-area {
+            margin-top: 20px;
             font-size: 1.5em;
             font-weight: bold;
             display: none;
+        }
+
+        .score-perfect { color: var(--success); }
+        .score-good { color: var(--primary); }
+        .score-bad { color: var(--error); }
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            button { width: 100%; }
         }
     </style>
 </head>
@@ -143,243 +164,452 @@
 
 <div class="container">
     <header>
-        <h1>Repaso Intensivo: Literatura y Palabras</h1>
-        <p>¡Hola Violeta! Vamos a por esas 20 preguntas. Tómate tu tiempo y lee las pistas.</p>
+        <h1>Examen de Repaso: La Materia</h1>
+        <p class="description">60 Preguntas para Violeta | Física y Química 2º ESO</p>
+        <p style="font-size: 0.9em; color: #888;">Temas: Método Científico, Propiedades de la Materia, Densidad, Estados de Agregación, Teoría Cinético-Molecular.</p>
     </header>
 
-    <div class="intro-box">
-        <p>Este examen consta de dos partes:</p>
-        <ol>
-            <li><strong>Los Géneros Literarios:</strong> ¿Quién habla? ¿Cómo se presenta?</li>
-            <li><strong>Estructura de la Palabra:</strong> ¿De qué piezas están hechas?</li>
-        </ol>
-    </div>
-
-    <div class="tip-box">
-        <strong>AYUDA BLOQUE 1:</strong> Recuerda la "actitud" del autor:
-        <ul>
-            <li><strong>Narrativo:</strong> Un <em>narrador</em> cuenta una historia que les pasa a unos personajes.</li>
-            <li><strong>Lírico:</strong> El autor expresa sus <em>sentimientos</em> íntimos (yo poético). Suele ir en verso.</li>
-            <li><strong>Dramático (Teatro):</strong> No hay narrador. Los personajes hablan directamente (diálogos) y está hecho para ser <em>representado</em>.</li>
-        </ul>
-    </div>
-
-    <form id="quizForm">
-        <div id="block1"></div>
-
-        <div class="tip-box">
-            <strong>AYUDA BLOQUE 2:</strong> Las palabras son como un Lego:
-            <ul>
-                <li><strong>Lexema (Raíz):</strong> La parte que no cambia y tiene el significado principal (Flor-ero).</li>
-                <li><strong>Morfemas Flexivos:</strong> Indican género (niñ-<strong>a</strong>) o número (niñ-<strong>as</strong>), o persona/tiempo en verbos. ¡No crean palabras nuevas, solo las cambian un poco!</li>
-                <li><strong>Morfemas Derivativos:</strong> Crean palabras nuevas. Prefijos (delante: <strong>pre</strong>-historia) y Sufijos (detrás: pan-<strong>adero</strong>).</li>
-                <li><strong>Tipos:</strong> Simple (1 lexema), Compuesta (2 lexemas), Derivada (Lexema + prefijo/sufijo).</li>
-            </ul>
+    <form id="quiz-form">
+        <div id="questions-container">
+            <!-- Las preguntas se generan con JavaScript -->
         </div>
-
-        <div id="block2"></div>
-
-        <button type="button" id="submit-btn" onclick="calculateScore()">Corregir Examen</button>
     </form>
 
-    <div id="result"></div>
+    <div class="controls">
+        <button type="button" onclick="checkAnswers()">Corregir Examen</button>
+        <div id="result-area"></div>
+    </div>
 </div>
 
 <script>
-    // Banco de preguntas
-    const db = [
-        // BLOQUE 1: GÉNEROS (0-9)
+    // Base de datos de preguntas basada en los PDFs proporcionados
+    const questions = [
+        // --- MÉTODO CIENTÍFICO ---
         {
-            q: "1. ¿Cuál es la característica principal del género lírico?",
-            options: ["Contar una historia de aventuras", "Ser representado por actores", "Expresar sentimientos y emociones del autor", "Dar información objetiva"],
-            ans: 2,
-            exp: "¡Correcto! La lírica es subjetiva, se centra en el mundo interior y los sentimientos."
+            q: "¿Cuál es el primer paso del método científico?",
+            options: ["Enunciado de leyes", "Observación", "Experimentación", "Búsqueda de información"],
+            a: 1
         },
         {
-            q: "2. En el género dramático (teatro), ¿quién cuenta la historia?",
-            options: ["Un narrador omnisciente", "El poeta", "Nadie, hablan los personajes directamente", "El director de la obra"],
-            ans: 2,
-            exp: "¡Exacto! En el teatro desaparece el narrador; la acción avanza a través del diálogo."
+            q: "¿Qué es una hipótesis?",
+            options: ["Una verdad absoluta", "Una suposición para explicar un fenómeno observado", "El resultado final de un experimento", "Una ley matemática"],
+            a: 1
         },
         {
-            q: "3. ¿Qué son las acotaciones en una obra de teatro?",
-            options: ["Los diálogos de los actores", "Las indicaciones del autor sobre el escenario y gestos", "El resumen de la obra", "Los versos que riman"],
-            ans: 1,
-            exp: "¡Muy bien! Las acotaciones suelen ir entre paréntesis y guían la puesta en escena."
+            q: "¿Qué fase del método científico sirve para comprobar si la hipótesis es cierta?",
+            options: ["La búsqueda de información", "La observación", "La experimentación", "La publicación"],
+            a: 2
         },
         {
-            q: "4. Una novela, ¿a qué género literario pertenece?",
-            options: ["Narrativo", "Lírico", "Dramático", "Didáctico"],
-            ans: 0,
-            exp: "¡Sí! La novela narra una historia, por lo tanto es género narrativo."
+            q: "Si los resultados de la experimentación confirman la hipótesis, podemos enunciar...",
+            options: ["Una pregunta", "Una ley o teoría", "Una nueva observación", "Un experimento fallido"],
+            a: 1
         },
         {
-            q: "5. Si un texto dice: '¡Oh, dulce soledad, compañera de mis noches!', ¿a qué género pertenece?",
-            options: ["Narrativo", "Lírico", "Dramático", "Periodístico"],
-            ans: 1,
-            exp: "¡Correcto! Expresa una emoción intensa y personal, típico de la lírica."
-        },
-        {
-            q: "6. ¿Cuál de estos elementos es fundamental en el género narrativo?",
-            options: ["El narrador", "La rima asonante", "El escenario", "Las acotaciones"],
-            ans: 0,
-            exp: "¡Eso es! Sin narrador (alguien que cuente la historia), no hay narración."
-        },
-        {
-            q: "7. ¿Qué género se escribe casi siempre en verso?",
-            options: ["La novela", "El teatro", "La lírica", "El ensayo"],
-            ans: 2,
-            exp: "¡Bien! Aunque existe la prosa poética, la lírica tradicionalmente usa el verso."
-        },
-        {
-            q: "8. La tragedia y la comedia son subgéneros del...",
-            options: ["Género Lírico", "Género Narrativo", "Género Dramático", "Género Epistolar"],
-            ans: 2,
-            exp: "¡Perfecto! Son las formas clásicas del teatro (drama)."
-        },
-        {
-            q: "9. ¿En qué género es más importante la función expresiva del lenguaje?",
-            options: ["Lírico", "Narrativo", "Dramático", "Científico"],
-            ans: 0,
-            exp: "¡Sí! Porque busca expresar la subjetividad del emisor."
-        },
-        {
-            q: "10. ¿Qué diferencia principal hay entre una obra de teatro y una novela?",
-            options: ["La novela es más corta", "El teatro se escribe para ser visto/oído y la novela para ser leída", "El teatro no tiene personajes", "La novela siempre es real"],
-            ans: 1,
-            exp: "¡Exacto! La finalidad del teatro es la representación (espectáculo)."
+            q: "En la fase de 'Búsqueda de información', ¿qué hacemos?",
+            options: ["Mirar por la ventana", "Consultar libros e internet sobre lo observado", "Mezclar productos químicos", "Escribir el informe final"],
+            a: 1
         },
 
-        // BLOQUE 2: PALABRAS (10-19)
+        // --- LA MATERIA Y PROPIEDADES GENERALES ---
         {
-            q: "11. ¿Qué es un lexema?",
-            options: ["Un tipo de sufijo", "La parte invariable de la palabra que aporta el significado léxico", "Una palabra sin significado", "La terminación verbal"],
-            ans: 1,
-            exp: "¡Correcto! El lexema (o raíz) es la base de la palabra (ej: FLOR en florero)."
+            q: "¿Cómo se define la materia?",
+            options: ["Todo lo que se puede ver", "Todo lo que tiene masa y ocupa un volumen", "Todo lo que pesa mucho", "Cualquier cosa que sea sólida"],
+            a: 1
         },
         {
-            q: "12. En la palabra 'niños', la 'o' y la 's' son morfemas...",
-            options: ["Derivativos", "Flexivos", "Prefijos", "Lexemas"],
-            ans: 1,
-            exp: "¡Muy bien! Indican género y número (gramática), no cambian el significado básico."
+            q: "¿Es el aire materia?",
+            options: ["No, porque no se ve", "No, porque no pesa", "Sí, porque tiene masa y ocupa volumen", "Solo cuando hace viento"],
+            a: 2
         },
         {
-            q: "13. ¿Qué tipo de palabra es 'sacacorchos'?",
-            options: ["Simple", "Derivada", "Compuesta", "Parasintética"],
-            ans: 2,
-            exp: "¡Sí! Une dos lexemas: SACA (sacar) + CORCHOS."
+            q: "¿Cuál es la unidad de masa en el Sistema Internacional?",
+            options: ["Gramo (g)", "Kilogramo (kg)", "Tonelada (t)", "Miligramo (mg)"],
+            a: 1
         },
         {
-            q: "14. ¿Qué es un prefijo?",
-            options: ["Un morfema que va después del lexema", "Un morfema que va antes del lexema", "La raíz de la palabra", "Un tipo de palabra compuesta"],
-            ans: 1,
-            exp: "¡Eso es! 'Pre' significa antes (como en pre-historia)."
+            q: "¿Qué instrumento utilizamos para medir la masa?",
+            options: ["Probeta", "Termómetro", "Balanza", "Cronómetro"],
+            a: 2
         },
         {
-            q: "15. La palabra 'marino' (de mar) es una palabra...",
-            options: ["Simple", "Compuesta", "Derivada", "Primitiva"],
-            ans: 2,
-            exp: "¡Correcto! Deriva de 'mar' añadiendo el sufijo '-ino'."
+            q: "¿Qué es el volumen?",
+            options: ["La cantidad de materia de un cuerpo", "El espacio que ocupa un cuerpo", "La fuerza con la que cae un objeto", "La temperatura de un objeto"],
+            a: 1
         },
         {
-            q: "16. ¿Cuál de estas palabras es simple?",
-            options: ["Panadería", "Sol", "Girasol", "Infeliz"],
-            ans: 1,
-            exp: "¡Bien! 'Sol' está formada por un solo lexema sin afijos."
+            q: "¿Cuál es la unidad de volumen en el Sistema Internacional?",
+            options: ["Litro (L)", "Metro cúbico (m³)", "Centímetro cúbico (cm³)", "Mililitro (mL)"],
+            a: 1
         },
         {
-            q: "17. En la palabra 'imposible', 'im-' es un...",
-            options: ["Sufijo", "Lexema", "Prefijo", "Morfema flexivo"],
-            ans: 2,
-            exp: "¡Perfecto! Va delante y cambia el significado a lo contrario."
+            q: "¿A qué equivale 1 mL?",
+            options: ["1 m³", "1 dm³", "1 cm³", "1 mm³"],
+            a: 2
         },
         {
-            q: "18. ¿Cuál de las siguientes palabras contiene un sufijo?",
-            options: ["Coche", "Librería", "Saca", "Anteojos"],
-            ans: 1,
-            exp: "¡Sí! '-ería' es un sufijo que indica lugar (donde se venden libros)."
+            q: "¿Qué instrumento usamos habitualmente en el laboratorio para medir el volumen de un líquido?",
+            options: ["Balanza", "Probeta", "Regla", "Pipeta solamente"],
+            a: 1
         },
         {
-            q: "19. ¿Qué es una familia léxica?",
-            options: ["Palabras que riman", "Palabras que comparten el mismo lexema o raíz", "Palabras con el mismo prefijo", "Sinónimos"],
-            ans: 1,
-            exp: "¡Exacto! Ejemplo: Pan, panadero, panadería, empanar..."
+            q: "Para medir el volumen de un sólido irregular (como una piedra), usamos...",
+            options: ["Una fórmula matemática", "El método de desplazamiento de agua en una probeta", "Una balanza", "No se puede medir"],
+            a: 1
         },
         {
-            q: "20. Identifica la palabra compuesta:",
-            options: ["Papelera", "Lavavajillas", "Caminante", "Precocinado"],
-            ans: 1,
-            exp: "¡Genial! LAVA + VAJILLAS = Compuesta."
+            q: "Si una probeta tiene 30 mL de agua y al meter una piedra sube a 48 mL, ¿cuál es el volumen de la piedra?",
+            options: ["78 mL", "18 mL", "48 mL", "30 mL"],
+            a: 1
+        },
+
+        // --- DENSIDAD ---
+        {
+            q: "¿Cuál es la fórmula de la densidad?",
+            options: ["d = m · V", "d = V / m", "d = m / V", "d = m + V"],
+            a: 2
+        },
+        {
+            q: "La densidad es una propiedad...",
+            options: ["General (depende del tamaño)", "Específica (característica de cada sustancia)", "Variable según la forma", "Que no sirve para identificar sustancias"],
+            a: 1
+        },
+        {
+            q: "Si tenemos agua y aceite, ¿por qué el aceite flota sobre el agua?",
+            options: ["Porque es más denso", "Porque es menos denso", "Porque tiene más masa", "Porque es más viscoso"],
+            a: 1
+        },
+        {
+            q: "¿Cuál es la unidad de densidad en el Sistema Internacional?",
+            options: ["g/L", "g/cm³", "kg/m³", "kg/L"],
+            a: 2
+        },
+        {
+            q: "Si un objeto tiene una masa de 10 g y un volumen de 2 cm³, ¿cuál es su densidad?",
+            options: ["20 g/cm³", "0.2 g/cm³", "5 g/cm³", "8 g/cm³"],
+            a: 2
+        },
+        {
+            q: "Si cortamos un trozo de madera por la mitad, ¿qué pasa con su densidad?",
+            options: ["Se reduce a la mitad", "Se duplica", "No cambia, es la misma", "Depende del corte"],
+            a: 2
+        },
+        {
+            q: "¿Qué es la temperatura de fusión?",
+            options: ["La temperatura a la que un líquido hierve", "La temperatura a la que un sólido pasa a líquido", "La temperatura del congelador", "100 ºC siempre"],
+            a: 1
+        },
+        {
+            q: "La temperatura de ebullición del agua a nivel del mar es:",
+            options: ["0 ºC", "50 ºC", "100 ºC", "120 ºC"],
+            a: 2
+        },
+        {
+            q: "Para identificar una sustancia desconocida, ¿qué dato es más útil?",
+            options: ["Su masa", "Su volumen", "Su forma", "Su densidad"],
+            a: 3
+        },
+        {
+            q: "Si expresamos 1,08 g en notación científica (kg), sería:",
+            options: ["1,08 · 10⁻³ kg", "1,08 · 10³ kg", "10,8 kg", "0,108 kg"],
+            a: 0
+        },
+
+        // --- ESTADOS DE LA MATERIA (Macroscópico) ---
+        {
+            q: "¿Cuáles son los tres estados de agregación principales?",
+            options: ["Duro, blando y gaseoso", "Sólido, líquido y gaseoso", "Hielo, agua y vapor", "Frío, templado y caliente"],
+            a: 1
+        },
+        {
+            q: "Los sólidos tienen...",
+            options: ["Forma variable y volumen constante", "Forma constante y volumen constante", "Forma variable y volumen variable", "Forma constante y volumen variable"],
+            a: 1
+        },
+        {
+            q: "Los líquidos tienen...",
+            options: ["Forma constante y volumen constante", "Forma variable (se adaptan al recipiente) y volumen constante", "Forma variable y volumen variable", "No tienen volumen"],
+            a: 1
+        },
+        {
+            q: "Los gases tienen...",
+            options: ["Forma y volumen variables (ocupan todo el espacio)", "Forma constante", "Volumen fijo", "Masa variable"],
+            a: 0
+        },
+        {
+            q: "¿Qué estado de la materia se puede comprimir fácilmente?",
+            options: ["Sólido", "Líquido", "Gaseoso", "Ninguno"],
+            a: 2
+        },
+        {
+            q: "¿Por qué los líquidos pueden fluir?",
+            options: ["Porque sus partículas están fijas", "Porque sus partículas pueden deslizarse unas sobre otras", "Porque no tienen masa", "Porque son transparentes"],
+            a: 1
+        },
+        {
+            q: "Si paso un gas de una botella pequeña a una grande...",
+            options: ["Mantiene su volumen original", "Se expande para ocupar toda la botella grande", "Se queda en el fondo", "Desaparece"],
+            a: 1
+        },
+
+        // --- TEORÍA CINÉTICO-MOLECULAR (TCM) ---
+        {
+            q: "Según la teoría cinético-molecular, la materia está formada por...",
+            options: ["Bloques continuos", "Partículas en continuo movimiento", "Aire y agua", "Energía pura"],
+            a: 1
+        },
+        {
+            q: "En los SÓLIDOS, las partículas...",
+            options: ["Se mueven libremente", "Están muy separadas", "Vibran en posiciones fijas y están ordenadas", "Resbalan unas sobre otras"],
+            a: 2
+        },
+        {
+            q: "En los LÍQUIDOS, las fuerzas de atracción entre partículas son...",
+            options: ["Muy fuertes, impidiendo el movimiento", "Más débiles que en sólidos, permitiendo cierto movimiento", "Inexistentes", "Iguales que en los gases"],
+            a: 1
+        },
+        {
+            q: "En los GASES, las partículas...",
+            options: ["Están muy juntas", "Se mueven caóticamente y están muy separadas", "Solo vibran", "Forman estructuras geométricas"],
+            a: 1
+        },
+        {
+            q: "¿Qué pasa con las partículas si aumentamos la temperatura?",
+            options: ["Se mueven más despacio", "Se mueven más deprisa (aumenta su energía)", "Se quedan quietas", "Se hacen más grandes"],
+            a: 1
+        },
+        {
+            q: "¿Por qué los sólidos no se pueden comprimir?",
+            options: ["Porque sus partículas ya están muy juntas y no hay espacio libre", "Porque pesan mucho", "Porque son duros", "Sí se pueden comprimir fácilmente"],
+            a: 0
+        },
+        {
+            q: "La densidad de los gases suele ser...",
+            options: ["Muy alta", "Muy baja, porque las partículas están muy separadas", "Igual que los sólidos", "Infinita"],
+            a: 1
+        },
+        {
+            q: "Según la TCM, ¿qué hay entre las partículas de un gas?",
+            options: ["Aire", "Otros átomos", "Espacio vacío", "Líquido"],
+            a: 2
+        },
+
+        // --- CAMBIOS DE ESTADO ---
+        {
+            q: "El paso de SÓLIDO a LÍQUIDO se llama...",
+            options: ["Vaporización", "Solidificación", "Fusión", "Sublimación"],
+            a: 2
+        },
+        {
+            q: "El paso de LÍQUIDO a GAS se llama...",
+            options: ["Condensación", "Vaporización", "Fusión", "Sublimación"],
+            a: 1
+        },
+        {
+            q: "El paso de GAS a LÍQUIDO se llama...",
+            options: ["Vaporización", "Condensación", "Solidificación", "Fusión"],
+            a: 1
+        },
+        {
+            q: "El paso de LÍQUIDO a SÓLIDO se llama...",
+            options: ["Fusión", "Sublimación", "Solidificación", "Condensación"],
+            a: 2
+        },
+        {
+            q: "El paso directo de SÓLIDO a GAS (sin pasar por líquido) se llama...",
+            options: ["Fusión", "Sublimación", "Evaporación", "Condensación"],
+            a: 1
+        },
+        {
+            q: "¿Cuál es la diferencia entre evaporación y ebullición?",
+            options: ["Son lo mismo", "La evaporación es solo en la superficie y lenta; la ebullición es en todo el líquido y rápida", "La evaporación es a 100ºC y la ebullición a cualquier temperatura", "La ebullición es paso de sólido a gas"],
+            a: 1
+        },
+        {
+            q: "Durante un cambio de estado (mientras se funde el hielo), la temperatura...",
+            options: ["Sube rápidamente", "Baja", "Se mantiene constante", "Sube y baja"],
+            a: 2
+        },
+        {
+            q: "¿Qué cambios de estado requieren AUMENTAR la temperatura (calentar)?",
+            options: ["Fusión y Vaporización", "Solidificación y Condensación", "Condensación y Sublimación inversa", "Ninguno"],
+            a: 0
+        },
+        {
+            q: "¿Qué cambios de estado ocurren al ENFRIAR (disminuir temperatura)?",
+            options: ["Fusión y Vaporización", "Solidificación y Condensación", "Sublimación y Fusión", "Todos"],
+            a: 1
+        },
+
+        // --- GRÁFICAS Y PRESIÓN ---
+        {
+            q: "En una gráfica de calentamiento, los tramos horizontales representan...",
+            options: ["Que no estamos calentando", "Un cambio de estado", "Que la temperatura sube", "Un error en el termómetro"],
+            a: 1
+        },
+        {
+            q: "¿Qué es la presión atmosférica?",
+            options: ["El peso de las nubes", "La fuerza que ejerce el aire de la atmósfera sobre la superficie", "El calor del sol", "La gravedad"],
+            a: 1
+        },
+        {
+            q: "¿Dónde es MAYOR la presión atmosférica?",
+            options: ["En la cima de una montaña", "Al nivel del mar", "En la estratosfera", "Es igual en todas partes"],
+            a: 1
+        },
+        {
+            q: "¿Cómo afecta la presión a la temperatura de ebullición?",
+            options: ["No afecta", "A mayor presión, mayor temperatura de ebullición", "A mayor presión, menor temperatura de ebullición", "El agua siempre hierve a 100ºC"],
+            a: 1
+        },
+        {
+            q: "En lo alto de una montaña, el agua hierve...",
+            options: ["A 100 ºC exactos", "A más de 100 ºC", "A menos de 100 ºC (porque hay menos presión)", "No hierve nunca"],
+            a: 2
+        },
+        {
+            q: "Si aumentamos la presión sobre un gas...",
+            options: ["Su volumen aumenta", "Su volumen disminuye", "Su masa aumenta", "Se convierte en plasma"],
+            a: 1
+        },
+        {
+            q: "¿Qué le pasa a un globo lleno de aire si lo metemos en el congelador?",
+            options: ["Explota", "Aumenta de volumen", "Disminuye de volumen (se encoge)", "Cambia de color"],
+            a: 2
+        },
+        {
+            q: "La sublimación inversa es el paso de...",
+            options: ["Sólido a Gas", "Gas a Sólido", "Líquido a Gas", "Gas a Líquido"],
+            a: 1
+        },
+        {
+            q: "En una gráfica de enfriamiento, la temperatura...",
+            options: ["Sube con el tiempo", "Baja con el tiempo", "Siempre es constante", "Es cero"],
+            a: 1
+        },
+        {
+            q: "¿Se conserva la masa durante un cambio de estado?",
+            options: ["Sí, la masa es constante", "No, siempre se pierde un poco", "No, la masa aumenta al calentarse", "Depende de la sustancia"],
+            a: 0
+        },
+        {
+            q: "La unidad Pa (Pascal) mide...",
+            options: ["Masa", "Volumen", "Presión", "Temperatura"],
+            a: 2
+        },
+        {
+            q: "¿Qué ocurre con las partículas cuando el agua se condensa?",
+            options: ["Se separan más y van más rápido", "Se juntan más y pierden libertad de movimiento", "Se convierten en hielo", "Desaparecen"],
+            a: 1
+        },
+        {
+            q: "¿Cuál de estos NO es un estado de agregación?",
+            options: ["Sólido", "Líquido", "Gaseoso", "Viscoso"],
+            a: 3
+        },
+        {
+            q: "Para medir 25 mL de agua con precisión usarías...",
+            options: ["Un vaso de precipitados grande", "Una probeta", "Una cuchara", "Un cubo"],
+            a: 1
+        },
+        {
+            q: "¿Es el hielo una sustancia distinta al agua líquida?",
+            options: ["Sí, son cosas diferentes", "No, es la misma sustancia (agua) en distinto estado", "Sí, porque el hielo flota", "No lo sé"],
+            a: 1
         }
     ];
 
-    function renderQuiz() {
-        const b1 = document.getElementById('block1');
-        const b2 = document.getElementById('block2');
+    function renderQuestions() {
+        const container = document.getElementById('questions-container');
         
-        db.forEach((item, index) => {
-            let html = `
-                <div class="question" id="q${index}">
-                    <span class="q-text">${item.q}</span>
-                    <div class="options">
-                        ${item.options.map((opt, i) => `
-                            <label class="option-label">
-                                <input type="radio" name="q${index}" value="${i}"> ${opt}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="feed${index}"></div>
+        questions.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.id = `q-card-${index}`;
+            
+            let optionsHTML = '';
+            item.options.forEach((opt, i) => {
+                optionsHTML += `
+                    <label class="option-label" id="label-${index}-${i}">
+                        <input type="radio" name="q${index}" value="${i}">
+                        <span>${opt}</span>
+                    </label>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="question-title">
+                    <span class="q-num">${index + 1}.</span>
+                    <span>${item.q}</span>
+                </div>
+                <div class="options">
+                    ${optionsHTML}
                 </div>
             `;
-            
-            if(index < 10) b1.innerHTML += html;
-            else b2.innerHTML += html;
+            container.appendChild(card);
         });
     }
 
-    function calculateScore() {
+    function checkAnswers() {
         let score = 0;
         let answered = 0;
-
-        db.forEach((item, index) => {
-            const radios = document.getElementsByName(`q${index}`);
-            const feedback = document.getElementById(`feed${index}`);
-            let val = -1;
+        
+        questions.forEach((item, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const card = document.getElementById(`q-card-${index}`);
             
-            for(let r of radios) {
-                if(r.checked) val = parseInt(r.value);
-                r.disabled = true; // Desactivar tras corregir
-            }
+            // Limpiar estilos previos
+            const labels = card.querySelectorAll('.option-label');
+            labels.forEach(l => {
+                l.classList.remove('correct-answer', 'wrong-answer');
+            });
 
-            feedback.style.display = "block";
-            
-            if(val === -1) {
-                feedback.className = "feedback incorrect-msg";
-                feedback.innerText = "No respondiste esta pregunta.";
-            } else if(val === item.ans) {
-                score++;
-                feedback.className = "feedback correct-msg";
-                feedback.innerText = item.exp;
+            if (selected) {
+                answered++;
+                const val = parseInt(selected.value);
+                const selectedLabel = document.getElementById(`label-${index}-${val}`);
+                
+                if (val === item.a) {
+                    score++;
+                    selectedLabel.classList.add('correct-answer');
+                } else {
+                    selectedLabel.classList.add('wrong-answer');
+                    // Marcar la correcta también para aprender
+                    document.getElementById(`label-${index}-${item.a}`).classList.add('correct-answer');
+                }
             } else {
-                feedback.className = "feedback incorrect-msg";
-                feedback.innerText = `Incorrecto. ${item.exp}`;
+                // Si no contestó, mostramos la correcta
+                document.getElementById(`label-${index}-${item.a}`).classList.add('correct-answer');
             }
         });
 
-        const resultDiv = document.getElementById('result');
-        resultDiv.style.display = 'block';
-        resultDiv.innerHTML = `Tu nota es: <span style="color: var(--primary); font-size: 2em;">${score} / 20</span><br>`;
+        const resultArea = document.getElementById('result-area');
+        resultArea.style.display = 'block';
         
-        if(score >= 18) resultDiv.innerHTML += "¡IMPRESIONANTE! 🌟 Estás listísima.";
-        else if(score >= 14) resultDiv.innerHTML += "¡Muy bien! 👍 Casi perfecto.";
-        else if(score >= 10) resultDiv.innerHTML += "Aprobado, pero repasa los fallos 📚.";
-        else resultDiv.innerHTML += "Hay que estudiar un poquito más 💪.";
+        let messageClass = '';
+        let message = '';
         
-        document.getElementById('submit-btn').style.display = 'none';
+        const percentage = (score / questions.length) * 10;
+        
+        if (percentage >= 9) {
+            messageClass = 'score-perfect';
+            message = '¡Excelente! Estás listísima para el examen.';
+        } else if (percentage >= 5) {
+            messageClass = 'score-good';
+            message = '¡Bien! Has aprobado, pero repasa los fallos.';
+        } else {
+            messageClass = 'score-bad';
+            message = 'Hay que estudiar un poco más. ¡Revisa las correcciones!';
+        }
+
+        resultArea.innerHTML = `Tu nota es: <span class="${messageClass}">${score} de ${questions.length} (${percentage.toFixed(1)})</span><br><small>${message}</small>`;
+        
+        // Scroll al resultado
+        resultArea.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Iniciar
-    renderQuiz();
+    window.onload = renderQuestions;
 
 </script>
 
