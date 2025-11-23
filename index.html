@@ -3,614 +3,770 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Repaso: La Materia y sus Estados - 2º ESO</title>
+    <title>Gran Simulacro 2º ESO - MateTutor Andalucía</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338ca;
-            --background: #F3F4F6;
-            --surface: #ffffff;
-            --text: #1F2937;
-            --success: #10B981;
-            --error: #EF4444;
-            --border: #E5E7EB;
-        }
-
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0fdf4; /* Verde muy suave, toque andaluz */
+            color: #333;
             line-height: 1.6;
             margin: 0;
             padding: 20px;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--surface);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
         header {
+            background-color: #00904c; /* Verde Andalucía */
+            color: white;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
-        h1 {
-            color: var(--primary);
-            margin-bottom: 10px;
+        h1 { margin: 0; font-size: 2.2em; }
+        h2 { border-bottom: 3px solid #00904c; padding-bottom: 10px; margin-top: 40px; color: #007a40; }
+        
+        .tips-box {
+            background-color: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
-
-        .description {
-            color: #6B7280;
-            font-size: 1.1em;
-        }
+        .tips-title { font-weight: bold; font-size: 1.1em; color: #856404; display: block; margin-bottom: 5px; }
 
         .question-card {
-            background-color: #fff;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            background: white;
+            border: 1px solid #ddd;
             padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .question-card:hover {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .question-title {
-            font-weight: 600;
-            font-size: 1.1em;
             margin-bottom: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .q-num {
-            color: var(--primary);
-            min-width: 30px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .option-label:hover {
-            background-color: #F9FAFB;
-        }
-
-        input[type="radio"] {
-            margin-right: 12px;
-            transform: scale(1.2);
-        }
-
-        /* Estilos para corrección */
-        .correct-answer {
-            background-color: #D1FAE5 !important;
-            border-color: var(--success) !important;
-            color: #065F46;
-        }
-
-        .wrong-answer {
-            background-color: #FEE2E2 !important;
-            border-color: var(--error) !important;
-            color: #991B1B;
-        }
-
-        .controls {
-            margin-top: 40px;
-            text-align: center;
-            position: sticky;
-            bottom: 20px;
-            background: rgba(255,255,255,0.9);
-            padding: 20px;
             border-radius: 8px;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
         }
-
+        .question-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        
+        .q-num { font-weight: bold; color: #00904c; margin-right: 10px; }
+        
         button {
-            background-color: var(--primary);
+            background-color: #00904c;
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.2em;
-            font-weight: bold;
-            border-radius: 8px;
+            padding: 8px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            font-size: 0.9em;
+            margin-top: 10px;
         }
-
-        button:hover {
-            background-color: var(--primary-hover);
-        }
-
-        #result-area {
-            margin-top: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
+        button:hover { background-color: #007a40; }
+        
+        .solution {
             display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #00904c;
+            border-radius: 4px;
+            font-size: 0.95em;
         }
+        .step { display: block; margin-bottom: 5px; }
+        .final-res { font-weight: bold; color: #d32f2f; margin-top: 5px; display: block; }
 
-        .score-perfect { color: var(--success); }
-        .score-good { color: var(--primary); }
-        .score-bad { color: var(--error); }
-
-        @media (max-width: 600px) {
-            .container { padding: 20px; }
-            button { width: 100%; }
-        }
+        .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #666; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Examen de Repaso: La Materia</h1>
-        <p class="description">60 Preguntas para Violeta | Física y Química 2º ESO</p>
-        <p style="font-size: 0.9em; color: #888;">Temas: Método Científico, Propiedades de la Materia, Densidad, Estados de Agregación, Teoría Cinético-Molecular.</p>
-    </header>
+<header>
+    <h1>🎓 Simulacro Examen 2º ESO</h1>
+    <p>MateTutor Andalucía | 60 Preguntas Clave</p>
+</header>
 
-    <form id="quiz-form">
-        <div id="questions-container">
-            <!-- Las preguntas se generan con JavaScript -->
+<h2>Bloque 1: Números Naturales y Divisibilidad</h2>
+
+<div class="tips-box">
+    <span class="tips-title">💡 Tips del Profe para este bloque:</span>
+    <ul>
+        <li><strong>Jerarquía (PEMDAS):</strong> 1º Paréntesis, 2º Multiplicaciones/Divisiones, 3º Sumas/Restas. ¡Nunca sumes antes de multiplicar!</li>
+        <li><strong>Problemas de coincidencia:</strong> Si te preguntan cuándo volverán a coincidir dos eventos (buses, luces, personas), usa el <strong>m.c.m.</strong></li>
+        <li><strong>Problemas de repartir/agrupar:</strong> Si quieres dividir cosas en grupos iguales y máximos, usa el <strong>M.C.D.</strong></li>
+        <li><strong>Propiedad Distributiva:</strong> \(a \cdot (b + c) = a \cdot b + a \cdot c\).</li>
+    </ul>
+</div>
+
+<div id="bloque1">
+    <div class="question-card">
+        <span class="q-num">1.</span> Calcula: \( 12 + 8 \cdot 5 - 30 : 6 \)
+        <br><button onclick="toggle('sol1')">Comprobar Resultado</button>
+        <div id="sol1" class="solution">
+            <span class="step">1. Multiplicación: \(8 \cdot 5 = 40\)</span>
+            <span class="step">2. División: \(30 : 6 = 5\)</span>
+            <span class="step">3. Queda: \(12 + 40 - 5\)</span>
+            <span class="final-res">Resultado: 47</span>
         </div>
-    </form>
+    </div>
 
-    <div class="controls">
-        <button type="button" onclick="checkAnswers()">Corregir Examen</button>
-        <div id="result-area"></div>
+    <div class="question-card">
+        <span class="q-num">2.</span> Resuelve con paréntesis: \( 5 \cdot (3 + 7) - 4 \cdot (8 - 2) \)
+        <br><button onclick="toggle('sol2')">Comprobar Resultado</button>
+        <div id="sol2" class="solution">
+            <span class="step">1. Paréntesis: \(3+7=10\) y \(8-2=6\)</span>
+            <span class="step">2. Queda: \(5 \cdot 10 - 4 \cdot 6\)</span>
+            <span class="step">3. Multiplicaciones: \(50 - 24\)</span>
+            <span class="final-res">Resultado: 26</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">3.</span> Aplica la propiedad distributiva para calcular: \( 6 \cdot (10 + 5) \)
+        <br><button onclick="toggle('sol3')">Comprobar Resultado</button>
+        <div id="sol3" class="solution">
+            <span class="step">Distributiva significa multiplicar el de fuera por cada uno de dentro.</span>
+            <span class="step">\(6 \cdot 10 + 6 \cdot 5\)</span>
+            <span class="step">\(60 + 30\)</span>
+            <span class="final-res">Resultado: 90</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">4.</span> Saca factor común: \( 8 \cdot 3 + 8 \cdot 7 \)
+        <br><button onclick="toggle('sol4')">Comprobar Resultado</button>
+        <div id="sol4" class="solution">
+            <span class="step">El factor que se repite es el 8.</span>
+            <span class="step">\(8 \cdot (3 + 7)\)</span>
+            <span class="step">\(8 \cdot 10\)</span>
+            <span class="final-res">Resultado: 80</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">5.</span> Operación combinada compleja (tipo PDF): \( 20 - 3 \cdot (8 - 4) : 2 \)
+        <br><button onclick="toggle('sol5')">Comprobar Resultado</button>
+        <div id="sol5" class="solution">
+            <span class="step">1. Paréntesis: \(8-4 = 4\). Queda \(20 - 3 \cdot 4 : 2\)</span>
+            <span class="step">2. Multiplicación y división (de izq a der): \(3 \cdot 4 = 12\), luego \(12 : 2 = 6\)</span>
+            <span class="step">3. Resta: \(20 - 6\)</span>
+            <span class="final-res">Resultado: 14</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">6.</span> Descompón en factores primos el número 60.
+        <br><button onclick="toggle('sol6')">Comprobar Resultado</button>
+        <div id="sol6" class="solution">
+            <span class="step">60 entre 2 = 30</span>
+            <span class="step">30 entre 2 = 15</span>
+            <span class="step">15 entre 3 = 5</span>
+            <span class="step">5 entre 5 = 1</span>
+            <span class="final-res">Resultado: \(2^2 \cdot 3 \cdot 5\)</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">7.</span> Calcula el Máximo Común Divisor (M.C.D.) de 24 y 36.
+        <br><button onclick="toggle('sol7')">Comprobar Resultado</button>
+        <div id="sol7" class="solution">
+            <span class="step">\(24 = 2^3 \cdot 3\)</span>
+            <span class="step">\(36 = 2^2 \cdot 3^2\)</span>
+            <span class="step">Cogemos comunes al menor exponente: \(2^2\) y \(3\).</span>
+            <span class="step">\(4 \cdot 3 = 12\)</span>
+            <span class="final-res">Resultado: 12</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">8.</span> Calcula el mínimo común múltiplo (m.c.m.) de 6 y 8.
+        <br><button onclick="toggle('sol8')">Comprobar Resultado</button>
+        <div id="sol8" class="solution">
+            <span class="step">\(6 = 2 \cdot 3\)</span>
+            <span class="step">\(8 = 2^3\)</span>
+            <span class="step">Comunes y no comunes al mayor exponente: \(2^3 \cdot 3\).</span>
+            <span class="step">\(8 \cdot 3 = 24\)</span>
+            <span class="final-res">Resultado: 24</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">9.</span> (Problema) María va al tenis cada 4 días y Juan cada 6 días. Coincidieron hoy. ¿Dentro de cuántos días volverán a coincidir?
+        <br><button onclick="toggle('sol9')">Comprobar Resultado</button>
+        <div id="sol9" class="solution">
+            <span class="step">Buscamos un múltiplo común (futuro). Calculamos m.c.m.(4, 6).</span>
+            <span class="step">\(4=2^2\), \(6=2 \cdot 3\) → m.c.m. = \(2^2 \cdot 3 = 12\)</span>
+            <span class="final-res">Resultado: Dentro de 12 días.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">10.</span> (Problema) Tienes 20 caramelos de fresa y 30 de limón. Quieres hacer bolsas iguales con el máximo número de caramelos posible sin mezclar sabores. ¿Cuántos caramelos van en cada bolsa?
+        <br><button onclick="toggle('sol10')">Comprobar Resultado</button>
+        <div id="sol10" class="solution">
+            <span class="step">Buscamos dividir. Calculamos M.C.D.(20, 30).</span>
+            <span class="step">\(20 = 2^2 \cdot 5\), \(30 = 2 \cdot 3 \cdot 5\).</span>
+            <span class="step">Comunes al menor exp: \(2 \cdot 5 = 10\).</span>
+            <span class="final-res">Resultado: 10 caramelos por bolsa.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">11.</span> División con resto: Si divides 45 entre un número y te da cociente 6 y resto 3. ¿Cuál es el divisor?
+        <br><button onclick="toggle('sol11')">Comprobar Resultado</button>
+        <div id="sol11" class="solution">
+            <span class="step">Prueba de la división: \(D = d \cdot c + r\)</span>
+            <span class="step">\(45 = d \cdot 6 + 3\)</span>
+            <span class="step">Restamos el resto: \(45 - 3 = 42\).</span>
+            <span class="step">\(42 : 6 = 7\).</span>
+            <span class="final-res">Resultado: El divisor es 7.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">12.</span> ¿Es 123 divisible por 3? ¿Por qué?
+        <br><button onclick="toggle('sol12')">Comprobar Resultado</button>
+        <div id="sol12" class="solution">
+            <span class="step">Regla del 3: Sumar las cifras.</span>
+            <span class="step">\(1 + 2 + 3 = 6\).</span>
+            <span class="step">Como 6 es múltiplo de 3, el 123 también.</span>
+            <span class="final-res">Resultado: Sí.</span>
+        </div>
+    </div>
+    
+    <div class="question-card">
+        <span class="q-num">13.</span> Marta compra 3 camisetas a 15€ cada una y paga con un billete de 50€. ¿Cuánto le devuelven?
+        <br><button onclick="toggle('sol13')">Comprobar Resultado</button>
+        <div id="sol13" class="solution">
+            <span class="step">Gasto: \(3 \cdot 15 = 45\) euros.</span>
+            <span class="step">Vuelta: \(50 - 45\).</span>
+            <span class="final-res">Resultado: 5 €.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">14.</span> Queremos poner baldosas cuadradas en un suelo de 300cm x 200cm. ¿Cuál es el tamaño máximo del lado de la baldosa (sin cortar ninguna)?
+        <br><button onclick="toggle('sol14')">Comprobar Resultado</button>
+        <div id="sol14" class="solution">
+            <span class="step">Problema de M.C.D.(300, 200).</span>
+            <span class="step">Ambos son divisibles por 100. \(300 = 3 \cdot 100\), \(200 = 2 \cdot 100\).</span>
+            <span class="final-res">Resultado: 100 cm (1 metro) de lado.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">15.</span> Resuelve: \( 100 : (10 - 5) + 3^2 \)
+        <br><button onclick="toggle('sol15')">Comprobar Resultado</button>
+        <div id="sol15" class="solution">
+            <span class="step">Paréntesis: \(10-5=5\). Potencia: \(3^2=9\).</span>
+            <span class="step">División: \(100 : 5 = 20\).</span>
+            <span class="step">Suma: \(20 + 9\).</span>
+            <span class="final-res">Resultado: 29</span>
+        </div>
     </div>
 </div>
 
+<h2>Bloque 2: Números Enteros</h2>
+<div class="tips-box">
+    <span class="tips-title">💡 Tips del Profe para este bloque:</span>
+    <ul>
+        <li><strong>Signos iguales suman:</strong> \(-3 - 5 = -8\) (pierdo 3 y pierdo 5, pierdo 8).</li>
+        <li><strong>Signos distintos restan:</strong> \(-3 + 5 = +2\) (gano el del mayor valor absoluto).</li>
+        <li><strong>Regla de signos (Multiplicar/Dividir):</strong> Amigo de mi amigo = amigo (+ · + = +). Enemigo de mi enemigo = amigo (- · - = +).</li>
+        <li><strong>Resta de negativos:</strong> Restar un negativo es sumar. \(5 - (-2) = 5 + 2\).</li>
+    </ul>
+</div>
+
+<div id="bloque2">
+    <div class="question-card">
+        <span class="q-num">16.</span> Ordena de menor a mayor: \(-2, 5, 0, -8, 1\)
+        <br><button onclick="toggle('sol16')">Comprobar Resultado</button>
+        <div id="sol16" class="solution">
+            <span class="step">El más negativo es el más pequeño.</span>
+            <span class="final-res">Resultado: \(-8 < -2 < 0 < 1 < 5\)</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">17.</span> ¿Cuál es el opuesto de -7 y el valor absoluto de -7?
+        <br><button onclick="toggle('sol17')">Comprobar Resultado</button>
+        <div id="sol17" class="solution">
+            <span class="step">Opuesto: Cambiar el signo (+7).</span>
+            <span class="step">Valor Absoluto \(|-7|\): Distancia al cero (siempre positivo).</span>
+            <span class="final-res">Resultado: Opuesto = 7, Valor Absoluto = 7.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">18.</span> Calcula: \( -5 + 8 - 10 \)
+        <br><button onclick="toggle('sol18')">Comprobar Resultado</button>
+        <div id="sol18" class="solution">
+            <span class="step">De izquierda a derecha: \(-5 + 8 = +3\)</span>
+            <span class="step">Ahora: \(+3 - 10\)</span>
+            <span class="final-res">Resultado: -7</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">19.</span> Calcula: \( (-3) \cdot (-4) \)
+        <br><button onclick="toggle('sol19')">Comprobar Resultado</button>
+        <div id="sol19" class="solution">
+            <span class="step">Regla de signos: Menos por menos es más.</span>
+            <span class="step">\(3 \cdot 4 = 12\)</span>
+            <span class="final-res">Resultado: +12</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">20.</span> Calcula: \( 15 : (-3) \)
+        <br><button onclick="toggle('sol20')">Comprobar Resultado</button>
+        <div id="sol20" class="solution">
+            <span class="step">Más entre menos es menos.</span>
+            <span class="step">\(15 : 3 = 5\)</span>
+            <span class="final-res">Resultado: -5</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">21.</span> (Problema) Un ascensor está en la planta 3, baja 5 plantas y luego sube 2. ¿En qué planta está?
+        <br><button onclick="toggle('sol21')">Comprobar Resultado</button>
+        <div id="sol21" class="solution">
+            <span class="step">Inicio: +3</span>
+            <span class="step">Baja 5: \(3 - 5 = -2\) (Sótano 2)</span>
+            <span class="step">Sube 2: \(-2 + 2 = 0\)</span>
+            <span class="final-res">Resultado: Planta 0 (Planta Baja).</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">22.</span> Quita el paréntesis y calcula: \( 8 - (-3) \)
+        <br><button onclick="toggle('sol22')">Comprobar Resultado</button>
+        <div id="sol22" class="solution">
+            <span class="step">Restar un negativo es sumar: \( - (-) = + \)</span>
+            <span class="step">\(8 + 3\)</span>
+            <span class="final-res">Resultado: 11</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">23.</span> Calcula: \( -12 + (-4) \)
+        <br><button onclick="toggle('sol23')">Comprobar Resultado</button>
+        <div id="sol23" class="solution">
+            <span class="step">Sumar un negativo es restar: \( -12 - 4 \)</span>
+            <span class="step">Debo 12 y debo 4...</span>
+            <span class="final-res">Resultado: -16</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">24.</span> Operación combinada: \( 2 \cdot (-5) + 10 \)
+        <br><button onclick="toggle('sol24')">Comprobar Resultado</button>
+        <div id="sol24" class="solution">
+            <span class="step">Primero multiplicación: \(2 \cdot (-5) = -10\)</span>
+            <span class="step">Suma: \(-10 + 10\)</span>
+            <span class="final-res">Resultado: 0</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">25.</span> Operación combinada: \( ( -8 + 2 ) : 3 \)
+        <br><button onclick="toggle('sol25')">Comprobar Resultado</button>
+        <div id="sol25" class="solution">
+            <span class="step">Paréntesis: \(-8 + 2 = -6\) (signo del mayor)</span>
+            <span class="step">División: \(-6 : 3\)</span>
+            <span class="final-res">Resultado: -2</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">26.</span> Complejo (tipo PDF): \( [10 - (-2)] - (-3 - 1) \)
+        <br><button onclick="toggle('sol26')">Comprobar Resultado</button>
+        <div id="sol26" class="solution">
+            <span class="step">Corchete: \(10 - (-2) = 10 + 2 = 12\)</span>
+            <span class="step">Paréntesis: \(-3 - 1 = -4\)</span>
+            <span class="step">Operación: \(12 - (-4) = 12 + 4\)</span>
+            <span class="final-res">Resultado: 16</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">27.</span> El termómetro marcaba -2ºC a las 8:00 y subió 10 grados a las 12:00. ¿Qué temperatura hace ahora?
+        <br><button onclick="toggle('sol27')">Comprobar Resultado</button>
+        <div id="sol27" class="solution">
+            <span class="step">Inicio: -2</span>
+            <span class="step">Sube: +10</span>
+            <span class="step">Calculo: \(-2 + 10\)</span>
+            <span class="final-res">Resultado: 8ºC</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">28.</span> Una bomba extrae petróleo a 500m de profundidad (-500) y lo sube a un depósito a 20m de altura (+20). ¿Qué distancia recorre el petróleo?
+        <br><button onclick="toggle('sol28')">Comprobar Resultado</button>
+        <div id="sol28" class="solution">
+            <span class="step">Distancia = Final - Inicial (o simplemente sumar las distancias absolutas).</span>
+            <span class="step">\(20 - (-500) = 20 + 500\)</span>
+            <span class="final-res">Resultado: 520 metros.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">29.</span> Calcula: \( (-2)^3 \)
+        <br><button onclick="toggle('sol29')">Comprobar Resultado</button>
+        <div id="sol29" class="solution">
+            <span class="step">Base negativa, exponente impar = Resultado negativo.</span>
+            <span class="step">\((-2) \cdot (-2) \cdot (-2) = -8\)</span>
+            <span class="final-res">Resultado: -8</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">30.</span> Calcula: \( (-2) \cdot [ 5 - 3 \cdot (-2) ] \)
+        <br><button onclick="toggle('sol30')">Comprobar Resultado</button>
+        <div id="sol30" class="solution">
+            <span class="step">Dentro del corchete, primero multi: \(-3 \cdot (-2) = +6\).</span>
+            <span class="step">Corchete queda: \(5 + 6 = 11\).</span>
+            <span class="step">Fuera: \((-2) \cdot 11\)</span>
+            <span class="final-res">Resultado: -22</span>
+        </div>
+    </div>
+</div>
+
+<h2>Bloque 3: Proporcionalidad y Porcentajes</h2>
+<div class="tips-box">
+    <span class="tips-title">💡 Tips del Profe para este bloque:</span>
+    <ul>
+        <li><strong>Directa (Regla de 3):</strong> Si compro MÁS cosas, pago MÁS. (Multiplica cruzado y divide por el que sobra).</li>
+        <li><strong>Inversa:</strong> Si hay MÁS trabajadores, tardan MENOS tiempo. (Multiplica en línea y divide por el de abajo).</li>
+        <li><strong>Porcentajes:</strong> El 20% de 50 es \(0,20 \cdot 50\).</li>
+        <li><strong>Descuentos:</strong> Si me descuentan el 20%, pago el 80%.</li>
+    </ul>
+</div>
+
+<div id="bloque3">
+    <div class="question-card">
+        <span class="q-num">31.</span> Halla la x: \( \frac{2}{5} = \frac{x}{20} \)
+        <br><button onclick="toggle('sol31')">Comprobar Resultado</button>
+        <div id="sol31" class="solution">
+            <span class="step">Multiplica cruzado: \(5 \cdot x = 2 \cdot 20\)</span>
+            <span class="step">\(5x = 40\)</span>
+            <span class="step">\(x = 40 : 5\)</span>
+            <span class="final-res">Resultado: x = 8</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">32.</span> Si 3 kilos de naranjas cuestan 4€, ¿cuánto cuestan 6 kilos? (Proporcionalidad Directa)
+        <br><button onclick="toggle('sol32')">Comprobar Resultado</button>
+        <div id="sol32" class="solution">
+            <span class="step">Si doblo los kilos (3x2=6), doblo el precio.</span>
+            <span class="step">\(4 \cdot 2 = 8\)</span>
+            <span class="final-res">Resultado: 8 €</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">33.</span> Un coche tarda 4 horas en llegar a 100 km/h. ¿Cuánto tardará si va al doble de rápido (200 km/h)? (Proporcionalidad Inversa)
+        <br><button onclick="toggle('sol33')">Comprobar Resultado</button>
+        <div id="sol33" class="solution">
+            <span class="step">Más velocidad = Menos tiempo.</span>
+            <span class="step">Si la velocidad es doble, el tiempo es la mitad.</span>
+            <span class="final-res">Resultado: 2 horas.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">34.</span> 5 obreros construyen un muro en 6 días. ¿Cuánto tardarían 10 obreros?
+        <br><button onclick="toggle('sol34')">Comprobar Resultado</button>
+        <div id="sol34" class="solution">
+            <span class="step">Inversa: Más obreros, menos días.</span>
+            <span class="step">Total trabajo = \(5 \cdot 6 = 30\) "días-obrero".</span>
+            <span class="step">\(30 : 10 = 3\)</span>
+            <span class="final-res">Resultado: 3 días.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">35.</span> Calcula el 10% de 250.
+        <br><button onclick="toggle('sol35')">Comprobar Resultado</button>
+        <div id="sol35" class="solution">
+            <span class="step">Mueve la coma un sitio o multiplica por 0,1.</span>
+            <span class="final-res">Resultado: 25</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">36.</span> Calcula el 50% de 800.
+        <br><button onclick="toggle('sol36')">Comprobar Resultado</button>
+        <div id="sol36" class="solution">
+            <span class="step">El 50% es la mitad.</span>
+            <span class="final-res">Resultado: 400</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">37.</span> Calcula el 25% de 40.
+        <br><button onclick="toggle('sol37')">Comprobar Resultado</button>
+        <div id="sol37" class="solution">
+            <span class="step">El 25% es la cuarta parte (dividir entre 4).</span>
+            <span class="final-res">Resultado: 10</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">38.</span> Expresa la fracción \(\frac{1}{5}\) como porcentaje.
+        <br><button onclick="toggle('sol38')">Comprobar Resultado</button>
+        <div id="sol38" class="solution">
+            <span class="step">Divide 1 entre 5 = 0,2.</span>
+            <span class="step">Multiplica por 100.</span>
+            <span class="final-res">Resultado: 20%</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">39.</span> Una camiseta vale 20€. Tiene un descuento del 20%. ¿Cuánto me descuentan (en euros)?
+        <br><button onclick="toggle('sol39')">Comprobar Resultado</button>
+        <div id="sol39" class="solution">
+            <span class="step">Calcular el 20% de 20.</span>
+            <span class="step">\(0,20 \cdot 20 = 4\).</span>
+            <span class="final-res">Resultado: 4 € de descuento.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">40.</span> Siguiendo la anterior... ¿Cuánto pago al final por la camiseta?
+        <br><button onclick="toggle('sol40')">Comprobar Resultado</button>
+        <div id="sol40" class="solution">
+            <span class="step">Precio original - Descuento.</span>
+            <span class="step">\(20 - 4 = 16\).</span>
+            <span class="final-res">Resultado: 16 €</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">41.</span> Si 2 entradas cuestan 15€, ¿cuánto cuestan 5 entradas?
+        <br><button onclick="toggle('sol41')">Comprobar Resultado</button>
+        <div id="sol41" class="solution">
+            <span class="step">Calcula el precio de una (reducción a la unidad): \(15 : 2 = 7,5\) €.</span>
+            <span class="step">Multiplica por 5: \(7,5 \cdot 5\).</span>
+            <span class="final-res">Resultado: 37,50 €</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">42.</span> Un grifo que echa 10 litros/minuto llena una piscina en 6 horas. ¿Cuánto tardará si echa 20 litros/minuto?
+        <br><button onclick="toggle('sol42')">Comprobar Resultado</button>
+        <div id="sol42" class="solution">
+            <span class="step">Inversa: Doble de caudal, mitad de tiempo.</span>
+            <span class="step">\(6 : 2 = 3\).</span>
+            <span class="final-res">Resultado: 3 horas.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">43.</span> En una clase de 30 alumnos, el 10% lleva gafas. ¿Cuántos alumnos llevan gafas?
+        <br><button onclick="toggle('sol43')">Comprobar Resultado</button>
+        <div id="sol43" class="solution">
+            <span class="step">\(0,10 \cdot 30\).</span>
+            <span class="final-res">Resultado: 3 alumnos.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">44.</span> He pagado 40€ por un pantalón que costaba 50€. ¿Qué porcentaje me han descontado?
+        <br><button onclick="toggle('sol44')">Comprobar Resultado</button>
+        <div id="sol44" class="solution">
+            <span class="step">Descuento en euros: \(50 - 40 = 10\) €.</span>
+            <span class="step">Fracción: \(\frac{10}{50} = \frac{1}{5}\).</span>
+            <span class="step">\(\frac{1}{5} = 0,20\).</span>
+            <span class="final-res">Resultado: 20%</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">45.</span> Claudia ha comprado 15 chuches por 60 céntimos. ¿Cuántas compra con 20 céntimos?
+        <br><button onclick="toggle('sol45')">Comprobar Resultado</button>
+        <div id="sol45" class="solution">
+            <span class="step">Precio por chuche: \(60 : 15 = 4\) céntimos cada una.</span>
+            <span class="step">Con 20 céntimos: \(20 : 4 = 5\).</span>
+            <span class="final-res">Resultado: 5 chuches.</span>
+        </div>
+    </div>
+</div>
+
+<h2>Bloque 4: Desafío Final (Mixto)</h2>
+<div class="tips-box">
+    <span class="tips-title">💡 Tips del Profe:</span>
+    Este bloque mezcla todo. Lee bien el enunciado antes de decidir qué operación hacer. ¡Tú puedes!
+</div>
+
+<div id="bloque4">
+    <div class="question-card">
+        <span class="q-num">46.</span> (Enteros) Calcula: \( -3 + 2 \cdot [4 - (3 - 5)] \)
+        <br><button onclick="toggle('sol46')">Comprobar Resultado</button>
+        <div id="sol46" class="solution">
+            <span class="step">Paréntesis interno: \(3-5 = -2\).</span>
+            <span class="step">Corchete: \(4 - (-2) = 4 + 2 = 6\).</span>
+            <span class="step">Multiplicación: \(2 \cdot 6 = 12\).</span>
+            <span class="step">Suma final: \(-3 + 12\).</span>
+            <span class="final-res">Resultado: 9</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">47.</span> (Proporción) 3 amigos ponen 5€ cada uno para un regalo. Si fueran 5 amigos, ¿cuánto pondría cada uno para el mismo regalo?
+        <br><button onclick="toggle('sol47')">Comprobar Resultado</button>
+        <div id="sol47" class="solution">
+            <span class="step">Precio total regalo: \(3 \cdot 5 = 15\) €.</span>
+            <span class="step">Repartido entre 5: \(15 : 5\).</span>
+            <span class="final-res">Resultado: 3 € cada uno.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">48.</span> (Naturales) \( 2^3 + 4 \cdot \sqrt{25} \)
+        <br><button onclick="toggle('sol48')">Comprobar Resultado</button>
+        <div id="sol48" class="solution">
+            <span class="step">Potencia y Raíz: \(8 + 4 \cdot 5\).</span>
+            <span class="step">Multiplicación: \(4 \cdot 5 = 20\).</span>
+            <span class="step">Suma: \(8 + 20\).</span>
+            <span class="final-res">Resultado: 28</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">49.</span> (Enteros) Pitágoras nació en el año 570 a.C. (-570) y murió en el 495 a.C. (-495). ¿Cuántos años vivió?
+        <br><button onclick="toggle('sol49')">Comprobar Resultado</button>
+        <div id="sol49" class="solution">
+            <span class="step">Diferencia: Final - Inicial.</span>
+            <span class="step">\(-495 - (-570)\)</span>
+            <span class="step">\(-495 + 570\)</span>
+            <span class="final-res">Resultado: 75 años.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">50.</span> (Porcentajes) Un artículo sube un 10% y luego vale 110€. ¿Cuánto valía antes?
+        <br><button onclick="toggle('sol50')">Comprobar Resultado</button>
+        <div id="sol50" class="solution">
+            <span class="step">Cuidado, no es restar 10%.</span>
+            <span class="step">Si subió un 10%, ahora es el 110% del original.</span>
+            <span class="step">\(110\% = 1,1\). Entonces \(x \cdot 1,1 = 110\).</span>
+            <span class="step">\(x = 110 : 1,1 = 100\).</span>
+            <span class="final-res">Resultado: 100 €</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">51.</span> (Divisibilidad) ¿Es 15 múltiplo de 5?
+        <br><button onclick="toggle('sol51')">Comprobar Resultado</button>
+        <div id="sol51" class="solution">
+            <span class="step">Sí, porque \(5 \cdot 3 = 15\).</span>
+            <span class="final-res">Resultado: Sí.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">52.</span> (Divisibilidad) Enumera los divisores de 10.
+        <br><button onclick="toggle('sol52')">Comprobar Resultado</button>
+        <div id="sol52" class="solution">
+            <span class="step">Números que dividen al 10 exacto.</span>
+            <span class="final-res">Resultado: 1, 2, 5, 10.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">53.</span> (Combinadas) \( 10 - 2 \cdot 3 + 4 : 2 \)
+        <br><button onclick="toggle('sol53')">Comprobar Resultado</button>
+        <div id="sol53" class="solution">
+            <span class="step">Multi y Div: \(2 \cdot 3 = 6\) y \(4 : 2 = 2\).</span>
+            <span class="step">Queda: \(10 - 6 + 2\).</span>
+            <span class="step">De izq a der: \(4 + 2\).</span>
+            <span class="final-res">Resultado: 6</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">54.</span> (Enteros) \( | -10 | + | -5 | \)
+        <br><button onclick="toggle('sol54')">Comprobar Resultado</button>
+        <div id="sol54" class="solution">
+            <span class="step">Valor absoluto quita el signo.</span>
+            <span class="step">\(10 + 5\)</span>
+            <span class="final-res">Resultado: 15</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">55.</span> (Proporcionalidad) Si con 10€ compro 2kg de helado. ¿Cuántos kg compro con 5€?
+        <br><button onclick="toggle('sol55')">Comprobar Resultado</button>
+        <div id="sol55" class="solution">
+            <span class="step">La mitad de dinero, la mitad de helado.</span>
+            <span class="final-res">Resultado: 1 kg.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">56.</span> (Naturales) En una sala de cine hay 10 filas de 12 asientos. Hay 5 asientos vacíos. ¿Cuánta gente hay?
+        <br><button onclick="toggle('sol56')">Comprobar Resultado</button>
+        <div id="sol56" class="solution">
+            <span class="step">Total asientos: \(10 \cdot 12 = 120\).</span>
+            <span class="step">Ocupados: \(120 - 5\).</span>
+            <span class="final-res">Resultado: 115 personas.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">57.</span> (Enteros) Multiplica: \( (-1) \cdot (-1) \cdot (-1) \cdot (-1) \)
+        <br><button onclick="toggle('sol57')">Comprobar Resultado</button>
+        <div id="sol57" class="solution">
+            <span class="step">Hay 4 signos negativos (número par).</span>
+            <span class="step">Menos por menos más...</span>
+            <span class="final-res">Resultado: +1</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">58.</span> (Porcentaje) ¿Cuánto es el 1% de 2000?
+        <br><button onclick="toggle('sol58')">Comprobar Resultado</button>
+        <div id="sol58" class="solution">
+            <span class="step">Divide entre 100 (quita dos ceros).</span>
+            <span class="final-res">Resultado: 20</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">59.</span> (Lógica/Naturales) Si hoy es Lunes, ¿qué día será dentro de 15 días?
+        <br><button onclick="toggle('sol59')">Comprobar Resultado</button>
+        <div id="sol59" class="solution">
+            <span class="step">Dividimos 15 entre 7 (días de la semana).</span>
+            <span class="step">\(15 : 7 = 2\) semanas completas y sobra 1 día.</span>
+            <span class="step">Lunes + 1 día.</span>
+            <span class="final-res">Resultado: Martes.</span>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <span class="q-num">60.</span> (Repaso final) \( -2 + 5 \cdot 3 \)
+        <br><button onclick="toggle('sol60')">Comprobar Resultado</button>
+        <div id="sol60" class="solution">
+            <span class="step">Primero multiplicar: \(5 \cdot 3 = 15\).</span>
+            <span class="step">Suma: \(-2 + 15\).</span>
+            <span class="final-res">Resultado: 13</span>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>¡Gran trabajo! 🎉 Si has completado las 60 preguntas, estás muy bien preparada.</p>
+    <p>Creado por tu MateTutor Andalucía</p>
+</div>
+
 <script>
-    // Base de datos de preguntas basada en los PDFs proporcionados
-    const questions = [
-        // --- MÉTODO CIENTÍFICO ---
-        {
-            q: "¿Cuál es el primer paso del método científico?",
-            options: ["Enunciado de leyes", "Observación", "Experimentación", "Búsqueda de información"],
-            a: 1
-        },
-        {
-            q: "¿Qué es una hipótesis?",
-            options: ["Una verdad absoluta", "Una suposición para explicar un fenómeno observado", "El resultado final de un experimento", "Una ley matemática"],
-            a: 1
-        },
-        {
-            q: "¿Qué fase del método científico sirve para comprobar si la hipótesis es cierta?",
-            options: ["La búsqueda de información", "La observación", "La experimentación", "La publicación"],
-            a: 2
-        },
-        {
-            q: "Si los resultados de la experimentación confirman la hipótesis, podemos enunciar...",
-            options: ["Una pregunta", "Una ley o teoría", "Una nueva observación", "Un experimento fallido"],
-            a: 1
-        },
-        {
-            q: "En la fase de 'Búsqueda de información', ¿qué hacemos?",
-            options: ["Mirar por la ventana", "Consultar libros e internet sobre lo observado", "Mezclar productos químicos", "Escribir el informe final"],
-            a: 1
-        },
-
-        // --- LA MATERIA Y PROPIEDADES GENERALES ---
-        {
-            q: "¿Cómo se define la materia?",
-            options: ["Todo lo que se puede ver", "Todo lo que tiene masa y ocupa un volumen", "Todo lo que pesa mucho", "Cualquier cosa que sea sólida"],
-            a: 1
-        },
-        {
-            q: "¿Es el aire materia?",
-            options: ["No, porque no se ve", "No, porque no pesa", "Sí, porque tiene masa y ocupa volumen", "Solo cuando hace viento"],
-            a: 2
-        },
-        {
-            q: "¿Cuál es la unidad de masa en el Sistema Internacional?",
-            options: ["Gramo (g)", "Kilogramo (kg)", "Tonelada (t)", "Miligramo (mg)"],
-            a: 1
-        },
-        {
-            q: "¿Qué instrumento utilizamos para medir la masa?",
-            options: ["Probeta", "Termómetro", "Balanza", "Cronómetro"],
-            a: 2
-        },
-        {
-            q: "¿Qué es el volumen?",
-            options: ["La cantidad de materia de un cuerpo", "El espacio que ocupa un cuerpo", "La fuerza con la que cae un objeto", "La temperatura de un objeto"],
-            a: 1
-        },
-        {
-            q: "¿Cuál es la unidad de volumen en el Sistema Internacional?",
-            options: ["Litro (L)", "Metro cúbico (m³)", "Centímetro cúbico (cm³)", "Mililitro (mL)"],
-            a: 1
-        },
-        {
-            q: "¿A qué equivale 1 mL?",
-            options: ["1 m³", "1 dm³", "1 cm³", "1 mm³"],
-            a: 2
-        },
-        {
-            q: "¿Qué instrumento usamos habitualmente en el laboratorio para medir el volumen de un líquido?",
-            options: ["Balanza", "Probeta", "Regla", "Pipeta solamente"],
-            a: 1
-        },
-        {
-            q: "Para medir el volumen de un sólido irregular (como una piedra), usamos...",
-            options: ["Una fórmula matemática", "El método de desplazamiento de agua en una probeta", "Una balanza", "No se puede medir"],
-            a: 1
-        },
-        {
-            q: "Si una probeta tiene 30 mL de agua y al meter una piedra sube a 48 mL, ¿cuál es el volumen de la piedra?",
-            options: ["78 mL", "18 mL", "48 mL", "30 mL"],
-            a: 1
-        },
-
-        // --- DENSIDAD ---
-        {
-            q: "¿Cuál es la fórmula de la densidad?",
-            options: ["d = m · V", "d = V / m", "d = m / V", "d = m + V"],
-            a: 2
-        },
-        {
-            q: "La densidad es una propiedad...",
-            options: ["General (depende del tamaño)", "Específica (característica de cada sustancia)", "Variable según la forma", "Que no sirve para identificar sustancias"],
-            a: 1
-        },
-        {
-            q: "Si tenemos agua y aceite, ¿por qué el aceite flota sobre el agua?",
-            options: ["Porque es más denso", "Porque es menos denso", "Porque tiene más masa", "Porque es más viscoso"],
-            a: 1
-        },
-        {
-            q: "¿Cuál es la unidad de densidad en el Sistema Internacional?",
-            options: ["g/L", "g/cm³", "kg/m³", "kg/L"],
-            a: 2
-        },
-        {
-            q: "Si un objeto tiene una masa de 10 g y un volumen de 2 cm³, ¿cuál es su densidad?",
-            options: ["20 g/cm³", "0.2 g/cm³", "5 g/cm³", "8 g/cm³"],
-            a: 2
-        },
-        {
-            q: "Si cortamos un trozo de madera por la mitad, ¿qué pasa con su densidad?",
-            options: ["Se reduce a la mitad", "Se duplica", "No cambia, es la misma", "Depende del corte"],
-            a: 2
-        },
-        {
-            q: "¿Qué es la temperatura de fusión?",
-            options: ["La temperatura a la que un líquido hierve", "La temperatura a la que un sólido pasa a líquido", "La temperatura del congelador", "100 ºC siempre"],
-            a: 1
-        },
-        {
-            q: "La temperatura de ebullición del agua a nivel del mar es:",
-            options: ["0 ºC", "50 ºC", "100 ºC", "120 ºC"],
-            a: 2
-        },
-        {
-            q: "Para identificar una sustancia desconocida, ¿qué dato es más útil?",
-            options: ["Su masa", "Su volumen", "Su forma", "Su densidad"],
-            a: 3
-        },
-        {
-            q: "Si expresamos 1,08 g en notación científica (kg), sería:",
-            options: ["1,08 · 10⁻³ kg", "1,08 · 10³ kg", "10,8 kg", "0,108 kg"],
-            a: 0
-        },
-
-        // --- ESTADOS DE LA MATERIA (Macroscópico) ---
-        {
-            q: "¿Cuáles son los tres estados de agregación principales?",
-            options: ["Duro, blando y gaseoso", "Sólido, líquido y gaseoso", "Hielo, agua y vapor", "Frío, templado y caliente"],
-            a: 1
-        },
-        {
-            q: "Los sólidos tienen...",
-            options: ["Forma variable y volumen constante", "Forma constante y volumen constante", "Forma variable y volumen variable", "Forma constante y volumen variable"],
-            a: 1
-        },
-        {
-            q: "Los líquidos tienen...",
-            options: ["Forma constante y volumen constante", "Forma variable (se adaptan al recipiente) y volumen constante", "Forma variable y volumen variable", "No tienen volumen"],
-            a: 1
-        },
-        {
-            q: "Los gases tienen...",
-            options: ["Forma y volumen variables (ocupan todo el espacio)", "Forma constante", "Volumen fijo", "Masa variable"],
-            a: 0
-        },
-        {
-            q: "¿Qué estado de la materia se puede comprimir fácilmente?",
-            options: ["Sólido", "Líquido", "Gaseoso", "Ninguno"],
-            a: 2
-        },
-        {
-            q: "¿Por qué los líquidos pueden fluir?",
-            options: ["Porque sus partículas están fijas", "Porque sus partículas pueden deslizarse unas sobre otras", "Porque no tienen masa", "Porque son transparentes"],
-            a: 1
-        },
-        {
-            q: "Si paso un gas de una botella pequeña a una grande...",
-            options: ["Mantiene su volumen original", "Se expande para ocupar toda la botella grande", "Se queda en el fondo", "Desaparece"],
-            a: 1
-        },
-
-        // --- TEORÍA CINÉTICO-MOLECULAR (TCM) ---
-        {
-            q: "Según la teoría cinético-molecular, la materia está formada por...",
-            options: ["Bloques continuos", "Partículas en continuo movimiento", "Aire y agua", "Energía pura"],
-            a: 1
-        },
-        {
-            q: "En los SÓLIDOS, las partículas...",
-            options: ["Se mueven libremente", "Están muy separadas", "Vibran en posiciones fijas y están ordenadas", "Resbalan unas sobre otras"],
-            a: 2
-        },
-        {
-            q: "En los LÍQUIDOS, las fuerzas de atracción entre partículas son...",
-            options: ["Muy fuertes, impidiendo el movimiento", "Más débiles que en sólidos, permitiendo cierto movimiento", "Inexistentes", "Iguales que en los gases"],
-            a: 1
-        },
-        {
-            q: "En los GASES, las partículas...",
-            options: ["Están muy juntas", "Se mueven caóticamente y están muy separadas", "Solo vibran", "Forman estructuras geométricas"],
-            a: 1
-        },
-        {
-            q: "¿Qué pasa con las partículas si aumentamos la temperatura?",
-            options: ["Se mueven más despacio", "Se mueven más deprisa (aumenta su energía)", "Se quedan quietas", "Se hacen más grandes"],
-            a: 1
-        },
-        {
-            q: "¿Por qué los sólidos no se pueden comprimir?",
-            options: ["Porque sus partículas ya están muy juntas y no hay espacio libre", "Porque pesan mucho", "Porque son duros", "Sí se pueden comprimir fácilmente"],
-            a: 0
-        },
-        {
-            q: "La densidad de los gases suele ser...",
-            options: ["Muy alta", "Muy baja, porque las partículas están muy separadas", "Igual que los sólidos", "Infinita"],
-            a: 1
-        },
-        {
-            q: "Según la TCM, ¿qué hay entre las partículas de un gas?",
-            options: ["Aire", "Otros átomos", "Espacio vacío", "Líquido"],
-            a: 2
-        },
-
-        // --- CAMBIOS DE ESTADO ---
-        {
-            q: "El paso de SÓLIDO a LÍQUIDO se llama...",
-            options: ["Vaporización", "Solidificación", "Fusión", "Sublimación"],
-            a: 2
-        },
-        {
-            q: "El paso de LÍQUIDO a GAS se llama...",
-            options: ["Condensación", "Vaporización", "Fusión", "Sublimación"],
-            a: 1
-        },
-        {
-            q: "El paso de GAS a LÍQUIDO se llama...",
-            options: ["Vaporización", "Condensación", "Solidificación", "Fusión"],
-            a: 1
-        },
-        {
-            q: "El paso de LÍQUIDO a SÓLIDO se llama...",
-            options: ["Fusión", "Sublimación", "Solidificación", "Condensación"],
-            a: 2
-        },
-        {
-            q: "El paso directo de SÓLIDO a GAS (sin pasar por líquido) se llama...",
-            options: ["Fusión", "Sublimación", "Evaporación", "Condensación"],
-            a: 1
-        },
-        {
-            q: "¿Cuál es la diferencia entre evaporación y ebullición?",
-            options: ["Son lo mismo", "La evaporación es solo en la superficie y lenta; la ebullición es en todo el líquido y rápida", "La evaporación es a 100ºC y la ebullición a cualquier temperatura", "La ebullición es paso de sólido a gas"],
-            a: 1
-        },
-        {
-            q: "Durante un cambio de estado (mientras se funde el hielo), la temperatura...",
-            options: ["Sube rápidamente", "Baja", "Se mantiene constante", "Sube y baja"],
-            a: 2
-        },
-        {
-            q: "¿Qué cambios de estado requieren AUMENTAR la temperatura (calentar)?",
-            options: ["Fusión y Vaporización", "Solidificación y Condensación", "Condensación y Sublimación inversa", "Ninguno"],
-            a: 0
-        },
-        {
-            q: "¿Qué cambios de estado ocurren al ENFRIAR (disminuir temperatura)?",
-            options: ["Fusión y Vaporización", "Solidificación y Condensación", "Sublimación y Fusión", "Todos"],
-            a: 1
-        },
-
-        // --- GRÁFICAS Y PRESIÓN ---
-        {
-            q: "En una gráfica de calentamiento, los tramos horizontales representan...",
-            options: ["Que no estamos calentando", "Un cambio de estado", "Que la temperatura sube", "Un error en el termómetro"],
-            a: 1
-        },
-        {
-            q: "¿Qué es la presión atmosférica?",
-            options: ["El peso de las nubes", "La fuerza que ejerce el aire de la atmósfera sobre la superficie", "El calor del sol", "La gravedad"],
-            a: 1
-        },
-        {
-            q: "¿Dónde es MAYOR la presión atmosférica?",
-            options: ["En la cima de una montaña", "Al nivel del mar", "En la estratosfera", "Es igual en todas partes"],
-            a: 1
-        },
-        {
-            q: "¿Cómo afecta la presión a la temperatura de ebullición?",
-            options: ["No afecta", "A mayor presión, mayor temperatura de ebullición", "A mayor presión, menor temperatura de ebullición", "El agua siempre hierve a 100ºC"],
-            a: 1
-        },
-        {
-            q: "En lo alto de una montaña, el agua hierve...",
-            options: ["A 100 ºC exactos", "A más de 100 ºC", "A menos de 100 ºC (porque hay menos presión)", "No hierve nunca"],
-            a: 2
-        },
-        {
-            q: "Si aumentamos la presión sobre un gas...",
-            options: ["Su volumen aumenta", "Su volumen disminuye", "Su masa aumenta", "Se convierte en plasma"],
-            a: 1
-        },
-        {
-            q: "¿Qué le pasa a un globo lleno de aire si lo metemos en el congelador?",
-            options: ["Explota", "Aumenta de volumen", "Disminuye de volumen (se encoge)", "Cambia de color"],
-            a: 2
-        },
-        {
-            q: "La sublimación inversa es el paso de...",
-            options: ["Sólido a Gas", "Gas a Sólido", "Líquido a Gas", "Gas a Líquido"],
-            a: 1
-        },
-        {
-            q: "En una gráfica de enfriamiento, la temperatura...",
-            options: ["Sube con el tiempo", "Baja con el tiempo", "Siempre es constante", "Es cero"],
-            a: 1
-        },
-        {
-            q: "¿Se conserva la masa durante un cambio de estado?",
-            options: ["Sí, la masa es constante", "No, siempre se pierde un poco", "No, la masa aumenta al calentarse", "Depende de la sustancia"],
-            a: 0
-        },
-        {
-            q: "La unidad Pa (Pascal) mide...",
-            options: ["Masa", "Volumen", "Presión", "Temperatura"],
-            a: 2
-        },
-        {
-            q: "¿Qué ocurre con las partículas cuando el agua se condensa?",
-            options: ["Se separan más y van más rápido", "Se juntan más y pierden libertad de movimiento", "Se convierten en hielo", "Desaparecen"],
-            a: 1
-        },
-        {
-            q: "¿Cuál de estos NO es un estado de agregación?",
-            options: ["Sólido", "Líquido", "Gaseoso", "Viscoso"],
-            a: 3
-        },
-        {
-            q: "Para medir 25 mL de agua con precisión usarías...",
-            options: ["Un vaso de precipitados grande", "Una probeta", "Una cuchara", "Un cubo"],
-            a: 1
-        },
-        {
-            q: "¿Es el hielo una sustancia distinta al agua líquida?",
-            options: ["Sí, son cosas diferentes", "No, es la misma sustancia (agua) en distinto estado", "Sí, porque el hielo flota", "No lo sé"],
-            a: 1
-        }
-    ];
-
-    function renderQuestions() {
-        const container = document.getElementById('questions-container');
-        
-        questions.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = 'question-card';
-            card.id = `q-card-${index}`;
-            
-            let optionsHTML = '';
-            item.options.forEach((opt, i) => {
-                optionsHTML += `
-                    <label class="option-label" id="label-${index}-${i}">
-                        <input type="radio" name="q${index}" value="${i}">
-                        <span>${opt}</span>
-                    </label>
-                `;
-            });
-
-            card.innerHTML = `
-                <div class="question-title">
-                    <span class="q-num">${index + 1}.</span>
-                    <span>${item.q}</span>
-                </div>
-                <div class="options">
-                    ${optionsHTML}
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function checkAnswers() {
-        let score = 0;
-        let answered = 0;
-        
-        questions.forEach((item, index) => {
-            const selected = document.querySelector(`input[name="q${index}"]:checked`);
-            const card = document.getElementById(`q-card-${index}`);
-            
-            // Limpiar estilos previos
-            const labels = card.querySelectorAll('.option-label');
-            labels.forEach(l => {
-                l.classList.remove('correct-answer', 'wrong-answer');
-            });
-
-            if (selected) {
-                answered++;
-                const val = parseInt(selected.value);
-                const selectedLabel = document.getElementById(`label-${index}-${val}`);
-                
-                if (val === item.a) {
-                    score++;
-                    selectedLabel.classList.add('correct-answer');
-                } else {
-                    selectedLabel.classList.add('wrong-answer');
-                    // Marcar la correcta también para aprender
-                    document.getElementById(`label-${index}-${item.a}`).classList.add('correct-answer');
-                }
-            } else {
-                // Si no contestó, mostramos la correcta
-                document.getElementById(`label-${index}-${item.a}`).classList.add('correct-answer');
-            }
-        });
-
-        const resultArea = document.getElementById('result-area');
-        resultArea.style.display = 'block';
-        
-        let messageClass = '';
-        let message = '';
-        
-        const percentage = (score / questions.length) * 10;
-        
-        if (percentage >= 9) {
-            messageClass = 'score-perfect';
-            message = '¡Excelente! Estás listísima para el examen.';
-        } else if (percentage >= 5) {
-            messageClass = 'score-good';
-            message = '¡Bien! Has aprobado, pero repasa los fallos.';
+    function toggle(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "block") {
+            x.style.display = "none";
         } else {
-            messageClass = 'score-bad';
-            message = 'Hay que estudiar un poco más. ¡Revisa las correcciones!';
+            x.style.display = "block";
         }
-
-        resultArea.innerHTML = `Tu nota es: <span class="${messageClass}">${score} de ${questions.length} (${percentage.toFixed(1)})</span><br><small>${message}</small>`;
-        
-        // Scroll al resultado
-        resultArea.scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Iniciar
-    window.onload = renderQuestions;
-
 </script>
 
 </body>
