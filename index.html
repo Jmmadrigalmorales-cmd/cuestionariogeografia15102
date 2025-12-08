@@ -3,327 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen: Los Sectores Económicos</title>
+    <title>MateTutor Andalucía - Refuerzo de Bases</title>
     <style>
+        :root {
+            --primary: #007f5f; /* Verde pizarra andaluz */
+            --light: #e8f5e9;
+            --accent: #d00000;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
             color: #333;
             line-height: 1.6;
-            margin: 0;
+            max-width: 900px;
+            margin: 0 auto;
             padding: 20px;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        h1 {
+        header {
             text-align: center;
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-bottom: 5px solid var(--primary);
         }
-        .question-block {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
+        h1 { color: var(--primary); margin: 0; }
+        h2 { color: #2c3e50; border-left: 5px solid var(--primary); padding-left: 10px; margin-top: 40px;}
+        
+        .explanation-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            background-color: #fafafa;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .question-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #2980b9;
-        }
-        label {
-            display: block;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-        button {
-            display: block;
-            width: 100%;
+        .explanation-card h3 { color: var(--primary); margin-top: 0; }
+        .example {
+            background-color: var(--light);
             padding: 15px;
-            background-color: #27ae60;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .exercise-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .exercise-card:hover { transform: translateY(-2px); }
+        
+        .input-group {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 120px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 18px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #219150;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 20px;
             font-weight: bold;
-            text-align: center;
-            padding: 15px;
-            border-radius: 5px;
         }
-        .correct { color: #27ae60; font-weight: bold; }
-        .incorrect { color: #c0392b; font-weight: bold; }
-        .explanation { font-size: 0.9em; color: #666; margin-top: 5px; display: none; }
+        button:hover { background-color: #005f47; }
+        
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+            min-height: 1.5em;
+        }
+        .correct { color: green; }
+        .incorrect { color: var(--accent); }
+        
+        .diagram-placeholder {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+            font-size: 0.8em;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Examen: Sectores Económicos</h1>
-    <p>Selecciona la respuesta correcta para cada una de las 30 preguntas. Al finalizar, pulsa el botón para corregir.</p>
+<header>
+    <h1>🎓 MateTutor Andalucía</h1>
+    <p>Refuerzo de Numeración, Divisiones y Operaciones Combinadas</p>
+    <p><em>"Paso a paso, construimos el conocimiento."</em></p>
+</header>
 
-    <form id="quizForm">
-        <div id="questions-container"></div>
-    </form>
+<section>
+    <h2>1. Numeración de 7 Cifras</h2>
+    <div class="explanation-card">
+        <h3>💡 Resumen y Estrategia</h3>
+        <p>En este nivel trabajamos con números hasta las <strong>Unidades de Millón (U. Millón)</strong>. Recuerda el valor posicional de cada cifra.</p>
+        <p>El orden es: <strong>U. Millón - CM - DM - UM - C - D - U</strong></p>
+        <div class="diagram-placeholder">[Aquí iría una tabla de valor posicional mostrando desde Unidades hasta Unidades de Millón]</div>
+        
+        <div class="example">
+            <strong>Ejemplo:</strong> Descomponer el número <strong>2.405.120</strong><br>
+            2 U. Millón + 4 CM + 0 DM + 5 UM + 1 C + 2 D + 0 U<br>
+            En forma de suma: 2.000.000 + 400.000 + 5.000 + 100 + 20
+        </div>
+    </div>
 
-    <button type="button" onclick="checkAnswers()">Comprobar Respuestas</button>
-    <div id="result"></div>
-</div>
+    <div class="exercise-grid" id="block1">
+        </div>
+</section>
+
+<section>
+    <h2>2. Divisiones (Cálculo y Unidad seguida de ceros)</h2>
+    <div class="explanation-card">
+        <h3>💡 Resumen y Estrategia</h3>
+        <p>Vamos a practicar dos cosas: la división tradicional y el truco de los ceros.</p>
+        <ul>
+            <li><strong>División normal:</strong> "Baja la cifra", busca un número que multiplicado se acerque sin pasarse, resta y repite.</li>
+            <li><strong>Unidad seguida de ceros (10, 100...):</strong> Al dividir un número entero por 10, 100 o 1000, "tachamos" ceros del final si los tiene. Si no tiene ceros, movemos la coma imaginaria hacia la izquierda tantos lugares como ceros tenga el divisor.</li>
+        </ul>
+
+        <div class="example">
+            <strong>Ejemplo 1 (Cálculo):</strong> 450 : 25 = 18<br>
+            <strong>Ejemplo 2 (Por 100):</strong> 4500 : 100 -> Tachamos dos ceros -> <strong>45</strong><br>
+            <strong>Ejemplo 3 (Por 10):</strong> 345 : 10 -> Movemos la coma un sitio -> <strong>34,5</strong>
+        </div>
+    </div>
+
+    <div class="exercise-grid" id="block2">
+        </div>
+</section>
+
+<section>
+    <h2>3. Operaciones Combinadas</h2>
+    <div class="explanation-card">
+        <h3>💡 Resumen y Estrategia (Jerarquía)</h3>
+        <p>¡Cuidado! No se hacen las operaciones en el orden que aparecen. Hay reglas de oro (Jerarquía de Operaciones):</p>
+        <ol>
+            <li>Primero: <strong>Paréntesis ( )</strong></li>
+            <li>Segundo: <strong>Multiplicaciones (×) y Divisiones (:)</strong></li>
+            <li>Tercero: <strong>Sumas (+) y Restas (-)</strong></li>
+        </ol>
+        <div class="diagram-placeholder">[Aquí iría una pirámide mostrando la jerarquía de operaciones: Paréntesis arriba, Sumas/Restas abajo]</div>
+
+        <div class="example">
+            <strong>Ejemplo:</strong> 5 + 3 × 2 = ?<br>
+            ❌ Mal: 5 + 3 son 8, y 8 × 2 son 16.<br>
+            ✅ Bien: Primero multiplicamos (3 × 2 = 6). Luego sumamos: 5 + 6 = <strong>11</strong>.
+        </div>
+    </div>
+
+    <div class="exercise-grid" id="block3">
+        </div>
+</section>
 
 <script>
-    const questions = [
-        // Sector Primario
-        {
-            q: "1. ¿Qué actividad pertenece al Sector Primario?",
-            a: ["Agricultura", "Fábrica de coches", "Turismo"],
-            correct: 0
-        },
-        {
-            q: "2. El sector primario se encarga de obtener recursos directamente de...",
-            a: ["Las fábricas", "La naturaleza", "Los supermercados"],
-            correct: 1
-        },
-        {
-            q: "3. ¿Cuál de los siguientes trabajos es del sector primario?",
-            a: ["Pescador", "Profesor", "Mecánico"],
-            correct: 0
-        },
-        {
-            q: "4. La ganadería consiste en...",
-            a: ["Cultivar la tierra", "Extraer minerales", "Cría de animales"],
-            correct: 2
-        },
-        {
-            q: "5. La silvicultura o explotación forestal está relacionada con:",
-            a: ["El cuidado de los bosques", "La pesca en el mar", "La construcción de casas"],
-            correct: 0
-        },
-        {
-            q: "6. La minería subterránea extrae...",
-            a: ["Peces", "Minerales y rocas", "Madera"],
-            correct: 1
-        },
-        {
-            q: "7. ¿Qué tipo de agricultura depende exclusivamente de las lluvias?",
-            a: ["Regadío", "Secano", "Invernadero"],
-            correct: 1
-        },
-        {
-            q: "8. ¿Cuál NO es una actividad del sector primario?",
-            a: ["Apicultura", "Artesanía", "Minería"],
-            correct: 1
-        },
-        {
-            q: "9. La pesca que se realiza cerca de la costa se llama...",
-            a: ["Pesca de altura", "Pesca de bajura", "Piscifactoría"],
-            correct: 1
-        },
-        {
-            q: "10. ¿Qué obtenemos principalmente del sector primario?",
-            a: ["Materias primas", "Productos elaborados", "Servicios"],
-            correct: 0
-        },
+    // Función para crear ejercicios
+    function createExerciseHTML(id, question, answer, hint, containerId) {
+        const div = document.createElement('div');
+        div.className = 'exercise-card';
+        div.innerHTML = `
+            <strong>Ejercicio ${id}:</strong>
+            <p>${question}</p>
+            <div class="input-group">
+                <input type="text" id="ans-${containerId}-${id}" placeholder="Tu respuesta">
+                <button onclick="checkAnswer('${containerId}-${id}', '${answer}', '${hint}')">Comprobar</button>
+            </div>
+            <div id="feed-${containerId}-${id}" class="feedback"></div>
+        `;
+        document.getElementById(containerId).appendChild(div);
+    }
 
-        // Sector Secundario
-        {
-            q: "11. El sector secundario se encarga de...",
-            a: ["Obtener materias primas", "Transformar materias primas", "Vender productos"],
-            correct: 1
-        },
-        {
-            q: "12. ¿Cuál de estos lugares pertenece al sector secundario?",
-            a: ["Un hospital", "Una granja", "Una fábrica"],
-            correct: 2
-        },
-        {
-            q: "13. La industria textil se dedica a la fabricación de...",
-            a: ["Alimentos", "Ropa y telas", "Coches"],
-            correct: 1
-        },
-        {
-            q: "14. La diferencia entre artesanía e industria es que...",
-            a: ["La artesanía usa máquinas complejas", "La industria produce en grandes cantidades", "La artesanía es más rápida"],
-            correct: 1
-        },
-        {
-            q: "15. ¿A qué sector pertenece la construcción?",
-            a: ["Primario", "Secundario", "Terciario"],
-            correct: 1
-        },
-        {
-            q: "16. ¿Qué tipo de industria produce bienes para otras industrias (ej. acero)?",
-            a: ["Industria de base", "Industria de consumo", "Industria tecnológica"],
-            correct: 0
-        },
-        {
-            q: "17. Una fábrica de conservas (latas de atún) pertenece a la industria...",
-            a: ["Metalúrgica", "Alimentaria", "Química"],
-            correct: 1
-        },
-        {
-            q: "18. ¿Cuál es la principal fuente de energía utilizada en la industria moderna?",
-            a: ["Fuerza animal", "Electricidad y combustibles", "Viento solamente"],
-            correct: 1
-        },
-        {
-            q: "19. Un carpintero que hace muebles a mano es un...",
-            a: ["Obrero industrial", "Artesano", "Agricultor"],
-            correct: 1
-        },
-        {
-            q: "20. La transformación del petróleo en gasolina se hace en...",
-            a: ["Una refinería", "Una mina", "Una central eólica"],
-            correct: 0
-        },
+    function checkAnswer(uniqueId, correct, hint) {
+        const input = document.getElementById(`ans-${uniqueId}`);
+        const feedback = document.getElementById(`feed-${uniqueId}`);
+        let userVal = input.value.trim().toLowerCase().replace(',', '.'); // Normalizar coma a punto
+        let correctVal = correct.toLowerCase();
 
-        // Sector Terciario
-        {
-            q: "21. El sector terciario también es conocido como el sector de...",
-            a: ["Materias primas", "Servicios", "Fábricas"],
-            correct: 1
-        },
-        {
-            q: "22. ¿Cuál de los siguientes profesionales trabaja en el sector terciario?",
-            a: ["Minero", "Médico", "Operario de fábrica"],
-            correct: 1
-        },
-        {
-            q: "23. El turismo es una actividad importante del sector...",
-            a: ["Primario", "Secundario", "Terciario"],
-            correct: 2
-        },
-        {
-            q: "24. El comercio que vende directamente al consumidor final se llama...",
-            a: ["Comercio mayorista", "Comercio minorista", "Comercio exterior"],
-            correct: 1
-        },
-        {
-            q: "25. El transporte de mercancías y personas pertenece al sector...",
-            a: ["Terciario", "Secundario", "Primario"],
-            correct: 0
-        },
-        {
-            q: "26. La educación (colegios, universidades) es un servicio...",
-            a: ["Social", "Industrial", "Agrícola"],
-            correct: 0
-        },
-        {
-            q: "27. Un supermercado pertenece al...",
-            a: ["Sector Primario", "Sector Secundario", "Sector Terciario"],
-            correct: 2
-        },
-        {
-            q: "28. ¿Qué es el comercio exterior?",
-            a: ["Comercio dentro de una ciudad", "Comercio entre diferentes países", "Comercio en la calle"],
-            correct: 1
-        },
-        {
-            q: "29. Los servicios financieros (bancos) ayudan a...",
-            a: ["Cultivar patatas", "Gestionar el dinero", "Fabricar muebles"],
-            correct: 1
-        },
-        {
-            q: "30. ¿Qué sector predomina en los países más desarrollados?",
-            a: ["Primario", "Secundario", "Terciario"],
-            correct: 2
+        // Eliminar puntos de miles para comparar números (ej: 1.000 -> 1000) si la respuesta esperada es numérica
+        if (!isNaN(correctVal)) {
+             userVal = userVal.replace(/\./g, '');
         }
+
+        if (userVal === correctVal) {
+            feedback.innerHTML = "✅ ¡Excelente! Correcto.";
+            feedback.className = "feedback correct";
+        } else {
+            feedback.innerHTML = `❌ Incorrecto. <br>Pista: ${hint}`;
+            feedback.className = "feedback incorrect";
+        }
+    }
+
+    // --- DATOS DE LOS EJERCICIOS ---
+
+    // BLOQUE 1: NUMERACIÓN
+    const block1Data = [
+        { q: "¿Cómo se escribe en cifras: Tres millones cuatrocientos mil cinco?", a: "3400005", h: "Cuidado con los ceros intermedios: 3.400.005" },
+        { q: "En el número 5.678.900, ¿qué cifra ocupa las Unidades de Millón?", a: "5", h: "Es la séptima cifra contando desde la derecha." },
+        { q: "Escribe el número anterior a 2.000.000", a: "1999999", h: "Réstale 1 a dos millones." },
+        { q: "Descompón: ¿Cuántas 'Centenas de Millar' (CM) tiene el número 7.850.000? (Escribe solo la cifra)", a: "8", h: "Fíjate en la posición de las centenas de mil." },
+        { q: "Redondea 3.480.000 a la Unidad de Millón más cercana (Escribe el número completo)", a: "3000000", h: "Como la siguiente cifra es 4, se queda en 3 millones." },
+        { q: "¿Cuántas cifras tiene el número diez millones?", a: "8", h: "Escríbelo: 10.000.000" },
+        { q: "Calcula: 2 U. Millón + 3 CM. (Escribe el resultado numérico)", a: "2300000", h: "Son 2.000.000 + 300.000" },
+        { q: "En el número 1.234.567, ¿cuánto vale la cifra 2? (Escribe su valor en unidades)", a: "200000", h: "Está en las Centenas de Millar, añade 5 ceros." },
+        { q: "Escribe el número posterior a 4.999.999", a: "5000000", h: "Súmale 1." },
+        { q: "¿Qué número es mayor: 3.456.000 o 3.465.000? (Escribe el mayor)", a: "3465000", h: "Compara cifra a cifra de izquierda a derecha." }
     ];
 
-    function loadQuestions() {
-        const container = document.getElementById('questions-container');
-        questions.forEach((q, index) => {
-            const block = document.createElement('div');
-            block.className = 'question-block';
-            block.id = 'block-' + index;
-            
-            let optionsHtml = '';
-            q.a.forEach((option, i) => {
-                optionsHtml += `
-                    <label>
-                        <input type="radio" name="q${index}" value="${i}">
-                        ${option}
-                    </label>
-                `;
-            });
+    // BLOQUE 2: DIVISIONES
+    const block2Data = [
+        { q: "Calcula: 450 : 10", a: "45", h: "Tacha un cero." },
+        { q: "Calcula: 3400 : 100", a: "34", h: "Tacha dos ceros." },
+        { q: "Calcula: 144 : 12", a: "12", h: "Es una división exacta, revisa la tabla del 12." },
+        { q: "Calcula: 5000 : 1000", a: "5", h: "Tacha tres ceros." },
+        { q: "Calcula: 2500 : 50", a: "50", h: "Puedes tachar un cero a cada lado primero: 250 : 5." },
+        { q: "Calcula: 480 : 2", a: "240", h: "Es la mitad de 480." },
+        { q: "Calcula: 600 : 20", a: "30", h: "Tacha un cero: 60 : 2." },
+        { q: "Una división tiene dividendo 21 y divisor 3. ¿Cuál es el cociente?", a: "7", h: "Busca en la tabla del 3." },
+        { q: "Calcula: 1500 : 100", a: "15", h: "Quita los dos últimos ceros." },
+        { q: "Calcula: 84 : 4", a: "21", h: "Divide 8 entre 4 y luego 4 entre 4." }
+    ];
 
-            block.innerHTML = `
-                <div class="question-title">${q.q}</div>
-                ${optionsHtml}
-                <div class="explanation" id="exp-${index}"></div>
-            `;
-            container.appendChild(block);
-        });
-    }
+    // BLOQUE 3: OPERACIONES COMBINADAS
+    const block3Data = [
+        { q: "Calcula: 5 + 2 × 3", a: "11", h: "Primero multiplica 2x3, luego suma 5." },
+        { q: "Calcula: (5 + 2) × 3", a: "21", h: "Primero el paréntesis: 7x3." },
+        { q: "Calcula: 10 - 4 : 2", a: "8", h: "Primero divide 4:2, luego resta." },
+        { q: "Calcula: 20 : (2 + 3)", a: "4", h: "Primero suma el paréntesis, luego divide 20 entre eso." },
+        { q: "Calcula: 6 × 3 + 2", a: "20", h: "Primero multiplica, luego suma." },
+        { q: "Calcula: 100 - 10 × 5", a: "50", h: "Primero multiplica 10x5, luego resta a 100." },
+        { q: "Calcula: 4 × (3 + 2) - 1", a: "19", h: "1º Paréntesis, 2º Multiplicación, 3º Resta." },
+        { q: "Calcula: 12 + 8 : 4", a: "14", h: "La división va antes que la suma." },
+        { q: "Calcula: (10 + 10) : 2", a: "10", h: "Suma primero lo de dentro, luego divide." },
+        { q: "Calcula: 5 × 5 + 5 × 2", a: "35", h: "Haz las dos multiplicaciones primero, luego suma sus resultados." }
+    ];
 
-    function checkAnswers() {
-        let score = 0;
-        let answered = 0;
-        
-        questions.forEach((q, index) => {
-            const radios = document.getElementsByName(`q${index}`);
-            const block = document.getElementById(`block-${index}`);
-            const exp = document.getElementById(`exp-${index}`);
-            let val = null;
+    // Generar los ejercicios al cargar
+    block1Data.forEach((ex, i) => createExerciseHTML(i+1, ex.q, ex.a, ex.h, 'block1'));
+    block2Data.forEach((ex, i) => createExerciseHTML(i+1, ex.q, ex.a, ex.h, 'block2'));
+    block3Data.forEach((ex, i) => createExerciseHTML(i+1, ex.q, ex.a, ex.h, 'block3'));
 
-            // Reset styles
-            block.style.border = "1px solid #e0e0e0";
-            exp.style.display = "none";
-            exp.innerHTML = "";
-
-            for (let i = 0; i < radios.length; i++) {
-                if (radios[i].checked) {
-                    val = parseInt(radios[i].value);
-                    break;
-                }
-            }
-
-            if (val !== null) {
-                answered++;
-                if (val === q.correct) {
-                    score++;
-                    block.style.border = "2px solid #27ae60";
-                    exp.className = "explanation correct";
-                    exp.innerText = "¡Correcto!";
-                } else {
-                    block.style.border = "2px solid #c0392b";
-                    exp.className = "explanation incorrect";
-                    exp.innerText = `Incorrecto. La respuesta correcta era: ${q.a[q.correct]}`;
-                }
-                exp.style.display = "block";
-            }
-        });
-
-        const resultDiv = document.getElementById('result');
-        if (answered < questions.length) {
-            resultDiv.style.color = "#e67e22";
-            resultDiv.innerText = `Has respondido ${answered} de ${questions.length} preguntas. ¡Responde todas para ver tu nota final!`;
-        } else {
-            let color = score >= 15 ? "#27ae60" : "#c0392b";
-            resultDiv.style.color = color;
-            resultDiv.innerText = `Tu puntuación final es: ${score} de 30`;
-            window.scrollTo(0, document.body.scrollHeight);
-        }
-    }
-
-    // Cargar preguntas al iniciar
-    loadQuestions();
 </script>
 
 </body>
