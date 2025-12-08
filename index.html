@@ -3,269 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Divisiones - MateTutor Andalucía</title>
+    <title>Test de Matemáticas - 4º Primaria</title>
     <style>
-        :root {
-            --primary: #00695c; /* Verde botella pizarra */
-            --secondary: #ffb300; /* Amarillo albero */
-            --bg: #fdfbf7;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: #333;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            border-bottom: 4px solid var(--primary);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 { color: var(--primary); margin-bottom: 5px; }
-        .subtitle { color: #666; font-style: italic; }
-        
-        .block-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 6px solid var(--primary);
-        }
-        
-        h2 { color: var(--primary); display: flex; align-items: center; gap: 10px; }
-        
-        .strategy-box {
-            background-color: #e0f2f1;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .example-step {
-            font-family: 'Courier New', monospace;
-            background: #fff;
-            padding: 10px;
-            border: 1px dashed #aaa;
-            margin: 10px 0;
-            white-space: pre;
-        }
-
-        .exercise-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        @media (max-width: 600px) { .exercise-list { grid-template-columns: 1fr; } }
-
-        .exercise-item {
-            background-color: #fafafa;
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .input-area {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        input {
-            padding: 8px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        button:hover { background-color: #004d40; }
-        
-        .feedback {
-            margin-top: 8px;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-        .correct { color: #2e7d32; }
-        .incorrect { color: #c62828; }
-
-        .note {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 5px;
-            background: #fff3e0;
-            padding: 5px;
-            display: inline-block;
-            border-radius: 4px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f8ff; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; }
+        h2 { color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px; margin-top: 40px; }
+        .summary-box { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .example-box { background-color: #d1ecf1; border-left: 5px solid #17a2b8; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .exercise { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee; }
+        .exercise label { font-weight: bold; display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="number"] { padding: 8px; width: 60%; border: 2px solid #ccc; border-radius: 5px; font-size: 16px; }
+        button { padding: 8px 15px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin-left: 10px; }
+        button:hover { background-color: #218838; }
+        .feedback { margin-left: 10px; font-weight: bold; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        .nav-buttons { text-align: center; margin-top: 30px; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .nav-btn { background-color: #007bff; margin: 5px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>📝 Taller de Divisiones</h1>
-    <div class="subtitle">MateTutor Andalucía: "Papel, boli y concentración"</div>
-    <p>Objetivo: Fortalecer el algoritmo de la división sin calculadora.</p>
-</header>
-
-
-
-<div class="block-container">
-    <h2>1. Calentamiento: Divisor de 1 cifra (Números largos)</h2>
+<div class="container">
+    <h1>Matemáticas 4º Primaria</h1>
     
-    <div class="strategy-box">
-        <h3>💡 Estrategia</h3>
-        <p>Aunque el divisor sea pequeño (una cifra), el dividendo es largo. Esto requiere mantener el orden y bajar las cifras una a una con cuidado.</p>
-        <p><strong>Recordatorio:</strong> Si al bajar una cifra, el número que queda es menor que el divisor, ponemos <strong>cero al cociente</strong> y bajamos la siguiente cifra.</p>
-        <div class="example-step">
-   4162 | 4
- - 4      1040...
-  ---
-   01     (1 es menor que 4 -> 0 al cociente)
-    16    (bajo el 6)
-  </div>
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="showSection('bloque1')">1. Numeración</button>
+        <button class="nav-btn" onclick="showSection('bloque2')">2. Divisiones</button>
+        <button class="nav-btn" onclick="showSection('bloque3')">3. Operaciones Combinadas</button>
     </div>
 
-    <div class="exercise-list" id="block1"></div>
-</div>
+    <div id="bloque1" class="section active">
+        <h2>1. Numeración de hasta 7 Cifras</h2>
+        
+        <div class="summary-box">
+            <strong>Resumen:</strong> Los números de 7 cifras llegan hasta los <strong>Millones</strong>. 
+            El orden es: Unidades de Millón (UMM), Centenas de Millar (CM), Decenas de Millar (DM), Unidades de Millar (UM), Centenas (C), Decenas (D) y Unidades (U).
+            <br>Recuerda poner un punto cada tres cifras empezando por la derecha para leerlo mejor.
+        </div>
 
-<div class="block-container">
-    <h2>2. El Reto Estándar: Divisor de 2 Cifras</h2>
-    
-    <div class="strategy-box">
-        <h3>💡 Estrategia: "Tapar cifras"</h3>
-        <p>Para saber a cuánto cabe, tapa la cifra de las unidades del divisor y del número que has cogido en el dividendo.</p>
-        <p><strong>Ejemplo:</strong> 75 : 21</p>
-        <ol>
-            <li>Tapo el 1 (del 21) y tapo el 5 (del 75).</li>
-            <li>Me pregunto: ¿Qué número multiplicado por 2 se acerca a 7? -> El 3.</li>
-            <li>Pruebo con el 3.</li>
-        </ol>
-    </div>
-    
-    
+        <div class="example-box">
+            <strong>Ejemplo:</strong> Descompón el número 3.456.789
+            <br><em>Solución:</em> 3 UMM + 4 CM + 5 DM + 6 UM + 7 C + 8 D + 9 U
+            <br><em>O también:</em> 3.000.000 + 400.000 + 50.000 + 6.000 + 700 + 80 + 9
+        </div>
 
-[Image of step by step long division calculation example]
-
-
-    <div class="exercise-list" id="block2"></div>
-</div>
-
-<div class="block-container">
-    <h2>3. Entrenamiento de Resistencia (Números Grandes)</h2>
-    
-    <div class="strategy-box">
-        <h3>💡 Estrategia: Paciencia y Limpieza</h3>
-        <p>Aquí los números son más altos. Es vital que escribas los números alineados. Si te equivocas en una resta intermedia, todo el final estará mal.</p>
-        <p class="note">⚠️ En estos ejercicios, te pediré a veces el <strong>Cociente</strong> y a veces el <strong>Resto</strong> para asegurar que haces la operación completa.</p>
+        <div id="ejercicios-bloque1"></div>
     </div>
 
-    <div class="exercise-list" id="block3"></div>
+    <div id="bloque2" class="section">
+        <h2>2. Divisiones</h2>
+        
+        <div class="summary-box">
+            <strong>Resumen:</strong>
+            <ul>
+                <li><strong>División exacta:</strong> El resto es 0.</li>
+                <li><strong>División entera:</strong> El resto es distinto de 0 (pero menor que el divisor).</li>
+                <li><strong>Unidad seguida de ceros:</strong> Para dividir por 10, 100, 1000, tachamos tantos ceros en el dividendo como tenga el divisor.</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <strong>Ejemplo 1:</strong> 4500 : 100
+            <br><em>Solución:</em> Tachamos dos ceros al 4500. Resultado = 45.
+            <br><strong>Ejemplo 2:</strong> Prueba de la división:
+            <br><em>Fórmula:</em> Dividendo = (Divisor × Cociente) + Resto
+        </div>
+
+        <div id="ejercicios-bloque2"></div>
+    </div>
+
+    <div id="bloque3" class="section">
+        <h2>3. Operaciones Combinadas</h2>
+        
+        <div class="summary-box">
+            <strong>Resumen (Jerarquía):</strong> Para resolver operaciones mezcladas, sigue este orden estricto:
+            <ol>
+                <li>Primero: Los <strong>Paréntesis</strong> ( ).</li>
+                <li>Segundo: <strong>Multiplicaciones</strong> y <strong>Divisiones</strong>.</li>
+                <li>Tercero: <strong>Sumas</strong> y <strong>Restas</strong>.</li>
+            </ol>
+        </div>
+
+        <div class="example-box">
+            <strong>Ejemplo:</strong> 5 + 3 × 2
+            <br><em>Paso 1 (Multiplicación):</em> 3 × 2 = 6
+            <br><em>Paso 2 (Suma):</em> 5 + 6 = 11
+            <br><strong>¡Cuidado!</strong> Si haces primero 5+3 estaría mal (8 × 2 = 16 ❌).
+        </div>
+
+        <div id="ejercicios-bloque3"></div>
+    </div>
+
 </div>
 
 <script>
-    // --- DATOS ---
+    // Datos de los ejercicios
+    const ejercicios = {
+        bloque1: [
+            { p: "¿Cómo se escribe en cifras: Dos millones trescientos mil?", a: "2300000" },
+            { p: "Descompón: ¿Cuántas Unidades de Millar (UM) tiene 45.678?", a: "5" },
+            { p: "Escribe el número anterior a 1.000.000", a: "999999" },
+            { p: "Descompón 3.500.000 en suma (sin puntos):", a: "3000000+500000" },
+            { p: "¿Qué valor tiene la cifra 7 en el número 3.720.000? (Escribe el número completo)", a: "700000" },
+            { p: "Escribe el número: 4 UMM + 2 CM + 1 U", a: "4200001" },
+            { p: "¿Cuál es mayor: 3.456.000 o 3.465.000? (Escribe el número)", a: "3465000" },
+            { p: "Redondea 4.580.000 a la Centena de Millar más próxima:", a: "4600000" },
+            { p: "Escribe en cifras: Cinco millones cuarenta y dos", a: "5000042" },
+            { p: "Suma mentalmente: 2.000.000 + 350.000", a: "2350000" }
+        ],
+        bloque2: [
+            { p: "Divide: 450 : 10", a: "45" },
+            { p: "Divide: 6300 : 100", a: "63" },
+            { p: "Calcula el resto de 25 : 4", a: "1" },
+            { p: "Divide: 8000 : 1000", a: "8" },
+            { p: "Si el divisor es 5 y el cociente es 6 (exacta), ¿cuál es el dividendo?", a: "30" },
+            { p: "Calcula la mitad de 480", a: "240" },
+            { p: "En una división, si el resto es 0, la división es...", a: "exacta" },
+            { p: "Divide 360 : 6", a: "60" },
+            { p: "Divide 120 : 12", a: "10" },
+            { p: "Si reparto 15 caramelos entre 3 niños, ¿cuántos tocan?", a: "5" }
+        ],
+        bloque3: [
+            { p: "Calcula: 5 + 2 × 3", a: "11" },
+            { p: "Calcula: (5 + 2) × 3", a: "21" },
+            { p: "Calcula: 10 - 4 : 2", a: "8" },
+            { p: "Calcula: 20 : (2 + 3)", a: "4" },
+            { p: "Calcula: 3 × 3 + 2", a: "11" },
+            { p: "Calcula: 8 + 10 : 2", a: "13" },
+            { p: "Calcula: (10 - 2) : 4", a: "2" },
+            { p: "Calcula: 5 × 4 - 10", a: "10" },
+            { p: "Calcula: 2 + 2 + 2 × 0", a: "4" },
+            { p: "Calcula: 100 - 50 × 2", a: "0" }
+        ]
+    };
 
-    // Bloque 1: Divisor 1 cifra, dividendo largo. Buscamos ceros al cociente o llevarse.
-    const b1 = [
-        { id: "1-1", q: "8.546 : 2", a: "4273", type: "cociente", h: "Divide cifra a cifra. Es exacta." },
-        { id: "1-2", q: "6.045 : 5", a: "1209", type: "cociente", h: "Cuidado cuando bajas el 4, es menor que 5." },
-        { id: "1-3", q: "9.636 : 3", a: "3212", type: "cociente", h: "Sencilla, pero mantén el orden." },
-        { id: "1-4", q: "1.248 : 4", a: "312", type: "cociente", h: "Coge dos cifras al principio (12)." },
-        { id: "1-5", q: "7.854 : 7", a: "1122", type: "cociente", h: "Ojo al bajar el 5 (es menor que 7)." },
-        { id: "1-6", q: "5.608 : 8", a: "701", type: "cociente", h: "56 entre 8 es 7... luego baja el 0." },
-        { id: "1-7", q: "3.216 : 4", a: "804", type: "cociente", h: "32 entre 4... y cuidado con el 1." },
-        { id: "1-8", q: "9.018 : 9", a: "1002", type: "cociente", h: "Atención a los ceros intermedios." },
-        { id: "1-9", q: "4.525 : 5", a: "905", type: "cociente", h: "45 entre 5... baja el 2 (cero al cociente)." },
-        { id: "1-10", q: "1.000 : 8", a: "125", type: "cociente", h: "Un clásico. Hazla paso a paso." }
-    ];
-
-    // Bloque 2: Divisor 2 cifras. Nivel medio.
-    const b2 = [
-        { id: "2-1", q: "468 : 12", a: "39", type: "cociente", h: "Prueba tapando unidades." },
-        { id: "2-2", q: "725 : 25", a: "29", type: "cociente", h: "Piensa en monedas de 25 céntimos." },
-        { id: "2-3", q: "896 : 14", a: "64", type: "cociente", h: "Tapa el 4 y el 6. ¿8 entre 1?" },
-        { id: "2-4", q: "576 : 24", a: "24", type: "cociente", h: "¿A cuánto cabe 57 entre 24?" },
-        { id: "2-5", q: "945 : 45", a: "21", type: "cociente", h: "Coge el 94 primero." },
-        { id: "2-6", q: "¿Cuál es el RESTO de 155 : 12?", a: "11", type: "resto", h: "Calcula hasta que no puedas dividir más." },
-        { id: "2-7", q: "672 : 32", a: "21", type: "cociente", h: "67 entre 32 cabe a 2." },
-        { id: "2-8", q: "¿Cuál es el RESTO de 458 : 15?", a: "8", type: "resto", h: "Haz la división entera." },
-        { id: "2-9", q: "912 : 24", a: "38", type: "cociente", h: "Empieza con 91 entre 24." },
-        { id: "2-10", q: "¿Cuál es el RESTO de 785 : 25?", a: "10", type: "resto", h: "Recuerda: monedas de 25." }
-    ];
-
-    // Bloque 3: Números más grandes y restos.
-    const b3 = [
-        { id: "3-1", q: "3.456 : 12", a: "288", type: "cociente", h: "Es una división larga de 3 pasos." },
-        { id: "3-2", q: "5.678 : 22 (Solo cociente entero)", a: "258", type: "cociente", h: "No saques decimales." },
-        { id: "3-3", q: "9.876 : 45 (Solo cociente entero)", a: "219", type: "cociente", h: "Cuidado con las restas." },
-        { id: "3-4", q: "¿Cuál es el RESTO de 2.500 : 35?", a: "15", type: "resto", h: "Calcula todo el proceso." },
-        { id: "3-5", q: "1.234 : 11 (Solo cociente entero)", a: "112", type: "cociente", h: "Tabla del 11: 11, 22, 33..." },
-        { id: "3-6", q: "8.000 : 32", a: "250", type: "cociente", h: "Exacta. Cuidado al final con el cero." },
-        { id: "3-7", q: "4.321 : 21 (Solo cociente entero)", a: "205", type: "cociente", h: "¡Ojo! Cero al cociente en medio." },
-        { id: "3-8", q: "¿Cuál es el RESTO de 6.789 : 56?", a: "13", type: "resto", h: "Esta requiere paciencia." },
-        { id: "3-9", q: "7.500 : 75", a: "100", type: "cociente", h: "Parece difícil pero es lógica pura." },
-        { id: "3-10", q: "¿Cuál es el RESTO de 3.333 : 30?", a: "3", type: "resto", h: "Fíjate bien en lo que sobra." }
-    ];
-
-    // Función de generación
-    function renderExercises(data, containerId) {
-        const container = document.getElementById(containerId);
-        data.forEach(ex => {
+    // Función para generar ejercicios HTML
+    function generarEjercicios(bloqueId, datos) {
+        const contenedor = document.getElementById(`ejercicios-${bloqueId}`);
+        datos.forEach((item, index) => {
             const div = document.createElement('div');
-            div.className = 'exercise-item';
-            
-            // Texto diferente si pide Resto o Cociente
-            let label = "Tu respuesta:";
-            if (ex.type === 'resto') label = "Escribe el RESTO:";
-            else label = "Escribe el COCIENTE (entero):";
-
+            div.className = 'exercise';
             div.innerHTML = `
-                <strong>${ex.q}</strong>
-                <div class="input-area">
-                    <label style="font-size:0.8em; color:#555;">${label}</label>
-                    <input type="number" id="inp-${ex.id}" placeholder="?">
-                    <button onclick="check('${ex.id}', '${ex.a}', '${ex.h}')">Comprobar</button>
-                    <div id="fb-${ex.id}" class="feedback"></div>
-                </div>
+                <label>${index + 1}. ${item.p}</label>
+                <input type="text" id="${bloqueId}-r${index}" placeholder="Tu respuesta aquí">
+                <button onclick="verificar('${bloqueId}', ${index}, '${item.a}')">Comprobar</button>
+                <span id="${bloqueId}-f${index}" class="feedback"></span>
             `;
-            container.appendChild(div);
+            contenedor.appendChild(div);
         });
     }
 
-    function check(id, correct, hint) {
-        const input = document.getElementById(`inp-${id}`);
-        const fb = document.getElementById(`fb-${id}`);
+    // Generar los 3 bloques
+    generarEjercicios('bloque1', ejercicios.bloque1);
+    generarEjercicios('bloque2', ejercicios.bloque2);
+    generarEjercicios('bloque3', ejercicios.bloque3);
+
+    // Función de verificación
+    function verificar(bloque, index, respuestaCorrecta) {
+        const input = document.getElementById(`${bloque}-r${index}`);
+        const feedback = document.getElementById(`${bloque}-f${index}`);
+        // Limpiamos espacios y pasamos a minúsculas para comparar mejor
+        let respuestaUsuario = input.value.trim().toLowerCase().replace(/\./g, ''); // Quita puntos de miles
+        let correctaNormalizada = respuestaCorrecta.toLowerCase().replace(/\./g, '');
         
-        if (input.value.trim() === correct) {
-            fb.innerHTML = "✅ ¡Correcto! Muy bien calculado.";
-            fb.className = "feedback correct";
+        if (respuestaUsuario === correctaNormalizada) {
+            feedback.textContent = "¡Correcto! 🎉";
+            feedback.className = "feedback correct";
         } else {
-            fb.innerHTML = `❌ Ups... revisa el papel. <br><span style="font-weight:normal; font-size:0.9em">Pista: ${hint}</span>`;
-            fb.className = "feedback incorrect";
+            feedback.textContent = "Inténtalo de nuevo.";
+            feedback.className = "feedback incorrect";
         }
     }
 
-    // Inicializar
-    renderExercises(b1, 'block1');
-    renderExercises(b2, 'block2');
-    renderExercises(b3, 'block3');
-
+    // Navegación entre pestañas
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(d => d.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
 </script>
 
 </body>
