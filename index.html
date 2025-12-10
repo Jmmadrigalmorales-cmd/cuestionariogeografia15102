@@ -3,487 +3,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Exam - 4º Primaria</title>
+    <title>English Flashcards - 4º Primaria</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap');
+
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-            background-color: #f0f8ff;
+            font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+            background-color: #e0f7fa;
             margin: 0;
             padding: 20px;
             color: #333;
         }
+
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 2px solid #4a90e2;
         }
+
         h1 {
             text-align: center;
-            color: #2c3e50;
-            border-bottom: 3px dashed #4a90e2;
-            padding-bottom: 10px;
+            color: #00838f;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #fff;
         }
-        h2 {
-            color: #e67e22;
-            margin-top: 30px;
-            border-left: 5px solid #e67e22;
-            padding-left: 10px;
+
+        p.subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #006064;
+            margin-bottom: 30px;
         }
-        .question-block {
-            background-color: #f9f9f9;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+
+        /* --- TABS --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
         }
-        .question-text {
+
+        .tab-btn {
+            background: white;
+            border: 3px solid #00bcd4;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-family: inherit;
             font-weight: bold;
-            font-size: 1.1em;
+            color: #00bcd4;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #00bcd4;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,188,212,0.4);
+        }
+
+        /* --- FLASHCARDS GRID --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .card-container {
+            background-color: transparent;
+            width: 100%;
+            height: 220px;
+            perspective: 1000px; /* Remove this if you don't want 3D effect */
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 4px solid #fff;
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .card-back {
+            background-color: #ffca28; /* Yellow for back */
+            color: #333;
+            transform: rotateY(180deg);
+        }
+
+        .emoji {
+            font-size: 4em;
             margin-bottom: 10px;
         }
-        label {
-            display: block;
-            margin: 5px 0;
-            cursor: pointer;
+
+        .word {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #0277bd;
         }
-        input[type="text"] {
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            padding: 5px;
-            font-family: inherit;
-            width: 200px;
-        }
-        select {
-            padding: 5px;
-            border-radius: 5px;
-            border: 2px solid #ccc;
-            font-family: inherit;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #27ae60;
-            color: white;
+
+        .meaning {
             font-size: 1.5em;
-            border: none;
+            font-weight: bold;
+            color: #bf360c;
+        }
+
+        .category-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.7em;
+            background: #e1f5fe;
+            padding: 3px 8px;
             border-radius: 10px;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: background 0.3s;
+            color: #0288d1;
         }
-        button:hover {
-            background-color: #219150;
-        }
-        #result {
+
+        /* --- QUIZ SECTION --- */
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .quiz-question {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #0277bd;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: #e0f7fa;
+            border: 2px solid #b2ebf2;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            transition: background 0.2s;
+        }
+
+        .option-btn:hover {
+            background: #b2ebf2;
+        }
+
+        .option-btn.correct {
+            background: #c8e6c9 !important;
+            border-color: #4caf50 !important;
+            color: #2e7d32;
+        }
+
+        .option-btn.wrong {
+            background: #ffcdd2 !important;
+            border-color: #ef5350 !important;
+            color: #c62828;
+        }
+
+        .score-display {
             font-size: 1.5em;
             margin-top: 20px;
             font-weight: bold;
-            padding: 20px;
-            border-radius: 10px;
+            color: #00838f;
+        }
+
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.2em;
+            cursor: pointer;
             display: none;
         }
-        .correct {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-        }
-        .incorrect {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-        }
-        .feedback {
-            font-size: 0.9em;
-            color: #721c24;
-            margin-top: 5px;
-            font-style: italic;
-            display: none;
-        }
-        .img-hint {
-            max-width: 100px;
-            display: block;
-            margin: 5px 0;
-        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🇬🇧 English Exam Review 🇬🇧</h1>
-    <p style="text-align: center;">Weekend Activities, Art & Technology</p>
+    <h1>🇬🇧 English Practice 🇬🇧</h1>
+    <p class="subtitle">¡Toca las tarjetas para girarlas!</p>
 
-    <!-- SECTION 1: VOCABULARY (DEFINITIONS) -->
-    <h2>1. Vocabulary: Art & Technology</h2>
-    <p><i>Match the definition with the correct word.</i></p>
-
-    <div class="question-block" id="q1-block">
-        <div class="question-text">1. A painting of a person is called a...</div>
-        <label><input type="radio" name="q1" value="landscape"> Landscape</label>
-        <label><input type="radio" name="q1" value="portrait"> Portrait</label>
-        <label><input type="radio" name="q1" value="app"> App</label>
-        <div class="feedback" id="fb-q1">Correct answer: Portrait</div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showMode('study')">📚 Tarjetas (Study)</button>
+        <button class="tab-btn" onclick="showMode('quiz')">🎮 Juego (Quiz)</button>
     </div>
 
-    <div class="question-block" id="q2-block">
-        <div class="question-text">2. A painting of the countryside is called a...</div>
-        <label><input type="radio" name="q2" value="portrait"> Portrait</label>
-        <label><input type="radio" name="q2" value="landscape"> Landscape</label>
-        <label><input type="radio" name="q2" value="museum"> Museum</label>
-        <div class="feedback" id="fb-q2">Correct answer: Landscape</div>
+    <!-- FLASHCARDS SECTION -->
+    <div id="study-mode" class="grid-container">
+        <!-- Cards will be injected here by JS -->
     </div>
 
-    <div class="question-block" id="q3-block">
-        <div class="question-text">3. You can paint pictures with a...</div>
-        <label><input type="radio" name="q3" value="paintbrush"> Paintbrush</label>
-        <label><input type="radio" name="q3" value="piano"> Piano</label>
-        <label><input type="radio" name="q3" value="click"> Click</label>
-        <div class="feedback" id="fb-q3">Correct answer: Paintbrush</div>
+    <!-- QUIZ SECTION -->
+    <div id="quiz-mode" class="quiz-container">
+        <div id="quiz-content">
+            <div class="emoji" id="q-emoji"></div>
+            <div class="quiz-question" id="q-word">Word</div>
+            <div class="quiz-options" id="q-options">
+                <!-- Options injected here -->
+            </div>
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Siguiente ➡️</button>
+            <div class="score-display" id="score">Puntos: 0</div>
+        </div>
+        <div id="quiz-end" style="display:none;">
+            <h2>🎉 ¡Muy bien! 🎉</h2>
+            <p id="final-score">Has terminado.</p>
+            <button class="tab-btn" onclick="startQuiz()">Jugar otra vez</button>
+        </div>
     </div>
 
-    <div class="question-block" id="q4-block">
-        <div class="question-text">4. An ______ is a program on a phone or tablet.</div>
-        <select id="q4">
-            <option value="">Choose...</option>
-            <option value="click">Click</option>
-            <option value="app">App</option>
-            <option value="download">Download</option>
-        </select>
-        <div class="feedback" id="fb-q4">Correct answer: App</div>
-    </div>
-
-    <div class="question-block" id="q5-block">
-        <div class="question-text">5. You can ______ an app onto your tablet.</div>
-        <select id="q5">
-            <option value="">Choose...</option>
-            <option value="visit">Visit</option>
-            <option value="download">Download</option>
-            <option value="draw">Draw</option>
-        </select>
-        <div class="feedback" id="fb-q5">Correct answer: Download</div>
-    </div>
-
-    <div class="question-block" id="q6-block">
-        <div class="question-text">6. When you ______ on an app, it opens.</div>
-        <input type="text" id="q6" placeholder="Write the word...">
-        <div class="feedback" id="fb-q6">Correct answer: Click</div>
-    </div>
-
-    <!-- SECTION 2: WEEKEND ACTIVITIES -->
-    <h2>2. At The Weekend</h2>
-    <p><i>Look at the activities and choose the correct option.</i></p>
-
-    <div class="question-block" id="q7-block">
-        <div class="question-text">7. We look at old things and art here.</div>
-        <label><input type="radio" name="q7" value="visit museums"> Visit museums</label>
-        <label><input type="radio" name="q7" value="make cakes"> Make cakes</label>
-        <label><input type="radio" name="q7" value="watch sport"> Watch sport</label>
-        <div class="feedback" id="fb-q7">Correct answer: Visit museums</div>
-    </div>
-
-    <div class="question-block" id="q8-block">
-        <div class="question-text">8. We play these with friends (like Uno).</div>
-        <label><input type="radio" name="q8" value="play the piano"> Play the piano</label>
-        <label><input type="radio" name="q8" value="play card games"> Play card games</label>
-        <label><input type="radio" name="q8" value="make videos"> Make videos</label>
-        <div class="feedback" id="fb-q8">Correct answer: Play card games</div>
-    </div>
-
-    <div class="question-block" id="q9-block">
-        <div class="question-text">9. We cook sweet food in the kitchen.</div>
-        <label><input type="radio" name="q9" value="make cakes"> Make cakes</label>
-        <label><input type="radio" name="q9" value="watch films"> Watch films</label>
-        <label><input type="radio" name="q9" value="visit grandparents"> Visit grandparents</label>
-        <div class="feedback" id="fb-q9">Correct answer: Make cakes</div>
-    </div>
-
-    <div class="question-block" id="q10-block">
-        <div class="question-text">10. I use a camera or a phone to do this.</div>
-        <label><input type="radio" name="q10" value="make videos"> Make videos</label>
-        <label><input type="radio" name="q10" value="draw pictures"> Draw pictures</label>
-        <label><input type="radio" name="q10" value="play the piano"> Play the piano</label>
-        <div class="feedback" id="fb-q10">Correct answer: Make videos</div>
-    </div>
-
-    <div class="question-block" id="q11-block">
-        <div class="question-text">11. I sit on the sofa and watch TV (football, tennis...).</div>
-        <label><input type="radio" name="q11" value="watch films"> Watch films</label>
-        <label><input type="radio" name="q11" value="watch sport"> Watch sport</label>
-        <label><input type="radio" name="q11" value="make cakes"> Make cakes</label>
-        <div class="feedback" id="fb-q11">Correct answer: Watch sport</div>
-    </div>
-
-    <div class="question-block" id="q12-block">
-        <div class="question-text">12. I use a pencil and paper.</div>
-        <label><input type="radio" name="q12" value="make videos"> Make videos</label>
-        <label><input type="radio" name="q12" value="draw pictures"> Draw pictures</label>
-        <label><input type="radio" name="q12" value="visit museums"> Visit museums</label>
-        <div class="feedback" id="fb-q12">Correct answer: Draw pictures</div>
-    </div>
-
-    <!-- SECTION 3: GRAMMAR (DO / DON'T) -->
-    <h2>3. Grammar: Present Simple</h2>
-    <p><i>Complete the sentences with <b>do</b>, <b>don't</b>, or the correct verb.</i></p>
-
-    <div class="question-block" id="q13-block">
-        <div class="question-text">13. What _____ you do on Saturdays?</div>
-        <select id="q13">
-            <option value="">Choose...</option>
-            <option value="does">does</option>
-            <option value="do">do</option>
-            <option value="don't">don't</option>
-        </select>
-        <div class="feedback" id="fb-q13">Correct answer: do</div>
-    </div>
-
-    <div class="question-block" id="q14-block">
-        <div class="question-text">14. We ______ go to school at the weekend. (Negative)</div>
-        <input type="text" id="q14" placeholder="...">
-        <div class="feedback" id="fb-q14">Correct answer: don't</div>
-    </div>
-
-    <div class="question-block" id="q15-block">
-        <div class="question-text">15. I ______ card games with my friends. (Affirmative)</div>
-        <label><input type="radio" name="q15" value="plays"> plays</label>
-        <label><input type="radio" name="q15" value="play"> play</label>
-        <label><input type="radio" name="q15" value="playing"> playing</label>
-        <div class="feedback" id="fb-q15">Correct answer: play</div>
-    </div>
-
-    <div class="question-block" id="q16-block">
-        <div class="question-text">16. We ______ videos. They're really cool!</div>
-        <label><input type="radio" name="q16" value="make"> make</label>
-        <label><input type="radio" name="q16" value="do"> do</label>
-        <label><input type="radio" name="q16" value="makes"> makes</label>
-        <div class="feedback" id="fb-q16">Correct answer: make</div>
-    </div>
-
-    <div class="question-block" id="q17-block">
-        <div class="question-text">17. I ______ go to school on Sunday.</div>
-        <select id="q17">
-            <option value="">Choose...</option>
-            <option value="doesn't">doesn't</option>
-            <option value="do">do</option>
-            <option value="don't">don't</option>
-        </select>
-        <div class="feedback" id="fb-q17">Correct answer: don't</div>
-    </div>
-
-    <div class="question-block" id="q18-block">
-        <div class="question-text">18. We ______ visit museums. (Negative)</div>
-        <input type="text" id="q18" placeholder="Type don't or do...">
-        <div class="feedback" id="fb-q18">Correct answer: don't</div>
-    </div>
-
-    <!-- SECTION 4: ORDER THE SENTENCE -->
-    <h2>4. Order the sentences</h2>
-    <p><i>Choose the correct order for the words.</i></p>
-
-    <div class="question-block" id="q19-block">
-        <div class="question-text">19. you / do / What / at / weekend / the / ?</div>
-        <label><input type="radio" name="q19" value="A"> What do you do at the weekend?</label>
-        <label><input type="radio" name="q19" value="B"> What you do at the weekend?</label>
-        <div class="feedback" id="fb-q19">Correct answer: What do you do at the weekend?</div>
-    </div>
-
-    <div class="question-block" id="q20-block">
-        <div class="question-text">20. visit / I / museums / .</div>
-        <label><input type="radio" name="q20" value="A"> I museums visit.</label>
-        <label><input type="radio" name="q20" value="B"> I visit museums.</label>
-        <div class="feedback" id="fb-q20">Correct answer: I visit museums.</div>
-    </div>
-
-    <div class="question-block" id="q21-block">
-        <div class="question-text">21. don't / We / school / go / to / .</div>
-        <label><input type="radio" name="q21" value="A"> We don't go to school.</label>
-        <label><input type="radio" name="q21" value="B"> We go don't to school.</label>
-        <div class="feedback" id="fb-q21">Correct answer: We don't go to school.</div>
-    </div>
-
-    <div class="question-block" id="q22-block">
-        <div class="question-text">22. make / We / cakes / .</div>
-        <label><input type="radio" name="q22" value="A"> We cakes make.</label>
-        <label><input type="radio" name="q22" value="B"> We make cakes.</label>
-        <div class="feedback" id="fb-q22">Correct answer: We make cakes.</div>
-    </div>
-
-    <div class="question-block" id="q23-block">
-        <div class="question-text">23. play / I / games / card / .</div>
-        <label><input type="radio" name="q23" value="A"> I play card games.</label>
-        <label><input type="radio" name="q23" value="B"> I card games play.</label>
-        <div class="feedback" id="fb-q23">Correct answer: I play card games.</div>
-    </div>
-
-    <div class="question-block" id="q24-block">
-        <div class="question-text">24. watch / We / films / .</div>
-        <label><input type="radio" name="q24" value="A"> We watch films.</label>
-        <label><input type="radio" name="q24" value="B"> Films we watch.</label>
-        <div class="feedback" id="fb-q24">Correct answer: We watch films.</div>
-    </div>
-
-    <!-- SECTION 5: READING -->
-    <h2>5. Reading Comprehension</h2>
-    <p><i>Read about Rita and answer.</i></p>
-    <div style="background: #fff; border: 2px dashed #333; padding: 10px; margin-bottom: 10px;">
-        "Rita paints a painting of her family. Some children think Rita's painting isn't very good. Grace finds the painting. The painting is in the newspaper, on social media and on TV. In the end, everyone loves Rita's work."
-    </div>
-
-    <div class="question-block" id="q25-block">
-        <div class="question-text">25. What does Rita paint?</div>
-        <label><input type="radio" name="q25" value="landscape"> A landscape</label>
-        <label><input type="radio" name="q25" value="family"> Her family</label>
-        <div class="feedback" id="fb-q25">Correct answer: Her family</div>
-    </div>
-
-    <div class="question-block" id="q26-block">
-        <div class="question-text">26. Do all children like the painting at first?</div>
-        <label><input type="radio" name="q26" value="yes"> Yes</label>
-        <label><input type="radio" name="q26" value="no"> No, some think it isn't very good</label>
-        <div class="feedback" id="fb-q26">Correct answer: No</div>
-    </div>
-
-    <div class="question-block" id="q27-block">
-        <div class="question-text">27. Where is the painting? (Choose the one NOT in the text)</div>
-        <label><input type="radio" name="q27" value="newspaper"> Newspaper</label>
-        <label><input type="radio" name="q27" value="museum"> Museum</label>
-        <label><input type="radio" name="q27" value="tv"> TV</label>
-        <div class="feedback" id="fb-q27">Correct answer: Museum (it is not mentioned)</div>
-    </div>
-
-    <div class="question-block" id="q28-block">
-        <div class="question-text">28. In the end, does everyone love Rita's work?</div>
-        <label><input type="radio" name="q28" value="yes"> Yes</label>
-        <label><input type="radio" name="q28" value="no"> No</label>
-        <div class="feedback" id="fb-q28">Correct answer: Yes</div>
-    </div>
-
-    <!-- SECTION 6: TRUE OR FALSE -->
-    <h2>6. True or False?</h2>
-
-    <div class="question-block" id="q29-block">
-        <div class="question-text">29. We go to school on Sundays.</div>
-        <label><input type="radio" name="q29" value="true"> True</label>
-        <label><input type="radio" name="q29" value="false"> False</label>
-        <div class="feedback" id="fb-q29">Correct answer: False</div>
-    </div>
-
-    <div class="question-block" id="q30-block">
-        <div class="question-text">30. A 'portrait' is a picture of the countryside.</div>
-        <label><input type="radio" name="q30" value="true"> True</label>
-        <label><input type="radio" name="q30" value="false"> False</label>
-        <div class="feedback" id="fb-q30">Correct answer: False (It's a picture of a person)</div>
-    </div>
-
-    <button onclick="checkAnswers()">Check Answers / Corregir Examen</button>
-
-    <div id="result"></div>
 </div>
 
 <script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 30;
-
-        // Answers Key
-        const answers = {
-            q1: "portrait",
-            q2: "landscape",
-            q3: "paintbrush",
-            q4: "app",
-            q5: "download",
-            q6: "click", // text input
-            q7: "visit museums",
-            q8: "play card games",
-            q9: "make cakes",
-            q10: "make videos",
-            q11: "watch sport",
-            q12: "draw pictures",
-            q13: "do",
-            q14: "don't", // text input
-            q15: "play",
-            q16: "make",
-            q17: "don't",
-            q18: "don't", // text input
-            q19: "A",
-            q20: "B",
-            q21: "A",
-            q22: "B",
-            q23: "A",
-            q24: "A",
-            q25: "family",
-            q26: "no",
-            q27: "museum",
-            q28: "yes",
-            q29: "false",
-            q30: "false"
-        };
-
-        // Reset styles
-        for (let i = 1; i <= totalQuestions; i++) {
-            document.getElementById(`q${i}-block`).className = "question-block";
-            document.getElementById(`fb-q${i}`).style.display = "none";
-        }
-
-        // Check Loop
-        for (let i = 1; i <= totalQuestions; i++) {
-            let userAnswer = "";
-            let element = document.getElementById(`q${i}`);
-            
-            // Handle Radio Buttons
-            if (!element) { 
-                const radios = document.getElementsByName(`q${i}`);
-                for (let radio of radios) {
-                    if (radio.checked) {
-                        userAnswer = radio.value;
-                        break;
-                    }
-                }
-            } else {
-                // Handle Inputs and Selects
-                userAnswer = element.value.toLowerCase().trim();
-                // Fix for apostrophes (don't vs dont)
-                if(userAnswer === "dont") userAnswer = "don't";
-            }
-
-            const feedbackElement = document.getElementById(`fb-q${i}`);
-            const blockElement = document.getElementById(`q${i}-block`);
-
-            if (userAnswer === answers[`q${i}`].toLowerCase()) {
-                score++;
-                blockElement.classList.add("correct");
-            } else {
-                blockElement.classList.add("incorrect");
-                feedbackElement.style.display = "block";
-            }
-        }
-
-        // Display Result
-        const resultDiv = document.getElementById("result");
-        resultDiv.style.display = "block";
+    // DATA SOURCE
+    const vocabulary = [
+        // Art & Tech
+        { id: 1, word: "Portrait", meaning: "Retrato (persona)", emoji: "🖼️🧔", category: "Art" },
+        { id: 2, word: "Landscape", meaning: "Paisaje (campo)", emoji: "🏞️🌲", category: "Art" },
+        { id: 3, word: "Paintbrush", meaning: "Pincel", emoji: "🖌️", category: "Art" },
+        { id: 4, word: "App", meaning: "Aplicación", emoji: "📱", category: "Tech" },
+        { id: 5, word: "Download", meaning: "Descargar", emoji: "⬇️", category: "Tech" },
+        { id: 6, word: "Click", meaning: "Hacer clic", emoji: "🖱️👆", category: "Tech" },
         
-        let message = "";
-        if (score === 30) {
-            message = "🏆 PERFECT! Amazing job!";
-            resultDiv.style.backgroundColor = "#d4edda";
-            resultDiv.style.color = "#155724";
-        } else if (score >= 20) {
-            message = "🎉 Great job! Very good!";
-            resultDiv.style.backgroundColor = "#fff3cd";
-            resultDiv.style.color = "#856404";
-        } else {
-            message = "💪 Keep practicing! You can do it!";
-            resultDiv.style.backgroundColor = "#f8d7da";
-            resultDiv.style.color = "#721c24";
-        }
+        // Weekend Activities
+        { id: 7, word: "Visit museums", meaning: "Visitar museos", emoji: "🏛️", category: "Weekend" },
+        { id: 8, word: "Play card games", meaning: "Jugar a las cartas", emoji: "🃏", category: "Weekend" },
+        { id: 9, word: "Make cakes", meaning: "Hacer pasteles", emoji: "🧁👩‍🍳", category: "Weekend" },
+        { id: 10, word: "Make videos", meaning: "Hacer vídeos", emoji: "📹🎬", category: "Weekend" },
+        { id: 11, word: "Watch sport", meaning: "Ver deportes", emoji: "⚽📺", category: "Weekend" },
+        { id: 12, word: "Draw pictures", meaning: "Dibujar", emoji: "✏️🎨", category: "Weekend" },
+        { id: 13, word: "Play the piano", meaning: "Tocar el piano", emoji: "🎹", category: "Weekend" },
+        { id: 14, word: "Visit grandparents", meaning: "Visitar abuelos", emoji: "👵👴", category: "Weekend" },
 
-        resultDiv.innerHTML = `Score: ${score} / ${totalQuestions}<br>${message}`;
-        
-        // Scroll to bottom
-        resultDiv.scrollIntoView({behavior: "smooth"});
+        // Grammar / Verbs
+        { id: 15, word: "I don't go", meaning: "Yo no voy", emoji: "❌🚶", category: "Grammar" },
+        { id: 16, word: "Do you play?", meaning: "¿Tú juegas?", emoji: "❓🎮", category: "Grammar" },
+        { id: 17, word: "We make...", meaning: "Nosotros hacemos...", emoji: "🔨", category: "Grammar" }
+    ];
+
+    // --- FLASHCARD LOGIC ---
+    const gridContainer = document.getElementById('study-mode');
+
+    function renderCards() {
+        gridContainer.innerHTML = '';
+        vocabulary.forEach(item => {
+            const cardHTML = `
+                <div class="card-container" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <span class="category-tag">${item.category}</span>
+                            <div class="emoji">${item.emoji}</div>
+                            <div class="word">${item.word}</div>
+                        </div>
+                        <div class="card-back">
+                            <div class="meaning">${item.meaning}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+        });
     }
+
+    // --- QUIZ LOGIC ---
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let shuffledVocab = [];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function startQuiz() {
+        document.getElementById('quiz-end').style.display = 'none';
+        document.getElementById('quiz-content').style.display = 'block';
+        score = 0;
+        currentQuestionIndex = 0;
+        document.getElementById('score').innerText = 'Puntos: 0';
+        
+        // Create a copy and shuffle
+        shuffledVocab = [...vocabulary];
+        shuffleArray(shuffledVocab);
+        
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const item = shuffledVocab[currentQuestionIndex];
+        document.getElementById('q-emoji').innerText = item.emoji;
+        document.getElementById('q-word').innerText = item.word;
+        document.getElementById('next-btn').style.display = 'none';
+
+        // Generate options: 1 correct, 3 wrong
+        let options = [item];
+        const wrongOptions = vocabulary.filter(v => v.id !== item.id);
+        shuffleArray(wrongOptions);
+        options.push(wrongOptions[0], wrongOptions[1], wrongOptions[2]);
+        shuffleArray(options);
+
+        const optionsContainer = document.getElementById('q-options');
+        optionsContainer.innerHTML = '';
+
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt.meaning;
+            btn.onclick = () => checkAnswer(btn, opt.id === item.id);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(btn, isCorrect) {
+        // Disable all buttons
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.disabled = true);
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            score++;
+            document.getElementById('score').innerText = `Puntos: ${score}`;
+        } else {
+            btn.classList.add('wrong');
+            // Highlight correct one
+            // We can't easily find it without storing ID in DOM, but visually user sees red
+        }
+        document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < 10) { // Limit to 10 questions per round
+            loadQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    function endQuiz() {
+        document.getElementById('quiz-content').style.display = 'none';
+        document.getElementById('quiz-end').style.display = 'block';
+        document.getElementById('final-score').innerText = `Has conseguido ${score} de 10 puntos.`;
+    }
+
+    // --- MODE SWITCHING ---
+    function showMode(mode) {
+        const studyDiv = document.getElementById('study-mode');
+        const quizDiv = document.getElementById('quiz-mode');
+        const btns = document.querySelectorAll('.tab-btn');
+
+        if (mode === 'study') {
+            studyDiv.style.display = 'grid';
+            quizDiv.style.display = 'none';
+            btns[0].classList.add('active');
+            btns[1].classList.remove('active');
+        } else {
+            studyDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+            btns[0].classList.remove('active');
+            btns[1].classList.add('active');
+            startQuiz();
+        }
+    }
+
+    // Init
+    renderCards();
+
 </script>
 
 </body>
