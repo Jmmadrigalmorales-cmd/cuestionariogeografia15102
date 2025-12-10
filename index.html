@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Flashcards - 4º Primaria</title>
+    <title>English Super Quiz - 50 Preguntas</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap');
 
@@ -13,158 +13,89 @@
             margin: 0;
             padding: 20px;
             color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
-            max-width: 900px;
+            width: 100%;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         h1 {
             text-align: center;
             color: #00838f;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2.2em;
+            margin-bottom: 5px;
             text-shadow: 2px 2px 0px #fff;
         }
 
         p.subtitle {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #006064;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        /* --- TABS --- */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .tab-btn {
+        /* --- QUIZ CONTAINER --- */
+        .quiz-container {
             background: white;
-            border: 3px solid #00bcd4;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            color: #00bcd4;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background: #00bcd4;
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,188,212,0.4);
-        }
-
-        /* --- FLASHCARDS GRID --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 10px;
-        }
-
-        .card-container {
-            background-color: transparent;
-            width: 100%;
-            height: 220px;
-            perspective: 1000px; /* Remove this if you don't want 3D effect */
-            cursor: pointer;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,131,143,0.2);
             text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 15px;
+            border: 4px solid #b2ebf2;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card-container.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
+        /* Progress Bar */
+        .progress-bar-container {
             width: 100%;
+            background-color: #e0f2f1;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
             height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 4px solid #fff;
+            background-color: #00bcd4;
+            width: 0%;
+            transition: width 0.3s ease;
         }
 
-        .card-front {
-            background-color: #ffffff;
-            color: #333;
-        }
-
-        .card-back {
-            background-color: #ffca28; /* Yellow for back */
-            color: #333;
-            transform: rotateY(180deg);
+        .question-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 0.9em;
+            color: #aaa;
+            font-weight: bold;
         }
 
         .emoji {
-            font-size: 4em;
-            margin-bottom: 10px;
+            font-size: 5em;
+            margin-bottom: 15px;
+            display: block;
+            animation: bounce 2s infinite;
         }
 
-        .word {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #0277bd;
-        }
-
-        .meaning {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #bf360c;
-        }
-
-        .category-tag {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 0.7em;
-            background: #e1f5fe;
-            padding: 3px 8px;
-            border-radius: 10px;
-            color: #0288d1;
-        }
-
-        /* --- QUIZ SECTION --- */
-        .quiz-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            display: none; /* Hidden by default */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
         }
 
         .quiz-question {
             font-size: 1.8em;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #0277bd;
+            font-weight: 600;
         }
 
         .quiz-options {
@@ -174,144 +105,248 @@
         }
 
         .option-btn {
-            background: #e0f7fa;
-            border: 2px solid #b2ebf2;
+            background: #f0f4c3; /* Light lime background */
+            border: 3px solid #e6ee9c;
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 1.2em;
             cursor: pointer;
             font-family: 'Fredoka', sans-serif;
-            transition: background 0.2s;
+            color: #558b2f;
+            font-weight: bold;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 #cddc39;
         }
 
         .option-btn:hover {
-            background: #b2ebf2;
+            transform: translateY(-2px);
+            background: #e6ee9c;
+        }
+
+        .option-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 0 0 #cddc39;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+            opacity: 0.7;
+            transform: none !important;
         }
 
         .option-btn.correct {
-            background: #c8e6c9 !important;
-            border-color: #4caf50 !important;
-            color: #2e7d32;
+            background: #a5d6a7 !important;
+            border-color: #66bb6a !important;
+            color: #1b5e20 !important;
+            box-shadow: 0 4px 0 #43a047 !important;
         }
 
         .option-btn.wrong {
-            background: #ffcdd2 !important;
+            background: #ef9a9a !important;
             border-color: #ef5350 !important;
-            color: #c62828;
+            color: #b71c1c !important;
+            box-shadow: 0 4px 0 #e53935 !important;
+        }
+
+        .feedback-area {
+            min-height: 60px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .score-display {
-            font-size: 1.5em;
-            margin-top: 20px;
+            font-size: 1.4em;
             font-weight: bold;
             color: #00838f;
         }
 
         .next-btn {
-            margin-top: 20px;
-            padding: 10px 30px;
+            padding: 12px 35px;
             background: #00bcd4;
             color: white;
             border: none;
             border-radius: 20px;
-            font-size: 1.2em;
+            font-size: 1.3em;
+            font-family: 'Fredoka', sans-serif;
             cursor: pointer;
-            display: none;
+            display: none; /* Hidden initially */
+            box-shadow: 0 4px 0 #0097a7;
+            transition: transform 0.1s;
         }
 
+        .next-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* --- RESULTS SCREEN --- */
+        #quiz-end {
+            text-align: center;
+        }
+        .final-score {
+            font-size: 3em;
+            color: #00bcd4;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .restart-btn {
+            background: #ff7043;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 5px 0 #d84315;
+        }
+        .restart-btn:hover { background: #ff5722; }
+        .restart-btn:active { transform: translateY(5px); box-shadow: none; }
+
+        @media (max-width: 500px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            .emoji { font-size: 4em; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🇬🇧 English Practice 🇬🇧</h1>
-    <p class="subtitle">¡Toca las tarjetas para girarlas!</p>
+    <h1>🇬🇧 English Super Quiz 🇬🇧</h1>
+    <p class="subtitle">50 Preguntas para ser un experto</p>
 
-    <div class="tabs">
-        <button class="tab-btn active" onclick="showMode('study')">📚 Tarjetas (Study)</button>
-        <button class="tab-btn" onclick="showMode('quiz')">🎮 Juego (Quiz)</button>
-    </div>
+    <div class="quiz-container">
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="question-number" id="q-number">1 / 50</div>
 
-    <!-- FLASHCARDS SECTION -->
-    <div id="study-mode" class="grid-container">
-        <!-- Cards will be injected here by JS -->
-    </div>
-
-    <!-- QUIZ SECTION -->
-    <div id="quiz-mode" class="quiz-container">
+        <!-- Quiz Content -->
         <div id="quiz-content">
-            <div class="emoji" id="q-emoji"></div>
-            <div class="quiz-question" id="q-word">Word</div>
+            <div class="emoji" id="q-emoji">🤔</div>
+            <div class="quiz-question" id="q-text">Loading question...</div>
+            
             <div class="quiz-options" id="q-options">
-                <!-- Options injected here -->
+                <!-- Buttons injected by JS -->
             </div>
-            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Siguiente ➡️</button>
-            <div class="score-display" id="score">Puntos: 0</div>
-        </div>
-        <div id="quiz-end" style="display:none;">
-            <h2>🎉 ¡Muy bien! 🎉</h2>
-            <p id="final-score">Has terminado.</p>
-            <button class="tab-btn" onclick="startQuiz()">Jugar otra vez</button>
-        </div>
-    </div>
 
+            <div class="feedback-area">
+                <div class="score-display" id="current-score">Puntos: 0</div>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Siguiente ➡️</button>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div id="quiz-end" style="display:none;">
+            <h2>🎉 ¡Examen Completado! 🎉</h2>
+            <p>Tu puntuación final es:</p>
+            <div class="final-score" id="final-score-text">0 / 50</div>
+            <p id="final-message">¡Buen trabajo!</p>
+            <button class="restart-btn" onclick="startQuiz()">Repetir Examen 🔄</button>
+        </div>
+
+    </div>
 </div>
 
 <script>
-    // DATA SOURCE
-    const vocabulary = [
+    // --- 1. VOCABULARY DATABASE ---
+    const baseVocab = [
         // Art & Tech
-        { id: 1, word: "Portrait", meaning: "Retrato (persona)", emoji: "🖼️🧔", category: "Art" },
-        { id: 2, word: "Landscape", meaning: "Paisaje (campo)", emoji: "🏞️🌲", category: "Art" },
-        { id: 3, word: "Paintbrush", meaning: "Pincel", emoji: "🖌️", category: "Art" },
-        { id: 4, word: "App", meaning: "Aplicación", emoji: "📱", category: "Tech" },
-        { id: 5, word: "Download", meaning: "Descargar", emoji: "⬇️", category: "Tech" },
-        { id: 6, word: "Click", meaning: "Hacer clic", emoji: "🖱️👆", category: "Tech" },
-        
+        { id: "v1", en: "Portrait", es: "Retrato (persona)", emoji: "🖼️🧔", type: "vocab" },
+        { id: "v2", en: "Landscape", es: "Paisaje (campo)", emoji: "🏞️🌲", type: "vocab" },
+        { id: "v3", en: "Paintbrush", es: "Pincel", emoji: "🖌️", type: "vocab" },
+        { id: "v4", en: "App", es: "Aplicación", emoji: "📱", type: "vocab" },
+        { id: "v5", en: "Download", es: "Descargar", emoji: "⬇️", type: "vocab" },
+        { id: "v6", en: "Click", es: "Hacer clic", emoji: "🖱️👆", type: "vocab" },
         // Weekend Activities
-        { id: 7, word: "Visit museums", meaning: "Visitar museos", emoji: "🏛️", category: "Weekend" },
-        { id: 8, word: "Play card games", meaning: "Jugar a las cartas", emoji: "🃏", category: "Weekend" },
-        { id: 9, word: "Make cakes", meaning: "Hacer pasteles", emoji: "🧁👩‍🍳", category: "Weekend" },
-        { id: 10, word: "Make videos", meaning: "Hacer vídeos", emoji: "📹🎬", category: "Weekend" },
-        { id: 11, word: "Watch sport", meaning: "Ver deportes", emoji: "⚽📺", category: "Weekend" },
-        { id: 12, word: "Draw pictures", meaning: "Dibujar", emoji: "✏️🎨", category: "Weekend" },
-        { id: 13, word: "Play the piano", meaning: "Tocar el piano", emoji: "🎹", category: "Weekend" },
-        { id: 14, word: "Visit grandparents", meaning: "Visitar abuelos", emoji: "👵👴", category: "Weekend" },
-
-        // Grammar / Verbs
-        { id: 15, word: "I don't go", meaning: "Yo no voy", emoji: "❌🚶", category: "Grammar" },
-        { id: 16, word: "Do you play?", meaning: "¿Tú juegas?", emoji: "❓🎮", category: "Grammar" },
-        { id: 17, word: "We make...", meaning: "Nosotros hacemos...", emoji: "🔨", category: "Grammar" }
+        { id: "v7", en: "Visit museums", es: "Visitar museos", emoji: "🏛️", type: "vocab" },
+        { id: "v8", en: "Play card games", es: "Jugar a las cartas", emoji: "🃏", type: "vocab" },
+        { id: "v9", en: "Make cakes", es: "Hacer pasteles", emoji: "🧁👩‍🍳", type: "vocab" },
+        { id: "v10", en: "Make videos", es: "Hacer vídeos", emoji: "📹🎬", type: "vocab" },
+        { id: "v11", en: "Watch sport", es: "Ver deportes", emoji: "⚽📺", type: "vocab" },
+        { id: "v12", en: "Draw pictures", es: "Dibujar", emoji: "✏️🎨", type: "vocab" },
+        { id: "v13", en: "Play the piano", es: "Tocar el piano", emoji: "🎹", type: "vocab" },
+        { id: "v14", en: "Visit grandparents", es: "Visitar abuelos", emoji: "👵👴", type: "vocab" },
+        { id: "v15", en: "Watch films", es: "Ver películas", emoji: "🍿🎥", type: "vocab" }
     ];
 
-    // --- FLASHCARD LOGIC ---
-    const gridContainer = document.getElementById('study-mode');
+    const grammarQuestions = [
+        { q: "I _____ go to school on Sunday.", correct: "don't", wrong: ["do", "doesn't", "doing"], emoji: "❌🏫" },
+        { q: "What _____ you do at the weekend?", correct: "do", wrong: ["don't", "does", "making"], emoji: "❓📅" },
+        { q: "We _____ cakes with my friends.", correct: "make", wrong: ["makes", "making", "do"], emoji: "🧁" },
+        { q: "She _____ a painting.", correct: "paints", wrong: ["paint", "painting", "punted"], emoji: "🎨" },
+        { q: "We don't _____ videos.", correct: "make", wrong: ["makes", "making", "did"], emoji: "📹" }
+    ];
 
-    function renderCards() {
-        gridContainer.innerHTML = '';
-        vocabulary.forEach(item => {
-            const cardHTML = `
-                <div class="card-container" onclick="this.classList.toggle('flipped')">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <span class="category-tag">${item.category}</span>
-                            <div class="emoji">${item.emoji}</div>
-                            <div class="word">${item.word}</div>
-                        </div>
-                        <div class="card-back">
-                            <div class="meaning">${item.meaning}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            gridContainer.insertAdjacentHTML('beforeend', cardHTML);
-        });
-    }
-
-    // --- QUIZ LOGIC ---
-    let currentQuestionIndex = 0;
+    // --- 2. GAME STATE ---
+    let fullQuestionList = [];
+    let currentIndex = 0;
     let score = 0;
-    let shuffledVocab = [];
+    const TOTAL_QUESTIONS = 50;
+
+    // --- 3. QUESTION GENERATOR ---
+    function generateQuestionBank() {
+        let bank = [];
+
+        // Loop to create 50 mixed questions
+        // We have 15 vocab words.
+        // Round 1: EN -> ES (15 questions)
+        baseVocab.forEach(item => {
+            bank.push({
+                type: "en-es",
+                text: `¿Qué significa "${item.en}"?`,
+                correct: item.es,
+                emoji: item.emoji,
+                data: item
+            });
+        });
+
+        // Round 2: ES -> EN (15 questions)
+        baseVocab.forEach(item => {
+            bank.push({
+                type: "es-en",
+                text: `¿Cómo se dice "${item.es}" en inglés?`,
+                correct: item.en,
+                emoji: item.emoji,
+                data: item
+            });
+        });
+
+        // Round 3: Emoji -> EN (15 questions)
+        baseVocab.forEach(item => {
+            bank.push({
+                type: "img-en",
+                text: `¿Qué es esto?`,
+                correct: item.en,
+                emoji: item.emoji,
+                data: item
+            });
+        });
+
+        // Add Grammar Questions (5 questions)
+        grammarQuestions.forEach(g => {
+            bank.push({
+                type: "grammar",
+                text: g.q,
+                correct: g.correct,
+                emoji: g.emoji,
+                wrongList: g.wrong
+            });
+        });
+
+        // Shuffle all questions
+        shuffleArray(bank);
+
+        // Trim to exactly 50 if we have more, or loop if less (we have exactly 50 here: 15+15+15+5 = 50)
+        return bank.slice(0, TOTAL_QUESTIONS);
+    }
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -320,99 +355,131 @@
         }
     }
 
+    // --- 4. GAME LOGIC ---
+
     function startQuiz() {
+        fullQuestionList = generateQuestionBank();
+        currentIndex = 0;
+        score = 0;
+        
         document.getElementById('quiz-end').style.display = 'none';
         document.getElementById('quiz-content').style.display = 'block';
-        score = 0;
-        currentQuestionIndex = 0;
-        document.getElementById('score').innerText = 'Puntos: 0';
-        
-        // Create a copy and shuffle
-        shuffledVocab = [...vocabulary];
-        shuffleArray(shuffledVocab);
-        
+        updateScoreDisplay();
         loadQuestion();
     }
 
     function loadQuestion() {
-        const item = shuffledVocab[currentQuestionIndex];
-        document.getElementById('q-emoji').innerText = item.emoji;
-        document.getElementById('q-word').innerText = item.word;
-        document.getElementById('next-btn').style.display = 'none';
+        const qData = fullQuestionList[currentIndex];
+        
+        // Update UI Text
+        document.getElementById('q-emoji').innerText = qData.emoji;
+        document.getElementById('q-text').innerText = qData.text;
+        document.getElementById('q-number').innerText = `${currentIndex + 1} / ${TOTAL_QUESTIONS}`;
+        
+        // Update Progress Bar
+        const progressPct = ((currentIndex) / TOTAL_QUESTIONS) * 100;
+        document.getElementById('progress-bar').style.width = `${progressPct}%`;
 
-        // Generate options: 1 correct, 3 wrong
-        let options = [item];
-        const wrongOptions = vocabulary.filter(v => v.id !== item.id);
-        shuffleArray(wrongOptions);
-        options.push(wrongOptions[0], wrongOptions[1], wrongOptions[2]);
+        // Generate Options
+        let options = [];
+        
+        if (qData.type === "grammar") {
+            // Grammar uses specific wrong answers
+            options = [qData.correct, ...qData.wrongList];
+        } else {
+            // Vocab needs random wrong answers from the database
+            options = [qData.correct];
+            
+            // Get 3 wrong answers
+            let attempts = 0;
+            while(options.length < 4 && attempts < 100) {
+                const randomItem = baseVocab[Math.floor(Math.random() * baseVocab.length)];
+                let wrongVal = "";
+                
+                // If asking for Spanish translation, wrong answers must be Spanish
+                if (qData.type === "en-es") wrongVal = randomItem.es;
+                // Otherwise (English word needed), wrong answers must be English
+                else wrongVal = randomItem.en;
+
+                if (!options.includes(wrongVal)) {
+                    options.push(wrongVal);
+                }
+                attempts++;
+            }
+        }
+        
         shuffleArray(options);
+        renderOptions(options, qData.correct);
 
-        const optionsContainer = document.getElementById('q-options');
-        optionsContainer.innerHTML = '';
+        // Hide next button until answered
+        document.getElementById('next-btn').style.display = 'none';
+    }
 
-        options.forEach(opt => {
+    function renderOptions(optionsArr, correctAnswer) {
+        const container = document.getElementById('q-options');
+        container.innerHTML = ''; // Clear previous
+
+        optionsArr.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
-            btn.innerText = opt.meaning;
-            btn.onclick = () => checkAnswer(btn, opt.id === item.id);
-            optionsContainer.appendChild(btn);
+            btn.innerText = opt;
+            btn.onclick = () => handleAnswer(btn, opt, correctAnswer);
+            container.appendChild(btn);
         });
     }
 
-    function checkAnswer(btn, isCorrect) {
+    function handleAnswer(btn, selected, correct) {
         // Disable all buttons
         const allBtns = document.querySelectorAll('.option-btn');
         allBtns.forEach(b => b.disabled = true);
 
-        if (isCorrect) {
+        if (selected === correct) {
             btn.classList.add('correct');
             score++;
-            document.getElementById('score').innerText = `Puntos: ${score}`;
+            // Play little success sound (optional, kept simple visually for now)
         } else {
             btn.classList.add('wrong');
-            // Highlight correct one
-            // We can't easily find it without storing ID in DOM, but visually user sees red
+            // Highlight the correct one
+            allBtns.forEach(b => {
+                if(b.innerText === correct) b.classList.add('correct');
+            });
         }
-        document.getElementById('next-btn').style.display = 'inline-block';
+
+        updateScoreDisplay();
+        document.getElementById('next-btn').style.display = 'block';
     }
 
     function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < 10) { // Limit to 10 questions per round
+        currentIndex++;
+        if (currentIndex < TOTAL_QUESTIONS) {
             loadQuestion();
         } else {
             endQuiz();
         }
     }
 
+    function updateScoreDisplay() {
+        document.getElementById('current-score').innerText = `Puntos: ${score}`;
+    }
+
     function endQuiz() {
         document.getElementById('quiz-content').style.display = 'none';
         document.getElementById('quiz-end').style.display = 'block';
-        document.getElementById('final-score').innerText = `Has conseguido ${score} de 10 puntos.`;
+        document.getElementById('progress-bar').style.width = '100%';
+        
+        document.getElementById('final-score-text').innerText = `${score} / ${TOTAL_QUESTIONS}`;
+
+        let msg = "";
+        if (score === 50) msg = "🏆 ¡INCREÍBLE! ¡ERES UN GENIO! 🏆";
+        else if (score >= 40) msg = "🎉 ¡Excelente trabajo! 🎉";
+        else if (score >= 25) msg = "👍 ¡Muy bien, sigue practicando! 👍";
+        else msg = "💪 ¡Ánimo, tú puedes mejorar! 💪";
+        
+        document.getElementById('final-message').innerText = msg;
     }
 
-    // --- MODE SWITCHING ---
-    function showMode(mode) {
-        const studyDiv = document.getElementById('study-mode');
-        const quizDiv = document.getElementById('quiz-mode');
-        const btns = document.querySelectorAll('.tab-btn');
-
-        if (mode === 'study') {
-            studyDiv.style.display = 'grid';
-            quizDiv.style.display = 'none';
-            btns[0].classList.add('active');
-            btns[1].classList.remove('active');
-        } else {
-            studyDiv.style.display = 'none';
-            quizDiv.style.display = 'block';
-            btns[0].classList.remove('active');
-            btns[1].classList.add('active');
-            startQuiz();
-        }
-    }
-
-    // Init
-    renderCards();
+    // Start on load
+    startQuiz();
 
 </script>
 
