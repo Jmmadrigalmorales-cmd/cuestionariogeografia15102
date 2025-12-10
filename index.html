@@ -3,186 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Matemáticas - 4º Primaria</title>
+    <title>English Exam - 4º Primaria</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f8ff; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; }
-        h2 { color: #e67e22; border-bottom: 2px solid #e67e22; padding-bottom: 10px; margin-top: 40px; }
-        .summary-box { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        .example-box { background-color: #d1ecf1; border-left: 5px solid #17a2b8; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        .exercise { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee; }
-        .exercise label { font-weight: bold; display: block; margin-bottom: 5px; }
-        input[type="text"], input[type="number"] { padding: 8px; width: 60%; border: 2px solid #ccc; border-radius: 5px; font-size: 16px; }
-        button { padding: 8px 15px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin-left: 10px; }
-        button:hover { background-color: #218838; }
-        .feedback { margin-left: 10px; font-weight: bold; }
-        .correct { color: green; }
-        .incorrect { color: red; }
-        .nav-buttons { text-align: center; margin-top: 30px; }
-        .section { display: none; }
-        .section.active { display: block; }
-        .nav-btn { background-color: #007bff; margin: 5px; }
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid #4a90e2;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px dashed #4a90e2;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #e67e22;
+            margin-top: 30px;
+            border-left: 5px solid #e67e22;
+            padding-left: 10px;
+        }
+        .question-block {
+            background-color: #f9f9f9;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            font-family: inherit;
+            width: 200px;
+        }
+        select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            font-family: inherit;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #27ae60;
+            color: white;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+        #result {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+        .correct {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback {
+            font-size: 0.9em;
+            color: #721c24;
+            margin-top: 5px;
+            font-style: italic;
+            display: none;
+        }
+        .img-hint {
+            max-width: 100px;
+            display: block;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Matemáticas 4º Primaria</h1>
-    
-    <div class="nav-buttons">
-        <button class="nav-btn" onclick="showSection('bloque1')">1. Numeración</button>
-        <button class="nav-btn" onclick="showSection('bloque2')">2. Divisiones</button>
-        <button class="nav-btn" onclick="showSection('bloque3')">3. Operaciones Combinadas</button>
+    <h1>🇬🇧 English Exam Review 🇬🇧</h1>
+    <p style="text-align: center;">Weekend Activities, Art & Technology</p>
+
+    <!-- SECTION 1: VOCABULARY (DEFINITIONS) -->
+    <h2>1. Vocabulary: Art & Technology</h2>
+    <p><i>Match the definition with the correct word.</i></p>
+
+    <div class="question-block" id="q1-block">
+        <div class="question-text">1. A painting of a person is called a...</div>
+        <label><input type="radio" name="q1" value="landscape"> Landscape</label>
+        <label><input type="radio" name="q1" value="portrait"> Portrait</label>
+        <label><input type="radio" name="q1" value="app"> App</label>
+        <div class="feedback" id="fb-q1">Correct answer: Portrait</div>
     </div>
 
-    <div id="bloque1" class="section active">
-        <h2>1. Numeración de hasta 7 Cifras</h2>
-        
-        <div class="summary-box">
-            <strong>Resumen:</strong> Los números de 7 cifras llegan hasta los <strong>Millones</strong>. 
-            El orden es: Unidades de Millón (UMM), Centenas de Millar (CM), Decenas de Millar (DM), Unidades de Millar (UM), Centenas (C), Decenas (D) y Unidades (U).
-            <br>Recuerda poner un punto cada tres cifras empezando por la derecha para leerlo mejor.
-        </div>
-
-        <div class="example-box">
-            <strong>Ejemplo:</strong> Descompón el número 3.456.789
-            <br><em>Solución:</em> 3 UMM + 4 CM + 5 DM + 6 UM + 7 C + 8 D + 9 U
-            <br><em>O también:</em> 3.000.000 + 400.000 + 50.000 + 6.000 + 700 + 80 + 9
-        </div>
-
-        <div id="ejercicios-bloque1"></div>
+    <div class="question-block" id="q2-block">
+        <div class="question-text">2. A painting of the countryside is called a...</div>
+        <label><input type="radio" name="q2" value="portrait"> Portrait</label>
+        <label><input type="radio" name="q2" value="landscape"> Landscape</label>
+        <label><input type="radio" name="q2" value="museum"> Museum</label>
+        <div class="feedback" id="fb-q2">Correct answer: Landscape</div>
     </div>
 
-    <div id="bloque2" class="section">
-        <h2>2. Divisiones</h2>
-        
-        <div class="summary-box">
-            <strong>Resumen:</strong>
-            <ul>
-                <li><strong>División exacta:</strong> El resto es 0.</li>
-                <li><strong>División entera:</strong> El resto es distinto de 0 (pero menor que el divisor).</li>
-                <li><strong>Unidad seguida de ceros:</strong> Para dividir por 10, 100, 1000, tachamos tantos ceros en el dividendo como tenga el divisor.</li>
-            </ul>
-        </div>
-
-        <div class="example-box">
-            <strong>Ejemplo 1:</strong> 4500 : 100
-            <br><em>Solución:</em> Tachamos dos ceros al 4500. Resultado = 45.
-            <br><strong>Ejemplo 2:</strong> Prueba de la división:
-            <br><em>Fórmula:</em> Dividendo = (Divisor × Cociente) + Resto
-        </div>
-
-        <div id="ejercicios-bloque2"></div>
+    <div class="question-block" id="q3-block">
+        <div class="question-text">3. You can paint pictures with a...</div>
+        <label><input type="radio" name="q3" value="paintbrush"> Paintbrush</label>
+        <label><input type="radio" name="q3" value="piano"> Piano</label>
+        <label><input type="radio" name="q3" value="click"> Click</label>
+        <div class="feedback" id="fb-q3">Correct answer: Paintbrush</div>
     </div>
 
-    <div id="bloque3" class="section">
-        <h2>3. Operaciones Combinadas</h2>
-        
-        <div class="summary-box">
-            <strong>Resumen (Jerarquía):</strong> Para resolver operaciones mezcladas, sigue este orden estricto:
-            <ol>
-                <li>Primero: Los <strong>Paréntesis</strong> ( ).</li>
-                <li>Segundo: <strong>Multiplicaciones</strong> y <strong>Divisiones</strong>.</li>
-                <li>Tercero: <strong>Sumas</strong> y <strong>Restas</strong>.</li>
-            </ol>
-        </div>
-
-        <div class="example-box">
-            <strong>Ejemplo:</strong> 5 + 3 × 2
-            <br><em>Paso 1 (Multiplicación):</em> 3 × 2 = 6
-            <br><em>Paso 2 (Suma):</em> 5 + 6 = 11
-            <br><strong>¡Cuidado!</strong> Si haces primero 5+3 estaría mal (8 × 2 = 16 ❌).
-        </div>
-
-        <div id="ejercicios-bloque3"></div>
+    <div class="question-block" id="q4-block">
+        <div class="question-text">4. An ______ is a program on a phone or tablet.</div>
+        <select id="q4">
+            <option value="">Choose...</option>
+            <option value="click">Click</option>
+            <option value="app">App</option>
+            <option value="download">Download</option>
+        </select>
+        <div class="feedback" id="fb-q4">Correct answer: App</div>
     </div>
 
+    <div class="question-block" id="q5-block">
+        <div class="question-text">5. You can ______ an app onto your tablet.</div>
+        <select id="q5">
+            <option value="">Choose...</option>
+            <option value="visit">Visit</option>
+            <option value="download">Download</option>
+            <option value="draw">Draw</option>
+        </select>
+        <div class="feedback" id="fb-q5">Correct answer: Download</div>
+    </div>
+
+    <div class="question-block" id="q6-block">
+        <div class="question-text">6. When you ______ on an app, it opens.</div>
+        <input type="text" id="q6" placeholder="Write the word...">
+        <div class="feedback" id="fb-q6">Correct answer: Click</div>
+    </div>
+
+    <!-- SECTION 2: WEEKEND ACTIVITIES -->
+    <h2>2. At The Weekend</h2>
+    <p><i>Look at the activities and choose the correct option.</i></p>
+
+    <div class="question-block" id="q7-block">
+        <div class="question-text">7. We look at old things and art here.</div>
+        <label><input type="radio" name="q7" value="visit museums"> Visit museums</label>
+        <label><input type="radio" name="q7" value="make cakes"> Make cakes</label>
+        <label><input type="radio" name="q7" value="watch sport"> Watch sport</label>
+        <div class="feedback" id="fb-q7">Correct answer: Visit museums</div>
+    </div>
+
+    <div class="question-block" id="q8-block">
+        <div class="question-text">8. We play these with friends (like Uno).</div>
+        <label><input type="radio" name="q8" value="play the piano"> Play the piano</label>
+        <label><input type="radio" name="q8" value="play card games"> Play card games</label>
+        <label><input type="radio" name="q8" value="make videos"> Make videos</label>
+        <div class="feedback" id="fb-q8">Correct answer: Play card games</div>
+    </div>
+
+    <div class="question-block" id="q9-block">
+        <div class="question-text">9. We cook sweet food in the kitchen.</div>
+        <label><input type="radio" name="q9" value="make cakes"> Make cakes</label>
+        <label><input type="radio" name="q9" value="watch films"> Watch films</label>
+        <label><input type="radio" name="q9" value="visit grandparents"> Visit grandparents</label>
+        <div class="feedback" id="fb-q9">Correct answer: Make cakes</div>
+    </div>
+
+    <div class="question-block" id="q10-block">
+        <div class="question-text">10. I use a camera or a phone to do this.</div>
+        <label><input type="radio" name="q10" value="make videos"> Make videos</label>
+        <label><input type="radio" name="q10" value="draw pictures"> Draw pictures</label>
+        <label><input type="radio" name="q10" value="play the piano"> Play the piano</label>
+        <div class="feedback" id="fb-q10">Correct answer: Make videos</div>
+    </div>
+
+    <div class="question-block" id="q11-block">
+        <div class="question-text">11. I sit on the sofa and watch TV (football, tennis...).</div>
+        <label><input type="radio" name="q11" value="watch films"> Watch films</label>
+        <label><input type="radio" name="q11" value="watch sport"> Watch sport</label>
+        <label><input type="radio" name="q11" value="make cakes"> Make cakes</label>
+        <div class="feedback" id="fb-q11">Correct answer: Watch sport</div>
+    </div>
+
+    <div class="question-block" id="q12-block">
+        <div class="question-text">12. I use a pencil and paper.</div>
+        <label><input type="radio" name="q12" value="make videos"> Make videos</label>
+        <label><input type="radio" name="q12" value="draw pictures"> Draw pictures</label>
+        <label><input type="radio" name="q12" value="visit museums"> Visit museums</label>
+        <div class="feedback" id="fb-q12">Correct answer: Draw pictures</div>
+    </div>
+
+    <!-- SECTION 3: GRAMMAR (DO / DON'T) -->
+    <h2>3. Grammar: Present Simple</h2>
+    <p><i>Complete the sentences with <b>do</b>, <b>don't</b>, or the correct verb.</i></p>
+
+    <div class="question-block" id="q13-block">
+        <div class="question-text">13. What _____ you do on Saturdays?</div>
+        <select id="q13">
+            <option value="">Choose...</option>
+            <option value="does">does</option>
+            <option value="do">do</option>
+            <option value="don't">don't</option>
+        </select>
+        <div class="feedback" id="fb-q13">Correct answer: do</div>
+    </div>
+
+    <div class="question-block" id="q14-block">
+        <div class="question-text">14. We ______ go to school at the weekend. (Negative)</div>
+        <input type="text" id="q14" placeholder="...">
+        <div class="feedback" id="fb-q14">Correct answer: don't</div>
+    </div>
+
+    <div class="question-block" id="q15-block">
+        <div class="question-text">15. I ______ card games with my friends. (Affirmative)</div>
+        <label><input type="radio" name="q15" value="plays"> plays</label>
+        <label><input type="radio" name="q15" value="play"> play</label>
+        <label><input type="radio" name="q15" value="playing"> playing</label>
+        <div class="feedback" id="fb-q15">Correct answer: play</div>
+    </div>
+
+    <div class="question-block" id="q16-block">
+        <div class="question-text">16. We ______ videos. They're really cool!</div>
+        <label><input type="radio" name="q16" value="make"> make</label>
+        <label><input type="radio" name="q16" value="do"> do</label>
+        <label><input type="radio" name="q16" value="makes"> makes</label>
+        <div class="feedback" id="fb-q16">Correct answer: make</div>
+    </div>
+
+    <div class="question-block" id="q17-block">
+        <div class="question-text">17. I ______ go to school on Sunday.</div>
+        <select id="q17">
+            <option value="">Choose...</option>
+            <option value="doesn't">doesn't</option>
+            <option value="do">do</option>
+            <option value="don't">don't</option>
+        </select>
+        <div class="feedback" id="fb-q17">Correct answer: don't</div>
+    </div>
+
+    <div class="question-block" id="q18-block">
+        <div class="question-text">18. We ______ visit museums. (Negative)</div>
+        <input type="text" id="q18" placeholder="Type don't or do...">
+        <div class="feedback" id="fb-q18">Correct answer: don't</div>
+    </div>
+
+    <!-- SECTION 4: ORDER THE SENTENCE -->
+    <h2>4. Order the sentences</h2>
+    <p><i>Choose the correct order for the words.</i></p>
+
+    <div class="question-block" id="q19-block">
+        <div class="question-text">19. you / do / What / at / weekend / the / ?</div>
+        <label><input type="radio" name="q19" value="A"> What do you do at the weekend?</label>
+        <label><input type="radio" name="q19" value="B"> What you do at the weekend?</label>
+        <div class="feedback" id="fb-q19">Correct answer: What do you do at the weekend?</div>
+    </div>
+
+    <div class="question-block" id="q20-block">
+        <div class="question-text">20. visit / I / museums / .</div>
+        <label><input type="radio" name="q20" value="A"> I museums visit.</label>
+        <label><input type="radio" name="q20" value="B"> I visit museums.</label>
+        <div class="feedback" id="fb-q20">Correct answer: I visit museums.</div>
+    </div>
+
+    <div class="question-block" id="q21-block">
+        <div class="question-text">21. don't / We / school / go / to / .</div>
+        <label><input type="radio" name="q21" value="A"> We don't go to school.</label>
+        <label><input type="radio" name="q21" value="B"> We go don't to school.</label>
+        <div class="feedback" id="fb-q21">Correct answer: We don't go to school.</div>
+    </div>
+
+    <div class="question-block" id="q22-block">
+        <div class="question-text">22. make / We / cakes / .</div>
+        <label><input type="radio" name="q22" value="A"> We cakes make.</label>
+        <label><input type="radio" name="q22" value="B"> We make cakes.</label>
+        <div class="feedback" id="fb-q22">Correct answer: We make cakes.</div>
+    </div>
+
+    <div class="question-block" id="q23-block">
+        <div class="question-text">23. play / I / games / card / .</div>
+        <label><input type="radio" name="q23" value="A"> I play card games.</label>
+        <label><input type="radio" name="q23" value="B"> I card games play.</label>
+        <div class="feedback" id="fb-q23">Correct answer: I play card games.</div>
+    </div>
+
+    <div class="question-block" id="q24-block">
+        <div class="question-text">24. watch / We / films / .</div>
+        <label><input type="radio" name="q24" value="A"> We watch films.</label>
+        <label><input type="radio" name="q24" value="B"> Films we watch.</label>
+        <div class="feedback" id="fb-q24">Correct answer: We watch films.</div>
+    </div>
+
+    <!-- SECTION 5: READING -->
+    <h2>5. Reading Comprehension</h2>
+    <p><i>Read about Rita and answer.</i></p>
+    <div style="background: #fff; border: 2px dashed #333; padding: 10px; margin-bottom: 10px;">
+        "Rita paints a painting of her family. Some children think Rita's painting isn't very good. Grace finds the painting. The painting is in the newspaper, on social media and on TV. In the end, everyone loves Rita's work."
+    </div>
+
+    <div class="question-block" id="q25-block">
+        <div class="question-text">25. What does Rita paint?</div>
+        <label><input type="radio" name="q25" value="landscape"> A landscape</label>
+        <label><input type="radio" name="q25" value="family"> Her family</label>
+        <div class="feedback" id="fb-q25">Correct answer: Her family</div>
+    </div>
+
+    <div class="question-block" id="q26-block">
+        <div class="question-text">26. Do all children like the painting at first?</div>
+        <label><input type="radio" name="q26" value="yes"> Yes</label>
+        <label><input type="radio" name="q26" value="no"> No, some think it isn't very good</label>
+        <div class="feedback" id="fb-q26">Correct answer: No</div>
+    </div>
+
+    <div class="question-block" id="q27-block">
+        <div class="question-text">27. Where is the painting? (Choose the one NOT in the text)</div>
+        <label><input type="radio" name="q27" value="newspaper"> Newspaper</label>
+        <label><input type="radio" name="q27" value="museum"> Museum</label>
+        <label><input type="radio" name="q27" value="tv"> TV</label>
+        <div class="feedback" id="fb-q27">Correct answer: Museum (it is not mentioned)</div>
+    </div>
+
+    <div class="question-block" id="q28-block">
+        <div class="question-text">28. In the end, does everyone love Rita's work?</div>
+        <label><input type="radio" name="q28" value="yes"> Yes</label>
+        <label><input type="radio" name="q28" value="no"> No</label>
+        <div class="feedback" id="fb-q28">Correct answer: Yes</div>
+    </div>
+
+    <!-- SECTION 6: TRUE OR FALSE -->
+    <h2>6. True or False?</h2>
+
+    <div class="question-block" id="q29-block">
+        <div class="question-text">29. We go to school on Sundays.</div>
+        <label><input type="radio" name="q29" value="true"> True</label>
+        <label><input type="radio" name="q29" value="false"> False</label>
+        <div class="feedback" id="fb-q29">Correct answer: False</div>
+    </div>
+
+    <div class="question-block" id="q30-block">
+        <div class="question-text">30. A 'portrait' is a picture of the countryside.</div>
+        <label><input type="radio" name="q30" value="true"> True</label>
+        <label><input type="radio" name="q30" value="false"> False</label>
+        <div class="feedback" id="fb-q30">Correct answer: False (It's a picture of a person)</div>
+    </div>
+
+    <button onclick="checkAnswers()">Check Answers / Corregir Examen</button>
+
+    <div id="result"></div>
 </div>
 
 <script>
-    // Datos de los ejercicios
-    const ejercicios = {
-        bloque1: [
-            { p: "¿Cómo se escribe en cifras: Dos millones trescientos mil?", a: "2300000" },
-            { p: "Descompón: ¿Cuántas Unidades de Millar (UM) tiene 45.678?", a: "5" },
-            { p: "Escribe el número anterior a 1.000.000", a: "999999" },
-            { p: "Descompón 3.500.000 en suma (sin puntos):", a: "3000000+500000" },
-            { p: "¿Qué valor tiene la cifra 7 en el número 3.720.000? (Escribe el número completo)", a: "700000" },
-            { p: "Escribe el número: 4 UMM + 2 CM + 1 U", a: "4200001" },
-            { p: "¿Cuál es mayor: 3.456.000 o 3.465.000? (Escribe el número)", a: "3465000" },
-            { p: "Redondea 4.580.000 a la Centena de Millar más próxima:", a: "4600000" },
-            { p: "Escribe en cifras: Cinco millones cuarenta y dos", a: "5000042" },
-            { p: "Suma mentalmente: 2.000.000 + 350.000", a: "2350000" }
-        ],
-        bloque2: [
-            { p: "Divide: 450 : 10", a: "45" },
-            { p: "Divide: 6300 : 100", a: "63" },
-            { p: "Calcula el resto de 25 : 4", a: "1" },
-            { p: "Divide: 8000 : 1000", a: "8" },
-            { p: "Si el divisor es 5 y el cociente es 6 (exacta), ¿cuál es el dividendo?", a: "30" },
-            { p: "Calcula la mitad de 480", a: "240" },
-            { p: "En una división, si el resto es 0, la división es...", a: "exacta" },
-            { p: "Divide 360 : 6", a: "60" },
-            { p: "Divide 120 : 12", a: "10" },
-            { p: "Si reparto 15 caramelos entre 3 niños, ¿cuántos tocan?", a: "5" }
-        ],
-        bloque3: [
-            { p: "Calcula: 5 + 2 × 3", a: "11" },
-            { p: "Calcula: (5 + 2) × 3", a: "21" },
-            { p: "Calcula: 10 - 4 : 2", a: "8" },
-            { p: "Calcula: 20 : (2 + 3)", a: "4" },
-            { p: "Calcula: 3 × 3 + 2", a: "11" },
-            { p: "Calcula: 8 + 10 : 2", a: "13" },
-            { p: "Calcula: (10 - 2) : 4", a: "2" },
-            { p: "Calcula: 5 × 4 - 10", a: "10" },
-            { p: "Calcula: 2 + 2 + 2 × 0", a: "4" },
-            { p: "Calcula: 100 - 50 × 2", a: "0" }
-        ]
-    };
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 30;
 
-    // Función para generar ejercicios HTML
-    function generarEjercicios(bloqueId, datos) {
-        const contenedor = document.getElementById(`ejercicios-${bloqueId}`);
-        datos.forEach((item, index) => {
-            const div = document.createElement('div');
-            div.className = 'exercise';
-            div.innerHTML = `
-                <label>${index + 1}. ${item.p}</label>
-                <input type="text" id="${bloqueId}-r${index}" placeholder="Tu respuesta aquí">
-                <button onclick="verificar('${bloqueId}', ${index}, '${item.a}')">Comprobar</button>
-                <span id="${bloqueId}-f${index}" class="feedback"></span>
-            `;
-            contenedor.appendChild(div);
-        });
-    }
+        // Answers Key
+        const answers = {
+            q1: "portrait",
+            q2: "landscape",
+            q3: "paintbrush",
+            q4: "app",
+            q5: "download",
+            q6: "click", // text input
+            q7: "visit museums",
+            q8: "play card games",
+            q9: "make cakes",
+            q10: "make videos",
+            q11: "watch sport",
+            q12: "draw pictures",
+            q13: "do",
+            q14: "don't", // text input
+            q15: "play",
+            q16: "make",
+            q17: "don't",
+            q18: "don't", // text input
+            q19: "A",
+            q20: "B",
+            q21: "A",
+            q22: "B",
+            q23: "A",
+            q24: "A",
+            q25: "family",
+            q26: "no",
+            q27: "museum",
+            q28: "yes",
+            q29: "false",
+            q30: "false"
+        };
 
-    // Generar los 3 bloques
-    generarEjercicios('bloque1', ejercicios.bloque1);
-    generarEjercicios('bloque2', ejercicios.bloque2);
-    generarEjercicios('bloque3', ejercicios.bloque3);
-
-    // Función de verificación
-    function verificar(bloque, index, respuestaCorrecta) {
-        const input = document.getElementById(`${bloque}-r${index}`);
-        const feedback = document.getElementById(`${bloque}-f${index}`);
-        // Limpiamos espacios y pasamos a minúsculas para comparar mejor
-        let respuestaUsuario = input.value.trim().toLowerCase().replace(/\./g, ''); // Quita puntos de miles
-        let correctaNormalizada = respuestaCorrecta.toLowerCase().replace(/\./g, '');
-        
-        if (respuestaUsuario === correctaNormalizada) {
-            feedback.textContent = "¡Correcto! 🎉";
-            feedback.className = "feedback correct";
-        } else {
-            feedback.textContent = "Inténtalo de nuevo.";
-            feedback.className = "feedback incorrect";
+        // Reset styles
+        for (let i = 1; i <= totalQuestions; i++) {
+            document.getElementById(`q${i}-block`).className = "question-block";
+            document.getElementById(`fb-q${i}`).style.display = "none";
         }
-    }
 
-    // Navegación entre pestañas
-    function showSection(id) {
-        document.querySelectorAll('.section').forEach(d => d.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
+        // Check Loop
+        for (let i = 1; i <= totalQuestions; i++) {
+            let userAnswer = "";
+            let element = document.getElementById(`q${i}`);
+            
+            // Handle Radio Buttons
+            if (!element) { 
+                const radios = document.getElementsByName(`q${i}`);
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        userAnswer = radio.value;
+                        break;
+                    }
+                }
+            } else {
+                // Handle Inputs and Selects
+                userAnswer = element.value.toLowerCase().trim();
+                // Fix for apostrophes (don't vs dont)
+                if(userAnswer === "dont") userAnswer = "don't";
+            }
+
+            const feedbackElement = document.getElementById(`fb-q${i}`);
+            const blockElement = document.getElementById(`q${i}-block`);
+
+            if (userAnswer === answers[`q${i}`].toLowerCase()) {
+                score++;
+                blockElement.classList.add("correct");
+            } else {
+                blockElement.classList.add("incorrect");
+                feedbackElement.style.display = "block";
+            }
+        }
+
+        // Display Result
+        const resultDiv = document.getElementById("result");
+        resultDiv.style.display = "block";
+        
+        let message = "";
+        if (score === 30) {
+            message = "🏆 PERFECT! Amazing job!";
+            resultDiv.style.backgroundColor = "#d4edda";
+            resultDiv.style.color = "#155724";
+        } else if (score >= 20) {
+            message = "🎉 Great job! Very good!";
+            resultDiv.style.backgroundColor = "#fff3cd";
+            resultDiv.style.color = "#856404";
+        } else {
+            message = "💪 Keep practicing! You can do it!";
+            resultDiv.style.backgroundColor = "#f8d7da";
+            resultDiv.style.color = "#721c24";
+        }
+
+        resultDiv.innerHTML = `Score: ${score} / ${totalQuestions}<br>${message}`;
+        
+        // Scroll to bottom
+        resultDiv.scrollIntoView({behavior: "smooth"});
     }
 </script>
 
